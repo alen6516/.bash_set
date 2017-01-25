@@ -18,3 +18,4 @@ function psg()
 
 alias port='sudo netstat -antlp'
 alias py='python'
+alias ptt='ssh bbsu@ptt.cc'
