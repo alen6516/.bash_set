@@ -15,6 +15,14 @@ function psg()
         ps -aux | grep $1
     fi
 }
+function geoip()
+{
+    if [ $# = 1 ]; then
+        curl ipinfo.io/$1
+    else
+        echo "please assign the IP address"
+    fi
+}
 
 alias port='sudo netstat -antlp'
 alias py='python'
