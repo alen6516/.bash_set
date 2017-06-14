@@ -15,7 +15,7 @@ function psg()
         ps -aux | grep $1
     fi
 }
-function geoip()
+function ipinfo()
 {
     if [ $# = 1 ]; then
         curl ipinfo.io/$1
