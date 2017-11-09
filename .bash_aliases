@@ -24,6 +24,14 @@ function ipinfo()
     fi
 }
 
+function mem()
+{
+    ps aux | head -n1
+    ps aux | grep $1 | grep -v grep | grep $1
+    echo -n "$1 totally use memory "
+    ps aux | grep $1 | grep -v grep | awk '{ total += $6; } END { print total/1024"MB" }'
+}
+
 alias port='sudo netstat -antlp'
 alias py='python'
 alias ptt='ssh bbsu@ptt.cc'
