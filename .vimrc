@@ -1,6 +1,9 @@
 "##### shortcut ##########################
 "## F2    --> number/no number
-"## space --> page doen
+"## space --> page down
+"## fold
+"###  selecting lines, then use zf to create fold
+"###  zo to open fold, and zc to close
 "#########################################
 
 
