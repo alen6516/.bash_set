@@ -81,24 +81,38 @@ nnoremap <C-S-g> gg=G
 
 "###########################
 "#### custom file title ####
-autocmd BufNewFile *.py,*.sh exec ":call SetTitle()"
-func SetTitle()
+autocmd BufNewFile *.py,*.sh exec ":call SetTitle_1()"
+autocmd BufNewFile *.c,*.cpp exec ":call SetTitle_2()"
+func SetTitle_1()
     if &filetype == 'sh' 
-        call setline(1,"\#####") 
-        call append(line("."), "\# File Name: ".expand("%")) 
-        call append(line(".")+1, "\# Author: alen6516") 
-        call append(line(".")+2, "\# Created Time: ".strftime("%Y-%m-%d")) 
-        call append(line(".")+3, "\#####") 
-        call append(line(".")+4, "\#!/bin/bash")
-        call append(line(".")+5, "")
-        else
-        call setline(1,"\#####") 
-        call append(line("."), "\# File Name: ".expand("%")) 
-        call append(line(".")+1, "\# Author: alen6516") 
-        call append(line(".")+2, "\# Created Time: ".strftime("%Y-%m-%d")) 
-        call append(line(".")+3, "\#####") 
-        call append(line(".")+4, "") 
+        call setline(1, "\#!/bin/bash")
+        call append(line("."), "\#####") 
+        call append(line(".")+1, "\# File Name: ".expand("%")) 
+        call append(line(".")+2, "\# Author: alen6516") 
+        call append(line(".")+3, "\# Created Time: ".strftime("%Y-%m-%d")) 
+        call append(line(".")+4, "\#####") 
+        call append(line(".")+5, "") 
+    else
+        call setline(1,"\#!/usr/bin/python") 
+        call append(line("."), "\# -*- coding: utf-8 -*-") 
+        call append(line(".")+1, "\#####") 
+        call append(line(".")+2, "\# File Name: ".expand("%")) 
+        call append(line(".")+3, "\# Author: alen6516") 
+        call append(line(".")+4, "\# Created Time: ".strftime("%Y-%m-%d")) 
+        call append(line(".")+5, "\#####") 
+        call append(line(".")+6, "")
     endif
+endfunc 
+func SetTitle_2()
+    call setline(1,"/***") 
+    call append(line("."), " File Name: ".expand("%")) 
+    call append(line(".")+1, " Author: alen6516") 
+    call append(line(".")+2, " Created Time: ".strftime("%Y-%m-%d")) 
+    call append(line(".")+3, "***/") 
+    call append(line(".")+4, "") 
+    call append(line(".")+5, "#include <stdio.h>") 
+    call append(line(".")+6, "#include <stdint.h>") 
+    call append(line(".")+7, "") 
 endfunc 
 " auto move to the end of the file
 autocmd BufNewFile * normal G
