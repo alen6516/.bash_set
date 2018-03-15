@@ -32,6 +32,15 @@ function mem()
     ps aux | grep $1 | grep -v grep | awk '{ total += $6; } END { print total/1024"MB" }'
 }
 
+function open()
+{
+    if [ $# != 2 ]; then
+        echo "usage: open <host> <port>"
+    else
+        nc -zv $1 $2
+    fi
+}
+
 alias port='sudo netstat -antlp'
 alias py='python'
 alias ptt='ssh bbsu@ptt.cc'
