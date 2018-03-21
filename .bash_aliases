@@ -43,6 +43,7 @@ function open()
 
 alias port='sudo netstat -antlp'
 alias py='python'
+alias py3='python3'
 alias ptt='ssh bbsu@ptt.cc'
 
 # 引號裡要打引號前要先用\跳脫，但是也不能直接打\，否則會被awk解析，要打'\'
