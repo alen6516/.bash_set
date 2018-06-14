@@ -25,6 +25,12 @@ set encoding=utf-8
 set foldenable      " enable fold mode
 set foldmethod=manual
 
+"###########################################
+" enable copy between different vim instance
+vmap <C-y>y :w! /tmp/vitmp<CR>                                                                           
+nmap <C-p>p :r! cat /tmp/vitmp<CR>
+"###########################################
+
 "###############
 "#### color ####
 set t_Co=256
