@@ -6,6 +6,9 @@
 "## fold
 "###  selecting lines, then use zf to create fold
 "###  zo to open fold, and zc to close
+"## to copy and paste among different vim instances
+"### Ctrl-y y
+"### Ctrl-p p
 "#########################################
 
 
