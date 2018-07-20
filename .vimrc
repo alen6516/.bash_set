@@ -6,9 +6,7 @@
 "## fold
 "###  selecting lines, then use zf to create fold
 "###  zo to open fold, and zc to close
-"## to copy and paste among different vim instances
-"### Ctrl-y y
-"### Ctrl-p p
+"## copy and paste is savaliable among different vim instances
 "#########################################
 
 
@@ -30,8 +28,12 @@ set foldmethod=manual
 
 "###########################################
 " enable copy between different vim instance
-vmap <C-y>y :w! /tmp/vitmp<CR>                                                                           
-nmap <C-p>p :r! cat /tmp/vitmp<CR>
+
+map y :w! /tmp/vitmp<CR>
+map p :r! cat /tmp/vitmp<CR>
+
+"vmap <C-y>y :w! /tmp/vitmp<CR>                                                                           
+"nmap <C-p>p :r! cat /tmp/vitmp<CR>
 "###########################################
 
 "###############
