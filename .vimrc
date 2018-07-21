@@ -29,11 +29,14 @@ set foldmethod=manual
 "###########################################
 " enable copy between different vim instance
 
-map y :w! /tmp/vitmp<CR>
-map p :r! cat /tmp/vitmp<CR>
+"map y :w! /tmp/vitmp<CR>
+"map p :r! cat /tmp/vitmp<CR>
 
-"vmap <C-y>y :w! /tmp/vitmp<CR>                                                                           
-"nmap <C-p>p :r! cat /tmp/vitmp<CR>
+map <C-y> <Nop>
+map <C-p> <Nop>
+
+vmap <C-y>y :w! /tmp/vitmp<CR>                                                                           
+nmap <C-p>p :r! cat /tmp/vitmp<CR>
 "###########################################
 
 "###############
