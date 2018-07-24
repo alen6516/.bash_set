@@ -7,8 +7,8 @@
 "###  selecting lines, then use zf to create fold
 "###  zo to open fold, and zc to close
 "## copy and paste is savaliable among different vim instances
+"## tab & shift-tab to indent and unindent
 "#########################################
-
 
 "syntax enable      " turn on vim highlight for code, note this line should be upper then the line hi
 set nocompatible    " don't be compatible to vi
@@ -38,6 +38,14 @@ map <C-p> :r! cat /tmp/vitmp<CR>
 vmap <C-y>y :w! /tmp/vitmp<CR>                                                                           
 nmap <C-p>p :r! cat /tmp/vitmp<CR>
 "###########################################
+
+"#####################
+"# indent & unindent #
+nmap <tab> V>
+nmap <s-tab> V<
+vmap <tab> >gv
+vmap <s-tab> <gv
+"#####################
 
 "###############
 "#### color ####
