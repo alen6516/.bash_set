@@ -117,7 +117,7 @@ fi
 trash_can="/tmp/recycle_bin"
 function rm()
 {
-    [ -d $trash_can ] || mkdri $trash_can
+    [ -d $trash_can ] || mkdir $trash_can
     mv $@ $trash_can
     echo "moving $@ to $trash_can"
 }
