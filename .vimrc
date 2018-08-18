@@ -135,9 +135,10 @@ func SetTitle_2()
     call append(line(".")+2, " Created Time: ".strftime("%Y-%m-%d")) 
     call append(line(".")+3, "***/") 
     call append(line(".")+4, "") 
-    call append(line(".")+5, "#include <stdio.h>") 
-    call append(line(".")+6, "#include <stdint.h>") 
-    call append(line(".")+7, "") 
+    call append(line(".")+5, "#include <stdio.h>")
+    call append(line(".")+6, "#include <stdlib.h>")
+    call append(line(".")+7, "#include <stdint.h>") 
+    call append(line(".")+8, "") 
 endfunc 
 " auto move to the end of the file
 autocmd BufNewFile * normal G
