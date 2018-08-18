@@ -17,6 +17,7 @@ set nu
 set ruler           " turn on the display of coordination at right-bottom cornor
 set incsearch       " jump to the searching pattern while still typing
 set ic              " ignore the case of searching pattern
+set ai              " auto indent
 set tabstop=4       " the definition for a tab of vim
 set shiftwidth=4    " the width of auto indent
 set expandtab       " expand a tab as several spaces
