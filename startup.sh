@@ -78,7 +78,7 @@ backup () {
             _msg "no need to backup $HOME/$file"
         fi
 
-        mv $file $HOME/
+        cp $file $HOME/
     done
 
 }
