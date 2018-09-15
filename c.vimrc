@@ -50,7 +50,10 @@ call plug#begin('~/.vim/plugged')
 
     Plug 'itchyny/lightline.vim'
     " config {
-    "
+
+        let g:lightline = {
+            \'colorscheme': 'jellybeans',
+            \}
     " }
 
 
@@ -230,22 +233,12 @@ call plug#begin('~/.vim/plugged')
         " // In order to avoid conflicts, the Source Explorer should know what plugins except
         " // itself are using buffers. And you need add their buffer names into below list
         " // according to the command ":buffers!"
-        let g:SrcExpl_pluginList = [   
-        	\    "__Tag_List__",         
-        	\    "_NERD_tree_",          
-        	\    "Source_Explorer"       
-        	\   ]
+        let g:SrcExpl_pluginList = ["__Tag_List__", "_NERD_tree_", "Source_Explorer"]
         
         " // The color schemes used by Source Explorer. There are five color schemes
         " // supported for now - Red, Cyan, Green, Yellow and Magenta. Source Explorer
         " // will pick up one of them randomly when initialization.
-        let g:SrcExpl_colorSchemeList = [ 
-            \   "Red",                    
-            \   "Cyan",                   
-            \   "Green",                  
-            \  	"Yellow",                 
-            \   "Magenta"                 
-            \]
+        let g:SrcExpl_colorSchemeList = ["Red", "Cyan", "Green", "Yellow", "Magenta"]
         
         " // Enable/Disable the local definition searching, and note that this is not 
         " // guaranteed to work, the Source Explorer doesn't check the syntax for now. 
