@@ -8,6 +8,7 @@
 #    val => ${FILE[$i]}
 declare -A FILE=(                        \
     [".vimrc"]=".vimrc"                  \
+    [".vim.plug"]=".vim.plug"            \
     [".bashrc"]=".bashrc"                \
     [".bash_aliases"]=".bash_aliases"    \
     [".tmux.conf"]=".tmux.conf"          \
@@ -19,7 +20,7 @@ SCRIPT_PATH=$CURR_PATH/${BASH_SOURCE[0]}
 RET=0
 JOB=""
 
-DIR_NAME="bash_set"
+DIR_NAME=".bash_set"
 DEBUG_MODE=1
 
 ######################### tools
@@ -53,7 +54,7 @@ _debug() {
 
 ######################### functions
 
-check_env () {
+check_env() {
 
     JOB="check if \$HOME is set"
     [ -n $HOME ] 
@@ -65,7 +66,7 @@ check_env () {
 
 }
 
-backup () {
+backup() {
     for file in ${FILE[@]}
     do
         if [ -e $HOME/$file ]; then
@@ -78,12 +79,14 @@ backup () {
             _msg "no need to backup $HOME/$file"
         fi
 
-        cp $file $HOME/
+        JOB="build link for $file"
+        ln $file $HOME/
+        _result
     done
 
 }
 
-install_pkg () {
+install_pkg() {
 
     JOB="apt update"
     sudo apt update
@@ -100,8 +103,8 @@ install_pkg () {
     _result 
 
     JOB="install ctags"
-    #sudo apt install -y exuberant-ctags 
-    #_result 
+    sudo apt install -y exuberant-ctags 
+    _result 
 
     JOB="install cscope"
     #sudo apt install -y cscope
@@ -149,4 +152,4 @@ install_pkg
 
 backup
 
-#setup_vim_plug
+setup_vim_plug
