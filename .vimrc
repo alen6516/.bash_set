@@ -1,23 +1,12 @@
-"##### shortcut ##########################
-"## F2        --> number/no number
-"## space     --> half page down
-"## indent    --> Contrl + Shift + g
-"## C-n       --> close highlight search hit (:noh)
-"## fold
-"###  selecting lines, then use zf to create fold
-"###  zo to open fold, and zc to close
-"## copy and paste is savaliable among different vim instances
-"## tab & shift-tab to indent and unindent
-"#########################################
+source ~/.vim.plug
 
-"syntax enable      " turn on vim highlight for code, note this line should be upper then the line hi
-set nocompatible    " don't be compatible to vi
-
+set bg=dark
 set nu
 set ruler           " turn on the display of coordination at right-bottom cornor
 set incsearch       " jump to the searching pattern while still typing
 set ic              " ignore the case of searching pattern
 set ai              " auto indent
+set scrolloff=3     " preserve several lines when scrolling
 set tabstop=4       " the definition for a tab of vim
 set shiftwidth=4    " the width of auto indent
 set expandtab       " expand a tab as several spaces
@@ -25,7 +14,40 @@ set expandtab       " expand a tab as several spaces
 set encoding=utf-8
 
 set foldenable      " enable fold mode
-set foldmethod=manual
+set foldmethod=manual   " zz to create; zo to open; zc to close
+
+" #### line number color #### 
+set cursorline
+hi LineNr cterm=NONE ctermfg=DarkGrey ctermbg=NONE
+hi CursorLineNR term=bold cterm=bold ctermfg=yellow
+
+"#### set shortcut #######
+nmap N :set nonumber!<CR>:set foldcolumn=0<CR>
+nmap <Space> 10j
+nmap <BS> 10k
+nmap <C-h> :noh<CR>
+nmap <C-S-g> gg=G
+
+" quick quit
+nmap qqq :q<cr>
+
+" insert line
+"nmap O o<ESC>
+
+" move to header/tailer
+"nmap > $
+"nmap < 0
+
+" window switching
+"nmap w<Right> <C-w><Right>
+"nmap w<Left>  <C-w><Left>
+"nmap w<Up>    <C-w><Up>
+"nmap w<Down>  <C-w><Down>
+"nmap ww       <C-w>w
+
+" tab switching
+"nmap t<Right> gt
+"nmap t<Left> gT
 
 "###########################################
 " enable copy between different vim instance
@@ -36,8 +58,8 @@ map <C-y> :w! /tmp/vitmp<CR>
 map <C-p> <Nop>
 map <C-p> :r! cat /tmp/vitmp<CR>
 
-vmap <C-y>y :w! /tmp/vitmp<CR>                                                                           
-nmap <C-p>p :r! cat /tmp/vitmp<CR>
+vmap <C-y> :w! /tmp/vitmp<CR>
+nmap <C-p> :r! cat /tmp/vitmp<CR>
 "###########################################
 
 "#####################
@@ -46,25 +68,24 @@ nmap <tab> V>
 nmap <s-tab> V<
 vmap <tab> >gv
 vmap <s-tab> <gv
+imap <s-tab> <Esc>V<i
+
+"imap <tab> <C-n>   " use tab to show completion
 "#####################
+
 
 "###############
 "#### color ####
 set t_Co=256
 "colorscheme torte # set color style (select from /usr/share/vim/vimNN/colors/ , vimNN is the version number of your vim)
 
-set cursorline
-"hi CursorLine cterm=none ctermbg=DarkBlue ctermfg=White  "set the style of cursorline 
 
 set hlsearch        " highlight the searching result
 hi Search guibg=Yellow guifg=Black ctermbg=Yellow ctermfg=Black
 
-set background=dark
-hi Visual ctermbg=LightGreen ctermfg=NONE
-
 "##### set the style of status line ####
 set laststatus=2    " turn on the status line of vim, set 1 to turn 0ff
-set statusline=%#filepath#[%{expand('%:p')}]%#filetype#[%{strlen(&fenc)?&fenc:&enc},\ %{&ff},\ %{strlen(&filetype)?&filetype:'plain'}]%#filesize#%{FileSize()}%{IsBinary()}%=%#position#%c,%l/%L\ [%3p%%]
+"set statusline=%#filepath#[%{expand('%:p')}]%#filetype#[%{strlen(&fenc)?&fenc:&enc},\ %{&ff},\ %{strlen(&filetype)?&filetype:'plain'}]%#filesize#%{FileSize()}%{IsBinary()}%=%#position#%c,%l/%L\ [%3p%%]
 
 hi filepath cterm=none ctermbg=238 ctermfg=40
 hi filetype cterm=none ctermbg=238 ctermfg=45
@@ -74,10 +95,10 @@ hi position cterm=none ctermbg=238 ctermfg=228
 function IsBinary()
     if (&binary == 0)
         return ""
-        else
+    else
         return "[Binary]"
-        endif
-        endfunction
+    endif
+endfunction
 
 function FileSize()
     let bytes = getfsize(expand("%:p"))
@@ -96,14 +117,6 @@ endfunction
 "#### end of color ####
 "######################
 
-"#########################
-"#### set shortcut #######
-nnoremap <F2> :set nonumber!<CR>:set foldcolumn=0<CR>
-nnoremap <Space> <C-d>
-nnoremap <C-n> :noh<CR>
-nnoremap <C-S-g> gg=G
-"#### end of shortcut ####
-"#########################
 
 "###########################
 "#### custom file title ####
@@ -136,10 +149,9 @@ func SetTitle_2()
     call append(line(".")+2, " Created Time: ".strftime("%Y-%m-%d")) 
     call append(line(".")+3, "***/") 
     call append(line(".")+4, "") 
-    call append(line(".")+5, "#include <stdio.h>")
-    call append(line(".")+6, "#include <stdlib.h>")
-    call append(line(".")+7, "#include <stdint.h>") 
-    call append(line(".")+8, "") 
+    call append(line(".")+5, "#include <stdio.h>") 
+    call append(line(".")+6, "#include <stdint.h>") 
+    call append(line(".")+7, "") 
 endfunc 
 " auto move to the end of the file
 autocmd BufNewFile * normal G
@@ -150,11 +162,10 @@ autocmd BufNewFile * normal G
 "  source ~/.vimrc.bundles
 "endif
 
-autocmd filetype sh command R !./%
-autocmd filetype python nnoremap <F9> :w <bar> exec '!python '.shellescape('%')<CR>
-autocmd filetype c nnoremap <F9> :w <bar> exec '!clear&&gcc '.shellescape('%').' -o '.shellescape('%:r').'&&./'.shellescape('%:r')<CR> 
-autocmd filetype cpp nnoremap <F9> :w <bar> exec '!clear;echo -n "====================";TEMP=`mktemp`;script $TEMP -e -q -c "g++ '.shellescape('%').' -std=c++11 -Wall -o '.shellescape('%:r').'" > /dev/null 2>&1 ;if [ $? == 0 ] ;then echo -e "\r\033[32m********************\033[0m";./'.shellescape('%:r').';else echo -e "\r\033[31mXXXXXXXXXXXXXXXXX\033[0m";cat $TEMP; fi'<CR>
-autocmd filetype c nnoremap <F8> :w <bar> exec '!clear&&gcc '.shellescape('%').' -o '.shellescape('%:r')<CR> 
-autocmd filetype cpp nnoremap <F8> :w <bar> exec '!clear&&g++ '.shellescape('%').' -std=c++11 -Wall -o '.shellescape('%:r')<CR>
-nnoremap <F10> :w <bar> exec '!cat '.shellescape('%').'\| xclip -selection clipboard'<CR>
-nnoremap <F11> :w <bar> exec '!fish'<CR>
+"autocmd filetype python nnoremap <F9> :w <bar> exec '!python '.shellescape('%')<CR>
+"autocmd filetype c nnoremap <F9> :w <bar> exec '!clear&&gcc '.shellescape('%').' -o '.shellescape('%:r').'&&./'.shellescape('%:r')<CR> 
+"autocmd filetype cpp nnoremap <F9> :w <bar> exec '!clear;echo -n "====================";TEMP=`mktemp`;script $TEMP -e -q -c "g++ '.shellescape('%').' -std=c++11 -Wall -o '.shellescape('%:r').'" > /dev/null 2>&1 ;if [ $? == 0 ] ;then echo -e "\r\033[32m********************\033[0m";./'.shellescape('%:r').';else echo -e "\r\033[31mXXXXXXXXXXXXXXXXX\033[0m";cat $TEMP; fi'<CR>
+"autocmd filetype c nnoremap <F8> :w <bar> exec '!clear&&gcc '.shellescape('%').' -o '.shellescape('%:r')<CR> 
+"autocmd filetype cpp nnoremap <F8> :w <bar> exec '!clear&&g++ '.shellescape('%').' -std=c++11 -Wall -o '.shellescape('%:r')<CR>
+"nnoremap <F10> :w <bar> exec '!cat '.shellescape('%').'\| xclip -selection clipboard'<CR>
+"nnoremap <F11> :w <bar> exec '!fish'<CR>

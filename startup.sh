@@ -8,14 +8,16 @@
 #    val => ${FILE[$i]}
 declare -A FILE=(                        \
     [".vimrc"]=".vimrc"                  \
-    [".vim.plug"]=".vim.plug"            \
+    [".vim_plug"]=".vim_plug"            \
     [".bashrc"]=".bashrc"                \
     [".bash_aliases"]=".bash_aliases"    \
     [".tmux.conf"]=".tmux.conf"          \
 )
 
 CURR_PATH=`pwd`
-SCRIPT_PATH=$CURR_PATH/${BASH_SOURCE[0]}
+SCRIPT=`realpath $0`
+SCRIPT_PATH=`dirname $SCRIPT`
+DATE=`date +"%Y%m%d"`
 
 RET=0
 JOB=""
@@ -71,16 +73,19 @@ backup() {
     do
         if [ -e $HOME/$file ]; then
 
-            JOB="backup $HOME/$file to $HOME/${file}.old"
-            mv -i $HOME/$file $HOME/${file}.old
+            JOB="backup $HOME/$file to $HOME/${file}.$DATE"
+            mv -i $HOME/$file $HOME/${file}.$DATE
             _result 
 
         else
             _msg "no need to backup $HOME/$file"
         fi
-
+        
+        # create file before link
+        touch $HOME/$file
+        
         JOB="build link for $file"
-        ln $file $HOME/
+        ln -sf $SCRIPT_PATH/$file $HOME/$file
         _result
     done
 
@@ -135,7 +140,7 @@ setup_vim_plug() {
 
     JOB="set up vim plug"
     vim \
-        -u $HOME/${FILE[.vim.plug]} \
+        -u $HOME/${FILE[.vim_plug]} \
         "+set nomore"               \
         "+PlugInstall!"             \
         "+PlugClean"                \
