@@ -1,4 +1,4 @@
-source ~/.vim.plug
+source ~/.vim_plug
 
 set bg=dark
 set nu
