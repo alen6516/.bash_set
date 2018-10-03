@@ -25,7 +25,7 @@ hi CursorLineNR term=bold cterm=bold ctermfg=yellow
 nmap N :set nonumber!<CR>:set foldcolumn=0<CR>
 nmap <Space> 10j
 nmap <BS> 10k
-nmap <C-h> :noh<CR>
+nmap <C-l> :noh<CR>
 nmap <C-S-g> gg=G
 
 " quick quit
