@@ -97,8 +97,8 @@ install_pkg() {
     sudo apt update
     _result 
 
-    JOB="apt install tmux curl git openssh-server"
-    sudo apt install tmux curl git openssh-server
+    JOB="apt install vim tmux curl git openssh-server"
+    sudo apt install vim tmux curl git openssh-server
     _result 
     
 
