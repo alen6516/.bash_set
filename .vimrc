@@ -162,4 +162,6 @@ autocmd filetype cpp nnoremap <F9> :w <bar> exec '!clear;echo -n "==============
 "nnoremap <F10> :w <bar> exec '!cat '.shellescape('%').'\| xclip -selection clipboard'<CR>
 "nnoremap <F11> :w <bar> exec '!fish'<CR>
 
-autocmd filetype php setlocal cursorline!   " vim scrolls php file slowly with cursorline, so turn off it when open php files
+" vim scrolls php file slowly with cursorline, so turn off it when open php files
+autocmd filetype php setlocal nocursorline          " by filetype detected by vim
+autocmd BufRead,BufNewFile *.php set nocursorline   " by extension filename
