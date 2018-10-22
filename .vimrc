@@ -161,3 +161,5 @@ autocmd filetype cpp nnoremap <F9> :w <bar> exec '!clear;echo -n "==============
 "autocmd filetype cpp nnoremap <F8> :w <bar> exec '!clear&&g++ '.shellescape('%').' -std=c++11 -Wall -o '.shellescape('%:r')<CR>
 "nnoremap <F10> :w <bar> exec '!cat '.shellescape('%').'\| xclip -selection clipboard'<CR>
 "nnoremap <F11> :w <bar> exec '!fish'<CR>
+
+autocmd filetype php setlocal cursorline!   " vim scrolls php file slowly with cursorline, so turn off it when open php files
