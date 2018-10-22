@@ -22,10 +22,10 @@ hi LineNr cterm=NONE ctermfg=DarkGrey ctermbg=NONE
 hi CursorLineNR term=bold cterm=bold ctermfg=yellow
 
 "#### set shortcut #######
-nmap N :set nonumber!<CR>:set foldcolumn=0<CR>
+nmap <C-l> :set nonumber!<CR>:set foldcolumn=0<CR>
 nmap <Space> 10j
 nmap <BS> 10k
-nmap <C-l> :noh<CR>
+nmap <C-h> :noh<CR>
 nmap <C-S-g> gg=G
 
 " quick quit
