@@ -2,11 +2,8 @@
 
 ######################### set up variables
 
-# ${FILE[.vimrc]}
-# for i in ${!FILE[@]}
-#    key => $i
-#    val => ${FILE[$i]}
 declare -A FILE=(                        \
+    [".vim"]=".vim"                      \
     [".vimrc"]=".vimrc"                  \
     [".vim_plug"]=".vim_plug"            \
     [".bashrc"]=".bashrc"                \
@@ -23,6 +20,7 @@ RET=0
 JOB=""
 
 DIR_NAME=".bash_set"
+LOG_PATH="/tmp/bash_set.log"
 DEBUG_MODE=1
 
 ######################### tools
@@ -30,10 +28,12 @@ _msg() {
     printf "%b\n" "$@"
 }
 
+# deprecated, use _result
 _success() {
     _msg "successs in $1"
 }
 
+# deprecated, use _result
 _error() {
     RET=$?
     _msg "problem in $1"
@@ -41,9 +41,12 @@ _error() {
 
 _result() {
     if [ $? -eq 0 ]; then
-        _msg "\33[32m[✔]\33[0m $JOB"
+        #_msg "\33[32m[✔]\33[0m $JOB"
+        echo "\33[32m[✔]\33[0m $JOB" >> $LOG_PATH
     else
-        _msg "\33[31m[✘]\33[0m $JOB"
+        #_msg "\33[31m[✘]\33[0m $JOB"
+        echo "\33[32m[✔]\33[0m $JOB" >> $LOG_PATH
+        show_log
         exit 1
     fi
 }
@@ -56,6 +59,14 @@ _debug() {
 
 ######################### functions
 
+init() {
+
+    # ask for sudo privilege
+    [ "$UID" -eq 0 ] || exec sudo "$0" "$@"
+    
+    echo "" > $LOG_PATH
+}
+
 check_env() {
 
     JOB="check if \$HOME is set"
@@ -63,7 +74,8 @@ check_env() {
     _result 
 
     JOB="check if internet is accessable"
-    ping -w 1 -q -c 1 `ip r | grep "default" | head -1 |cut -d ' ' -f 3` > /dev/null
+    #ping -w 1 -q -c 1 `ip r | grep "default" | head -1 |cut -d ' ' -f 3` > /dev/null
+    ping -w 1 -c1 8.8.8.8 > /dev/null
     _result 
 
 }
@@ -72,13 +84,9 @@ backup() {
     for file in ${FILE[@]}
     do
         if [ -e $HOME/$file ]; then
-
             JOB="backup $HOME/$file to $HOME/${file}.$DATE"
             mv -i $HOME/$file $HOME/${file}.$DATE
             _result 
-
-        else
-            _msg "no need to backup $HOME/$file"
         fi
         
         # create file before link
@@ -97,11 +105,10 @@ install_pkg() {
     sudo apt update
     _result 
 
-    JOB="apt install vim tmux curl git openssh-server"
-    sudo apt install vim tmux curl git openssh-server
+    JOB="apt install vim tmux curl git openssh-server w3m"
+    sudo apt install vim tmux curl git openssh-server w3m
     _result 
     
-
     JOB="install vim-plug"
     curl -fLo $HOME/.vim/autoload/plug.vim --create-dirs \
         https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim 
@@ -127,9 +134,11 @@ install_pkg() {
     JOB="install python3-pip"
     sudo apt install -y python3-pip
     _result 
+
     JOB="upgrade pip"
     sudo pip3 install --upgrade pip
-    _result 
+    _result
+
     JOB="install autopep8"
     sudo pip3 install --upgrade autopep8
     _result 
@@ -149,7 +158,17 @@ setup_vim_plug() {
     _result 
 }
 
+show_log() {
+    exec < $LOG_PATH
+    while read line
+    do
+        _msg $line
+    done
+}
+
 ######################### start
+
+init
 
 check_env
 
@@ -158,3 +177,5 @@ install_pkg
 backup
 
 setup_vim_plug
+
+show_log
