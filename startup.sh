@@ -89,14 +89,13 @@ backup() {
             _result 
         fi
         
-        # create file before link
-        touch $HOME/$file
-        
-        JOB="build link for $file"
-        ln -sf $SCRIPT_PATH/$file $HOME/$file
-        _result
+	if [ -f $SCRIPT_PATH/$file ]; then
+            JOB="build link for $file"
+            touch $HOME/$file
+            ln -sf $SCRIPT_PATH/$file $HOME/$file
+            _result
+        fi
     done
-
 }
 
 install_pkg() {
@@ -172,9 +171,9 @@ init
 
 check_env
 
-install_pkg
-
 backup
+
+install_pkg
 
 setup_vim_plug
 
