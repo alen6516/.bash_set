@@ -42,10 +42,10 @@ _error() {
 _result() {
     if [ $? -eq 0 ]; then
         #_msg "\33[32m[✔]\33[0m $JOB"
-        echo "\33[32m[✔]\33[0m $JOB" >> $LOG_PATH
+        echo "\\33[32m[✔]\\33[0m $JOB" >> $LOG_PATH
     else
         #_msg "\33[31m[✘]\33[0m $JOB"
-        echo "\33[32m[✔]\33[0m $JOB" >> $LOG_PATH
+        echo "\\33[32m[✔]\\33[0m $JOB" >> $LOG_PATH
         show_log
         exit 1
     fi
