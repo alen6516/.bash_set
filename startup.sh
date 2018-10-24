@@ -25,7 +25,7 @@ DEBUG_MODE=1
 
 ######################### tools
 _msg() {
-    printf "%b\n" "$@"
+    printf "%b\n" "$*"
 }
 
 # deprecated, use _result
@@ -42,10 +42,10 @@ _error() {
 _result() {
     if [ $? -eq 0 ]; then
         #_msg "\33[32m[✔]\33[0m $JOB"
-        echo "\\33[32m[✔]\\33[0m $JOB" >> $LOG_PATH
+        echo "\\\33[32m[✔]\\\33[0m $JOB" >> $LOG_PATH
     else
         #_msg "\33[31m[✘]\33[0m $JOB"
-        echo "\\33[32m[✔]\\33[0m $JOB" >> $LOG_PATH
+        echo "\\\33[32m[✔]\\\33[0m $JOB" >> $LOG_PATH
         show_log
         exit 1
     fi
@@ -61,9 +61,6 @@ _debug() {
 
 init() {
 
-    # ask for sudo privilege
-    [ "$UID" -eq 0 ] || exec sudo "$0" "$@"
-    
     echo "" > $LOG_PATH
 }
 
@@ -88,8 +85,13 @@ backup() {
             mv -i $HOME/$file $HOME/${file}.$DATE
             _result 
         fi
-        
-	if [ -f $SCRIPT_PATH/$file ]; then
+    done
+}
+
+build_link() {
+    for file in ${FILE[@]}
+    do
+	    if [ -f $SCRIPT_PATH/$file ]; then
             JOB="build link for $file"
             touch $HOME/$file
             ln -sf $SCRIPT_PATH/$file $HOME/$file
@@ -172,6 +174,8 @@ init
 check_env
 
 backup
+
+build_link
 
 install_pkg
 
