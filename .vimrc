@@ -22,10 +22,10 @@ hi LineNr cterm=NONE ctermfg=DarkGrey ctermbg=NONE
 hi CursorLineNR term=bold cterm=bold ctermfg=yellow
 
 "#### set shortcut #######
-nmap N :set nonumber!<CR>:set foldcolumn=0<CR>
+nmap <C-l> :set nonumber!<CR>:set foldcolumn=0<CR>
 nmap <Space> 10j
 nmap <BS> 10k
-nmap <C-l> :noh<CR>
+nmap <C-h> :noh<CR>
 nmap <C-S-g> gg=G
 
 " quick quit
@@ -161,3 +161,7 @@ autocmd filetype cpp nnoremap <F9> :w <bar> exec '!clear;echo -n "==============
 "autocmd filetype cpp nnoremap <F8> :w <bar> exec '!clear&&g++ '.shellescape('%').' -std=c++11 -Wall -o '.shellescape('%:r')<CR>
 "nnoremap <F10> :w <bar> exec '!cat '.shellescape('%').'\| xclip -selection clipboard'<CR>
 "nnoremap <F11> :w <bar> exec '!fish'<CR>
+
+" vim scrolls php file slowly with cursorline, so turn off it when open php files
+autocmd filetype php setlocal nocursorline          " by filetype detected by vim
+autocmd BufRead,BufNewFile *.php set nocursorline   " by extension filename
