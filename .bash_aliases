@@ -56,11 +56,11 @@ function rrm()
 
 function doc()
 {
-    URL="https://wangchujiang.com/linux-command"
-    ping -c1 -w 3 8.8.8.8 || echo "Internet is not accessable"; exit 1
-    res_1=`curl $URL -s -o /dev/null -w %{http_code}`
-    [ 200 -ne $res_1 ] && echo "wangchujiang.com/linux-command is not accessable"; exit 1
-    w3m ${URL}/c/$1 | less
+    URL="https://wangchujiang.com/linux-command/"
+    ping -c1 -w 3 8.8.8.8 > /dev/null || (echo "Internet is not accessable"; return)
+    res=`curl -s -o /dev/null/ $URL -w %{http_code}`
+    [ 200 -ne $res ] && (echo "wangchujiang.com/linux-command is not accessable"; return)
+    w3m ${URL}c/${1} | less
 }
 
 alias port='sudo netstat -antlp'
