@@ -167,6 +167,11 @@ show_log() {
     done
 }
 
+source_config() {
+    source $HOME/.bashrc
+    source $HOME/.bash_aliases
+}
+
 ######################### start
 
 init
@@ -182,3 +187,5 @@ install_pkg
 setup_vim_plug
 
 show_log
+
+source_config
