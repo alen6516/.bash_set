@@ -112,18 +112,3 @@ if ! shopt -oq posix; then
     . /etc/bash_completion
   fi
 fi
-
-
-trash_can="/tmp/recycle_bin"
-function rm()
-{
-    [ -d $trash_can ] || mkdir $trash_can
-    mv $@ $trash_can
-    echo "moving $@ to $trash_can"
-}
-
-function rrm()
-{
-    /bin/rm -I $@    
-}
-

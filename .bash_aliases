@@ -41,6 +41,28 @@ function open()
     fi
 }
 
+trash_can="/tmp/recycle_bin"
+function rm()
+{
+    [ -d $trash_can ] || mkdir $trash_can
+    mv $@ $trash_can
+    echo "moving $@ to $trash_can"
+}
+
+function rrm()
+{
+    /bin/rm -I $@    
+}
+
+function doc()
+{
+    URL="https://wangchujiang.com/linux-command"
+    ping -c1 -w 3 8.8.8.8 || echo "Internet is not accessable"; exit 1
+    res_1=`curl $URL -s -o /dev/null -w %{http_code}`
+    [ 200 -ne $res_1 ] && echo "wangchujiang.com/linux-command is not accessable"; exit 1
+    w3m ${URL}/c/$1 | less
+}
+
 alias port='sudo netstat -antlp'
 alias py='python'
 alias py3='python3'
