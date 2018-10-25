@@ -107,7 +107,7 @@ install_pkg() {
     _result 
 
     JOB="apt install vim tmux curl git openssh-server w3m"
-    sudo apt install vim tmux curl git openssh-server w3m
+    sudo apt install -y vim tmux curl git openssh-server w3m
     _result 
     
     JOB="install vim-plug"

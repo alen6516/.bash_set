@@ -54,7 +54,7 @@ function rrm()
     /bin/rm -I $@    
 }
 
-function doc()
+function man2()
 {
     URL="https://wangchujiang.com/linux-command/"
     ping -c1 -w 3 8.8.8.8 > /dev/null || (echo "Internet is not accessable"; return)
