@@ -67,6 +67,7 @@ alias port='sudo netstat -antlp'
 alias py='python'
 alias py3='python3'
 alias ptt='ssh bbsu@ptt.cc'
+alias tmp='cd ~/vm_share/tmp'
 
 # 引號裡要打引號前要先用\跳脫，但是也不能直接打\，否則會被awk解析，要打'\'
 alias cpu_load='ps -aux|awk '\''BEGIN{ sum=0} {sum=sum+$3} END{print sum}'\'''
