@@ -146,8 +146,10 @@ func SetTitle_2()
     call append(line(".")+3, "***/") 
     call append(line(".")+4, "") 
     call append(line(".")+5, "#include <stdio.h>") 
-    call append(line(".")+6, "#include <stdint.h>") 
-    call append(line(".")+7, "") 
+    call append(line(".")+6, "#include <stdlib.h>") 
+    call append(line(".")+7, "#include <string.h>") 
+    call append(line(".")+8, "#include <stdint.h>") 
+    call append(line(".")+9, "") 
 endfunc 
 " auto move to the end of the file
 autocmd BufNewFile * normal G
@@ -165,3 +167,6 @@ autocmd filetype cpp nnoremap <F9> :w <bar> exec '!clear;echo -n "==============
 " vim scrolls php file slowly with cursorline, so turn off it when open php files
 autocmd filetype php setlocal nocursorline          " by filetype detected by vim
 autocmd BufRead,BufNewFile *.php set nocursorline   " by extension filename
+
+autocmd filetype c nmap C O/***/<ESC>
+
