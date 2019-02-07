@@ -62,13 +62,13 @@ call plug#begin('~/.vim/plugged')
     "
     "usage{
         " change surrounding
-            `cs'"`      => change ' to "
+        "   `cs'"`      => change ' to "
         
         " delete surrounding
-            `ds"`       => remove "
+        "   `ds"`       => remove "
             
         " you surrounding
-            `ysiw"`     => add "
+        "   `ysiw"`     => add "
     "}
 
 
