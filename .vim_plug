@@ -352,8 +352,8 @@ call plug#begin('~/.vim/plugged')
     "
     " usage {
     " 	select block, press 'ga' 
-    " 		press '=', it will align via the first =
-    " 		press '2=', it will align via the second =
+    " 		press `=`, it will align via the first =
+    " 		press `2=`, it will align via the second =
     " }
 
 "}
