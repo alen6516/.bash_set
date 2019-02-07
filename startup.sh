@@ -81,8 +81,8 @@ backup() {
     for file in ${FILE[@]}
     do
         if [ -e $HOME/$file ]; then
-            JOB="backup $HOME/$file to $HOME/${file}.$DATE"
-            mv -i $HOME/$file $HOME/${file}.$DATE
+            JOB="backup $HOME/$file to $HOME/${file}_$DATE"
+            mv -i $HOME/$file $HOME/${file}_$DATE
             _result 
         fi
     done
