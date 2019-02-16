@@ -23,16 +23,13 @@ hi CursorLineNR term=bold cterm=bold ctermfg=yellow
 
 "#### set shortcut #######
 nmap <C-l> :set nonumber!<CR>:set foldcolumn=0<CR>
-nmap <Space> 10j
-nmap <BS> 10k
+nmap <C-d> 10j
+nmap <C-u> 10k
 nmap <C-h> :noh<CR>
-nmap <C-S-g> gg=G
+"nmap <C-S-g> gg=G
 
 " quick quit
 nmap qqq :q<cr>
-
-" insert line
-"nmap O o<ESC>
 
 " move to header/tailer
 "nmap > $

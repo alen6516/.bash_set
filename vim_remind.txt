@@ -6,25 +6,25 @@ vim 支援 lua (vim --version | grep lua)
 vim-plug
 
 # general plug =======
-nerdtree			# nerdtree
+nerdtree			        # nerdtree
 vim-nerd-tree-direnter		# 允許 nerdtree 以 enter 在新的 tab 開檔
-lightline			# 美化狀態列, set laststatus=2
+lightline			        # 美化狀態列, set laststatus=2
 
-"junegunn/fzf
+"junegunn/fzf               # 模糊查找工具
 
 "gitsession
-vim-multiple-cursor		# 選取多重word一起修改
-easymotion			# 快速移動游標
-undotree			# undotree
-indentLine			# 縮排對齊線
-restore-view			# 開啟檔案時回到上次游標停留的地方
-wildfire			# 快速選取區塊
+vim-multiple-cursor	    # 選取多重word一起修改
+easymotion			    # 快速移動游標
+undotree			    # undotree
+indentLine			    # 縮排對齊線
+restore-view		   	# 開啟檔案時回到上次游標停留的地方
+wildfire			    # 快速選取區塊
 
 # programming====
-ctag				# 非 vim plug, apt install 裝 
-tagbar				# depend on ctag，變數、method 側欄
-SrcExpl				# 側欄顯示當前 method 定義處
-syntastic			# 預執行
+ctag				    # 非 vim plug, apt install 裝 
+tagbar				    # depend on ctag，變數、method 側欄
+SrcExpl				    # 側欄顯示當前 method 定義處
+syntastic			    # 預執行
 nerdcommenter			# 快速註解
 vim-easy-align			# 快速對齊
 
@@ -43,26 +43,24 @@ Shift + s	: src explore
 Shift + t	: tagbar
 Shift + u	: undo tree
 
-\\w		: easy-motion
-\c<Space>	: commenter
-ga		: easy-align
+\\w         : easy-motion
+\c<Space>   : commenter
+ga          : easy-align
 
 Ctrl + n	: multiple-cursor select
 
 # 控制
-qqq		: q
-Shift + n	: 行號
+qqq	        : q
+Ctrl + l	: 行號開關
 Ctrl + y	: file 間複製
 Ctrl + p	: file 間貼上
-Tab		: indent
+Tab	        : indent
 Shift + Tab	: unindent	# shift + tab 會被xhsell解析掉，而 vim 下 Ctrl+Tab = Tab
-shift + O	: 下一行插入空白行
-
 
 # 移動於 window 間
-Ctrl-w-w 	:move between windows
-w+ 上下左右	: Ctrl-w + 上下左右
-ww		: Ctrl-w + w
+Ctrl-w-w    :move between windows
+w + 上下左右: Ctrl-w + 上下左右
+ww          : Ctrl-w + w
 
 # 移動於 tab 間
 Ctrl+PageUp/Down:move between tabs 
@@ -77,14 +75,125 @@ M		: cursor移至螢幕中間
 }		: 移至段落結尾
 $		: 移至行首
 0		: 移至行末
-h		: cursor移至螢幕頂端
-l		: cursor移至螢幕底端
-m		: cursor移至螢幕中間
-space		: 下移 10 行
-backspace	: 上移 10 行
+^       : 移至第一個非空白字元
+Ctrl + d: 下移 10 行
+Ctrl + u: 上移 10 行
+gg      : 移至檔首
+G       : 移至檔尾
+nG      : 移至第 n 行行首
+w       : 移至下一個字字首
+W       : 同上，但忽略一些標點符號
+e       : 移至前一個字字尾
+E       : 同上，但忽略一些標點符號
+b       : 移至前一個字字首
+B       : 同上，但忽略一些標點符號
+%       : 游標在括弧上時，移至匹配的括弧上
 
-# 查詢按鍵用途
-:h f
+# 進入插入模式
+i       : insert
+I       : 在行首插入
+a       : append
+A       : 在行尾插入
+o       : 在下一行開新行插入
+O       : 在上一行開新行插入
+J       : 將下一行一整行接至本行
 
-# 查詢快捷鍵
-:map
+# delete (刪除)
+x       : 刪除游標所在字元
+X       : 刪除游標前之字元
+dd      : 刪除一整行
+dw      : 刪除一個字(不適用中文)
+dG      : 刪除至檔尾
+dgg     : 刪除至檔首
+D       : 刪除至行尾(含游標所在字元)
+d0      : 刪除至行首(不含游標所在字元)
+
+# replace (取代)
+~       : 游標所在之處大小寫互換
+u       : undo
+U       : 在游標還沒移開本行前，回復所有編輯動作
+Ctrl + R: redo
+
+# 排版
+>>      : 整行向右一個 shiftwidth
+<<      : 整行向左一個 shiftwidth
+:ce     : 本行文字置中
+:ri     : 本行文字靠右 (set textwidth 的長度)
+:le     : 本行文字靠左
+
+# copy & paste (複製 & 貼上)
+yy      : 複製整行
+y2y     : 複製 2 行
+y^      : 複製至行首
+y$      : 複製至行尾
+yw      : 複製一個 word
+yG      : 複製至檔尾
+ygg     : 複製至檔首    
+p       : 在游標後貼上
+P       : 在游標前貼上
+
+# registers (緩衝區)
+"ayy    : 將本行複製到 a 緩衝區 (a 可為 26 字母其中一個，小寫的 a 會覆蓋，大寫的 A 會 append)
+"ap     : 將 a 緩衝區的內容貼上
+
+# The Big Command
+.       : 重複上一個動作
+
+# search (尋找)
+/       : 向下找
+?       : 向上找
+n       : 尋找下一個
+N       : 尋找上一個
+*       : 尋找游標所在之處的 word (要完全符合)
+#       : 同上，不過是向上找
+g*      : 同 * ，但部分符合即可
+g#      : 同 # ，但部份符合即可
+
+# substitute (替換)
+:[range]s/pattern/string/[c,e,g,i]
+    range   : 範圍 (可用 % 代表整篇文章)
+    pattern : 就是要被替換掉的字串，支持 regexp
+    string  : 將 pattern 由 string 所取代
+    c       : confirm，每次替換前會詢問
+    e       : 不顯示 error
+    g       : globe，整行符合的 pattern 都替換
+    i       : ignore，不分大小寫
+
+# marks (書籤)
+mx      : mark 住游標所在位置 (x 可用英文字母或數字)
+    小寫字母: 只作用於單一檔案內
+    大寫字母: 可作用於編輯中之各檔案間
+    數目字 n: 回到前 n+1 次編輯檔案的最後位置 (0 是前一次)
+
+`x      : 回到書籤位置
+'x      : 回到書籤設定行首行
+:marks  : 書籤列表
+
+# buffer (多檔編輯)
+:e 檔名 : 不離開 vim 的情形下再開其他檔案
+:e#     : 編輯前一個檔案
+Ctrl + ^: 同上
+
+:files  : 列出 buffer 中所有檔案
+:buffers: 同上
+:ls     : 同上
+
+:bn     : buffer next
+:bl     : buffer last
+:b 檔名 : 移至該檔
+:b 編號 : 同上 (:ls 中會顯示各檔案的編號)
+:bd     : 將檔案從 buffer list 中移除
+
+:qa     : 多檔編輯下 :q 不會離開 vim，改用 :qa
+
+#
+
+# 其他
+:h f    : 查詢按鍵用途
+:f      : 顯示目前編輯的檔名、是否經過修改及目前游標所在之位置
+Ctrl + g: 同上
+:f 檔名 : 改變編輯中的檔案檔名
+:x      : 離開 vim，若檔案有變動則存檔後離開，若無則直接離開，不再存檔
+:map    : 查詢快捷鍵
+vim -r 檔名 : 有 .swp 時緊急恢復
+vim -x 檔名 : 加密檔案，以後要開檔時會要求輸入密碼
