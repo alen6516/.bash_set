@@ -17,6 +17,9 @@ set visualbell      " turn off bell under vim
 set foldenable      " enable fold mode
 set foldmethod=manual   " zz to create; zo to open; zc to close
 
+" allow using :w!! to write a edited read-only file (press quickly)
+cnoremap w!! execute 'silent! write !sudo tee % >/dev/null' <bar> edit!
+
 " #### line number color #### 
 set cursorline
 hi LineNr cterm=NONE ctermfg=DarkGrey ctermbg=NONE
@@ -31,10 +34,6 @@ nmap <C-h> :noh<CR>
 
 " quick quit
 nmap qqq :q<cr>
-
-" move to header/tailer
-"nmap > $
-"nmap < 0
 
 " window switching
 "nmap w<Right> <C-w><Right>
