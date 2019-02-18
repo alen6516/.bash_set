@@ -152,6 +152,7 @@ autocmd BufNewFile * normal G
 "#### end new file title####
 "###########################
 
+" use F9 to compile and execute
 autocmd filetype python nnoremap <F9> :w <bar> exec '!python '.shellescape('%')<CR>
 autocmd filetype c nnoremap <F9> :w <bar> exec '!clear&&gcc '.shellescape('%').' -o '.shellescape('%:r').'&&./'.shellescape('%:r')<CR>
 autocmd filetype cpp nnoremap <F9> :w <bar> exec '!clear;echo -n "====================";TEMP=`mktemp`;script $TEMP -e -q -c "g++ '.shellescape('%').' -std=c++11 -Wall -o '.shellescape('%:r').'" > /dev/null 2>&1 ;if [ $? == 0 ] ;then echo -e "\r\033[32m********************\033[0m";./'.shellescape('%:r').';else echo -e "\r\033[31mXXXXXXXXXXXXXXXXX\033[0m";cat $TEMP; fi'<CR>
@@ -164,5 +165,5 @@ autocmd filetype cpp nnoremap <F9> :w <bar> exec '!clear;echo -n "==============
 autocmd filetype php setlocal nocursorline          " by filetype detected by vim
 autocmd BufRead,BufNewFile *.php set nocursorline   " by extension filename
 
-autocmd filetype c nmap C O/***/<ESC>
+"autocmd filetype c nmap C O/***/<ESC>
 
