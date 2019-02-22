@@ -166,4 +166,3 @@ autocmd filetype php setlocal nocursorline          " by filetype detected by vi
 autocmd BufRead,BufNewFile *.php set nocursorline   " by extension filename
 
 "autocmd filetype c nmap C O/***/<ESC>
-
