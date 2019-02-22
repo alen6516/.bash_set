@@ -1,70 +1,83 @@
-# requirement
+## requirement
 vim 7.4
 vim 支援 lua (vim --version | grep lua)
 
-# plug-in mamager
+## plug-in mamager
 vim-plug
 
-# general plug =======
-nerdtree			        # nerdtree
-vim-nerd-tree-direnter		# 允許 nerdtree 以 enter 在新的 tab 開檔
-lightline			        # 美化狀態列, set laststatus=2
+## general plug =======
+plug name               | function
+------------------------|:--------
+nerdtree			    | nerdtree
+vim-nerd-tree-direnter	| 允許 nerdtree 以 enter 在新的 tab 開檔
+lightline			    | 美化狀態列, set laststatus=2
+"junegunn/fzf           | 模糊查找工具
+"gitsession             | git 相關
+vim-multiple-cursor	    | 選取多重word一起修改
+easymotion			    | 快速移動游標
+undotree			    | undotree
+indentLine			    | 縮排對齊線
+restore-view		   	| 開啟檔案時回到上次游標停留的地方
+wildfire			    | 快速選取區塊
 
-"junegunn/fzf               # 模糊查找工具
+## programming====
+plug name               | function
+------------------------|:--------
+ctag				    | 非 vim plug, apt install 裝 
+tagbar				    | depend on ctag，變數、method 側欄
+SrcExpl				    | 側欄顯示當前 method 定義處
+syntastic			    | 預執行
+nerdcommenter			| 快速註解
+vim-easy-align			| 快速對齊
 
-"gitsession
-vim-multiple-cursor	    # 選取多重word一起修改
-easymotion			    # 快速移動游標
-undotree			    # undotree
-indentLine			    # 縮排對齊線
-restore-view		   	# 開啟檔案時回到上次游標停留的地方
-wildfire			    # 快速選取區塊
+## 自動補齊
+plug name               | function
+------------------------|:--------
+"neocomplete            | 自動補齊
 
-# programming====
-ctag				    # 非 vim plug, apt install 裝 
-tagbar				    # depend on ctag，變數、method 側欄
-SrcExpl				    # 側欄顯示當前 method 定義處
-syntastic			    # 預執行
-nerdcommenter			# 快速註解
-vim-easy-align			# 快速對齊
+## python 語言=====
+plug name               | function
+------------------------|:--------
+vim-autopep8			| 重整python符合pep8風格，depend on autopep8
 
-# 自動補齊
-"neocomplete
+##js 語言=========
+None
 
-python 語言=====
-vim-autopep8			# 重整python符合pep8風格，depend on autopep8
-
-js 語言=========
-
-# plug 快捷鍵
-Shift + e	: nerdtree
-Shift + r	: syntastic
-Shift + s	: src explore
-Shift + t	: tagbar
-Shift + u	: undo tree
-
-\\w         : easy-motion
-\c<Space>   : commenter
-ga          : easy-align
-
-Ctrl + n	: multiple-cursor select
+## plug 快捷鍵
+short cut   | function
+------------|:--------
+Shift + e	| nerdtree
+Shift + r	| syntastic
+Shift + s	| src explore
+Shift + t	| tagbar
+Shift + u	| undo tree
+\\w         | easy-motion
+\c<Space>   | commenter
+ga          | easy-align
+Ctrl + n	| multiple-cursor select
 
 # 控制
-qqq	        : q
-Ctrl + l	: 行號開關
-Ctrl + y	: file 間複製
-Ctrl + p	: file 間貼上
-Tab	        : indent
-Shift + Tab	: unindent	# shift + tab 會被xhsell解析掉，而 vim 下 Ctrl+Tab = Tab
+short cut   | function
+------------|:--------
+qqq	        | q
+Ctrl + l	| 行號開關
+Ctrl + y	| file 間複製
+Ctrl + p	| file 間貼上
+Tab	        | indent
+Shift + Tab	| unindent	# shift + tab 會被xhsell解析掉，而 vim 下 Ctrl+Tab = Tab
 
 # 移動於 window 間
-Ctrl-w-w    :move between windows
-w + 上下左右: Ctrl-w + 上下左右
-ww          : Ctrl-w + w
+short cut       | function
+----------------|:--------
+Ctrl-w-w        | move between windows
+w + 上下左右    | Ctrl-w + 上下左右
+ww              | Ctrl-w + w
 
 # 移動於 tab 間
-Ctrl+PageUp/Down:move between tabs 
-gt/gT		:move between tabs
+short cut           | function
+--------------------|:--------
+Ctrl+PageUp/Down    | move between tabs 
+gt/gT		        | move between tabs
 
 # 移動游標
 zz 		: 將當前行移至螢幕中間
