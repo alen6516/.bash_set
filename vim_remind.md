@@ -43,7 +43,7 @@ vim-autopep8			| 重整python符合pep8風格，depend on autopep8
 ##js 語言=========
 None
 
-## plug 快捷鍵
+## plug 快捷鍵 (plug shortcut)
 short cut   | function
 ------------|:--------
 Shift + e	| nerdtree
@@ -56,7 +56,7 @@ Shift + u	| undo tree
 ga          | easy-align
 Ctrl + n	| multiple-cursor select
 
-# 控制
+# 控制 (control)
 short cut   | function
 ------------|:--------
 qqq	        | q
@@ -66,116 +66,136 @@ Ctrl + p	| file 間貼上
 Tab	        | indent
 Shift + Tab	| unindent	# shift + tab 會被xhsell解析掉，而 vim 下 Ctrl+Tab = Tab
 
-# 移動於 window 間
+# 移動於 window 間 (move among windows)
 short cut       | function
 ----------------|:--------
 Ctrl-w-w        | move between windows
 w + 上下左右    | Ctrl-w + 上下左右
 ww              | Ctrl-w + w
 
-# 移動於 tab 間
+# 移動於 tab 間 (move among tabs)
 short cut           | function
 --------------------|:--------
 Ctrl+PageUp/Down    | move between tabs 
 gt/gT		        | move between tabs
 
-# 移動游標
-zz 		: 將當前行移至螢幕中間
-H		: cursor移至螢幕頂端
-L		: cursor移至螢幕底端
-M		: cursor移至螢幕中間
-{		: 移至段落開頭
-}		: 移至段落結尾
-$		: 移至行首
-0		: 移至行末
-^       : 移至第一個非空白字元
-Ctrl + d: 下移 10 行
-Ctrl + u: 上移 10 行
-gg      : 移至檔首
-G       : 移至檔尾
-nG      : 移至第 n 行行首
-w       : 移至下一個字字首
-W       : 同上，但忽略一些標點符號
-e       : 移至前一個字字尾
-E       : 同上，但忽略一些標點符號
-b       : 移至前一個字字首
-B       : 同上，但忽略一些標點符號
-%       : 游標在括弧上時，移至匹配的括弧上
-:NUM    : 跳到第 NUM 行
+# 移動游標 (move cursor)
+short cut   | function
+------------|:--------
+zz 		    | 將當前行移至螢幕中間
+H		    | cursor移至螢幕頂端
+L		    | cursor移至螢幕底端
+M		    | cursor移至螢幕中間
+{		    | 移至段落開頭
+}		    | 移至段落結尾
+$		    | 移至行首
+0		    | 移至行末
+^           | 移至第一個非空白字元
+Ctrl + d    | 下移 10 行
+Ctrl + u    | 上移 10 行
+gg          | 移至檔首
+G           | 移至檔尾
+nG          | 移至第 n 行行首
+w           | 移至下一個字字首
+W           | 同上，但忽略一些標點符號
+e           | 移至前一個字字尾
+E           | 同上，但忽略一些標點符號
+b           | 移至前一個字字首
+B           | 同上，但忽略一些標點符號
+%           | 游標在括弧上時，移至匹配的括弧上
+:NUM        | 跳到第 NUM 行
 
 # 開檔時自動移動游標
 vim myfile.txt +28  : 移動到該行
 vim myfile.txt +/foo: 移動到第一次出現 pattern 處
 
-# 進入插入模式
-i       : insert
-I       : 在行首插入
-a       : append
-A       : 在行尾插入
-o       : 在下一行開新行插入
-O       : 在上一行開新行插入
-J       : 將下一行一整行接至本行
+# 進入插入模式 (enter insert mode)
+short cut   | function
+------------|:--------
+i           | insert
+I           | 在行首插入
+a           | append
+A           | 在行尾插入
+o           | 在下一行開新行插入
+O           | 在上一行開新行插入
+J           | 將下一行一整行接至本行
 
 # delete (刪除)
-x       : 刪除游標所在字元
-X       : 刪除游標前之字元
-dd      : 刪除一整行
-dw      : 刪除一個字(不適用中文)
-dG      : 刪除至檔尾
-dgg     : 刪除至檔首
-D       : 刪除至行尾(含游標所在字元)
-d0      : 刪除至行首(不含游標所在字元)
+short cut   | function
+------------|:--------
+x           | 刪除游標所在字元
+X           | 刪除游標前之字元
+dd          | 刪除一整行
+dw          | 刪除一個字(不適用中文)
+dG          | 刪除至檔尾
+dgg         | 刪除至檔首
+D           | 刪除至行尾(含游標所在字元)
+d0          | 刪除至行首(不含游標所在字元)
 
 # replace (取代)
-~       : 游標所在之處大小寫互換
-u       : undo
-U       : 在游標還沒移開本行前，回復所有編輯動作
-Ctrl + R: redo
+short cut   | function
+------------|:--------
+~           | 游標所在之處大小寫互換
+u           | undo
+U           | 在游標還沒移開本行前，回復所有編輯動作
+Ctrl + R    | redo
 
 # 排版
->>      : 整行向右一個 shiftwidth
-<<      : 整行向左一個 shiftwidth
-:ce     : 本行文字置中
-:ri     : 本行文字靠右 (set textwidth 的長度)
-:le     : 本行文字靠左
+short cut   | function
+------------|:--------
+>>          | 整行向右一個 shiftwidth
+<<          | 整行向左一個 shiftwidth
+:ce         | 本行文字置中
+:ri         | 本行文字靠右 (set textwidth 的長度)
+:le         | 本行文字靠左
 
 # copy & paste (複製 & 貼上)
-yy      : 複製整行
-y2y     : 複製 2 行
-y^      : 複製至行首
-y$      : 複製至行尾
-yw      : 複製一個 word
-yG      : 複製至檔尾
-ygg     : 複製至檔首    
-p       : 在游標後貼上
-P       : 在游標前貼上
+short cut   | function
+------------|:--------
+yy          | 複製整行
+y2y         | 複製 2 行
+y^          | 複製至行首
+y$          | 複製至行尾
+yw          | 複製一個 word
+yG          | 複製至檔尾
+ygg         | 複製至檔首    
+p           | 在游標後貼上
+P           | 在游標前貼上
 
 # registers (緩衝區)
-"ayy    : 將本行複製到 a 緩衝區 (a 可為 26 字母其中一個，小寫的 a 會覆蓋，大寫的 A 會 append)
-"ap     : 將 a 緩衝區的內容貼上
+short cut   | function
+------------|:--------
+"ayy        | 將本行複製到 a 緩衝區 (a 可為 26 字母其中一個，小寫的 a 會覆蓋，大寫的 A 會 append)
+"ap         | 將 a 緩衝區的內容貼上
 
 # The Big Command
-.       : 重複上一個動作
+short cut   | function
+------------|:--------
+.           | 重複:上一個動作
 
 # search (尋找)
-/       : 向下找
-?       : 向上找
-n       : 尋找下一個
-N       : 尋找上一個
-*       : 尋找游標所在之處的 word (要完全符合)
-#       : 同上，不過是向上找
-g*      : 同 * ，但部分符合即可
-g#      : 同 # ，但部份符合即可
+short cut   | function
+------------|:--------
+/           | 向下找
+?           | 向上找
+n           | 尋找下一個
+N           | 尋找上一個
+*           | 尋找游標所在之處的 word (要完全符合)
+#           | 同上，不過是向上找
+g****          | 同 * ，但部分符合即可
+g#          | 同 # ，但部份符合即可
 
 # substitute (替換)
 :[range]s/pattern/string/[c,e,g,i]
-    range   : 範圍 (可用 % 代表整篇文章)
-    pattern : 就是要被替換掉的字串，支持 regexp
-    string  : 將 pattern 由 string 所取代
-    c       : confirm，每次替換前會詢問
-    e       : 不顯示 error
-    g       : globe，整行符合的 pattern 都替換
-    i       : ignore，不分大小寫
+description | function
+------------|:--------
+range       | 範圍 (可用 % 代表整篇文章)
+pattern     | 就是要被替換掉的字串，支持 regexp
+string      | 將 pattern 由 string 所取代
+c           | confirm，每次替換前會詢問
+e           | 不顯示 error
+g           | globe，整行符合的 pattern 都替換
+i           | ignore，不分大小寫
 
 # marks (書籤)
 mx      : mark 住游標所在位置 (x 可用英文字母或數字)
