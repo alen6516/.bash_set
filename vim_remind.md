@@ -145,6 +145,8 @@ short cut   | function
 ------------|:--------
 >>          | 整行向右一個 shiftwidth
 <<          | 整行向左一個 shiftwidth
+>nG         | 當前行到第 n 行向右縮排
+<nG         | 當前行到第 n 行向左縮排
 :ce         | 本行文字置中
 :ri         | 本行文字靠右 (set textwidth 的長度)
 :le         | 本行文字靠左
