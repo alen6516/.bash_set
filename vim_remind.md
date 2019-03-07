@@ -164,6 +164,18 @@ ygg         | 複製至檔首
 p           | 在游標後貼上
 P           | 在游標前貼上
 
+# folding (折疊)
+short cut   | function
+------------|:--------
+zR          | 打開所有折疊
+zM          | 關閉所有折疊
+za          | toggle 折疊
+zi          | toggle foldenable 的值
+zj          | 移動游標到下一個折疊開始處
+zk          | 移動游標到上一個折疊開始處
+[z          | 移動游標到當前打開的折疊的開始處
+]z          | 移動游標到當前打開的折疊的開始處
+
 # registers (緩衝區)
 short cut   | function
 ------------|:--------
