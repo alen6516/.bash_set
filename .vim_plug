@@ -118,7 +118,12 @@ call plug#begin('~/.vim/plugged')
         " select all: <A-n> start muticursor and directly select all matches 
     " }
     
+    Plug 'Valloric/YouCompleteMe'
+    " config {
+        let g:ycm_global_ycm_extra_conf = '~/.vim/plugged/YouCompleteMe/.ycm_extra_conf.py'
+    " }
     
+ 
     Plug 'easymotion/vim-easymotion'
     " leader key is \
     " config {

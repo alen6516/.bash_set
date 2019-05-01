@@ -107,7 +107,7 @@ install_pkg() {
     _result 
 
     JOB="apt install vim tmux curl git openssh-server w3m"
-    sudo apt install -y vim tmux curl git openssh-server w3m
+    sudo apt install -y vim tmux curl git openssh-server w3m bc
     _result 
     
     JOB="install vim-plug"
@@ -123,8 +123,13 @@ install_pkg() {
     #sudo apt install -y cscope
     #_result 
 
-    JOB="install YCM"
-    #TODO: command to install YCM
+    JOB="install YCM dependencies"
+    if (( $(echo `lsb_release -rs` ">= 16.04" | bc -l) )); then
+	    sudo apt install -y build-essential cmake python3-dev
+    else 
+	    sudo apt install -y build-essential cmake3 python3-dev
+    fi
+    _result
 
     # let systastic to suppport python
     JOB="install pylint"
@@ -157,6 +162,13 @@ setup_vim_plug() {
         "+qall"
 
     _result 
+
+    JOB="install YCM"
+    pythin3 ~/.vim/plugged/YouCompleteMe/install.py --all
+    git clone https://gist.github.com/4950253.git /tmp/ycm_tmp
+    mv /tmp/ycm/.ycm_extra_conf.py ~/.vim/plugged/YouCompleteMe/
+    rm -rf /tmp/ycm
+    _result
 }
 
 show_log() {
