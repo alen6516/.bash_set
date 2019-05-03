@@ -93,8 +93,7 @@ build_link() {
     do
 	    if [ -f $SCRIPT_PATH/$file ]; then
             JOB="build link for $file"
-            touch $HOME/$file
-            ln -sf $SCRIPT_PATH/$file $HOME/$file
+            touch $HOME/$file && ln -sf $SCRIPT_PATH/$file $HOME/$file
             _result
         fi
     done
@@ -124,11 +123,7 @@ install_pkg() {
     #_result 
 
     JOB="install YCM dependencies"
-    if (( $(echo `lsb_release -rs` ">= 16.04" | bc -l) )); then
-	    sudo apt install -y build-essential cmake python3-dev
-    else 
-	    sudo apt install -y build-essential cmake3 python3-dev
-    fi
+    (( $(echo `lsb_release -rs` ">= 16.04" | bc -l) )) && (sudo apt install -y build-essential cmake python3-dev) || (sudo apt install -y build-essential cmake3 python3-dev)
     _result
 
     # let systastic to suppport python
@@ -164,9 +159,9 @@ setup_vim_plug() {
     _result 
 
     JOB="install YCM"
-    pythin3 ~/.vim/plugged/YouCompleteMe/install.py --all
-    git clone https://gist.github.com/4950253.git /tmp/ycm_tmp
-    mv /tmp/ycm/.ycm_extra_conf.py ~/.vim/plugged/YouCompleteMe/
+    python3 ~/.vim/plugged/YouCompleteMe/install.py --all && \
+    git clone https://gist.github.com/4950253.git /tmp/ycm_tmp && \
+    mv /tmp/ycm/.ycm_extra_conf.py ~/.vim/plugged/YouCompleteMe/ && \
     command rm -rf /tmp/ycm
     _result
 }
