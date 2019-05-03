@@ -167,7 +167,7 @@ setup_vim_plug() {
     pythin3 ~/.vim/plugged/YouCompleteMe/install.py --all
     git clone https://gist.github.com/4950253.git /tmp/ycm_tmp
     mv /tmp/ycm/.ycm_extra_conf.py ~/.vim/plugged/YouCompleteMe/
-    rm -rf /tmp/ycm
+    command rm -rf /tmp/ycm
     _result
 }
 
