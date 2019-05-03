@@ -159,7 +159,7 @@ setup_vim_plug() {
     _result 
 
     JOB="install YCM"
-    python3 ~/.vim/plugged/YouCompleteMe/install.py --all && \
+    python3 ~/.vim/plugged/YouCompleteMe/install.py --clang-completer && \
     git clone https://gist.github.com/4950253.git /tmp/ycm_tmp && \
     mv /tmp/ycm/.ycm_extra_conf.py ~/.vim/plugged/YouCompleteMe/ && \
     command rm -rf /tmp/ycm
