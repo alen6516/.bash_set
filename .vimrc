@@ -58,6 +58,17 @@ vmap <C-y> :w! /tmp/vitmp<CR>
 nmap <C-p> :r! cat /tmp/vitmp<CR>
 "###########################################
 
+"###########################################
+" move cursor to the end of text after p,
+" and without moving cursor after gp
+noremap p gp
+noremap P gP
+noremap gp p
+noremap gP P
+"###########################################
+
+
+
 "#####################
 "# indent & unindent #
 nmap <tab> V>
