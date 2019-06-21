@@ -19,8 +19,6 @@ function ipinfo()
 {
     if [ $# = 1 ]; then
         curl ipinfo.io/$1
-    else
-        echo "please assign the IP address"
     fi
 }
 
