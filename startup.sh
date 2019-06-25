@@ -45,8 +45,9 @@ _result() {
         echo "\\\33[32m[✔]\\\33[0m $JOB" >> $LOG_PATH
     else
         #_msg "\33[31m[✘]\33[0m $JOB"
-        echo "\\\33[32m[✔]\\\33[0m $JOB" >> $LOG_PATH
+        echo "\\\33[31m[✘]\\\33[0m $JOB" >> $LOG_PATH
         show_log
+        echo "installation fail due to an error..."
         exit 1
     fi
 }
@@ -105,10 +106,10 @@ install_pkg() {
     sudo apt update
     _result 
 
-    JOB="apt install vim tmux curl git openssh-server w3m bc manpage-zh"
+    JOB="apt install vim tmux curl git openssh-server w3m bc manpages-zh"
     # w3m: command line based web browser, for my man2 command
     # bc: command line calculater tool, for bash to calculate float val
-    # manpage-zh: manpages in zh_TW, for my manc
+    # manpages-zh: manpages in zh_TW, for my manc
     sudo apt install -y vim tmux curl git openssh-server w3m bc manpages-zh
     _result 
     
@@ -170,6 +171,7 @@ setup_vim_plug() {
 }
 
 show_log() {
+    _msg "log is save in $LOG_PATH and show below"
     exec < $LOG_PATH
     while read line
     do
