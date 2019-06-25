@@ -109,7 +109,7 @@ install_pkg() {
     # w3m: command line based web browser, for my man2 command
     # bc: command line calculater tool, for bash to calculate float val
     # manpage-zh: manpages in zh_TW, for my manc
-    sudo apt install -y vim tmux curl git openssh-server w3m bc manpage-zh
+    sudo apt install -y vim tmux curl git openssh-server w3m bc manpages-zh
     _result 
     
     JOB="install vim-plug"
