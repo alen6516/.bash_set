@@ -94,7 +94,7 @@ down ip -6 route del ::/0 via xxxx:xxxx::yyyy dev eth0
         * 啟動/關閉網卡的混亂模式
             * $ ip link set eth0 promisc on/off
         * 設定網卡 MTU
-            * $ ip link set eth0 MTU 1400
+            * $ ip link set eth0 mtu 1400
         * 改變網路卡名稱(要先關閉界面)
             * $ ip link set eth0 down
             * $ ip link set eth0 HP-eth0
@@ -125,3 +125,8 @@ down ip -6 route del ::/0 via xxxx:xxxx::yyyy dev eth0
             * $ ip route del 192.168.1.0/24 dev eth0
     * IPv6 
         * 上述 IPv4 指令之 ip 換成 ip -6 即可
+
+## /proc/sys/net
+    * IPv4
+        * 設定 server 不回 ICMP echo
+            $ echo 1 > /proc/sys/net/ipv4/icmp_echo_ignore_all
