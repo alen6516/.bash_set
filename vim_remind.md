@@ -23,7 +23,7 @@ wildfire			    | 快速選取區塊
 ## programming====
 plug name               | function
 ------------------------|:--------
-ctag				    | 非 vim plug, apt install 裝 
+ctag				    | 非 vim plug, apt install 裝, see note below
 tagbar				    | depend on ctag，變數、method 側欄
 SrcExpl				    | 側欄顯示當前 method 定義處
 syntastic			    | 預執行
@@ -340,3 +340,18 @@ gg=G        | 修正整個檔案的縮排
 15==        | 修正下方 15 行的縮排
 vim -r 檔名 | 有 .swp 時緊急恢復
 vim -x 檔名 | 加密檔案，以後要開檔時會要求輸入密碼
+
+# Note
+- ctags
+    - 非vim插件
+    - 需在專案資料夾最上層產生tag檔，否則只能看到本檔裡的東西
+        - ctags -R --exclude=.git .
+    - 預設可用 ctrl+] 跳到函式定義處
+        - 若定義處在不同檔，會開啟該檔在 vim buffer 裡
+        - 或用 :tag function_name 跳過去
+
+- tagbar
+    - 利用ctag找到的函式名稱，用一個sidebar顯示
+    - 好像只能顯示本檔
+- Srcexpl
+    - 利用 ctag，可以開一個 vim split window 跳到 ctags 找到的定義處
