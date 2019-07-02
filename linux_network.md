@@ -122,6 +122,7 @@ down ip -6 route del ::/0 via xxxx:xxxx::yyyy dev eth0
             * $ ip route del default
         * 設定路由
             * $ ip route add 192.168.1.0/24 via 192.168.2.1 dev eth0
+                * 192.168.2.1 就是 next hop, 這個 IP address 必須位於 routing table 裡 eth0 直接相接的網段
         * 刪除路由
             * $ ip route del 192.168.1.0/24 dev eth0
     * IPv6 
