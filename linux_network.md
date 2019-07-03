@@ -68,6 +68,10 @@ down ip -6 route del ::/0 via xxxx:xxxx::yyyy dev eth0
     * 設定網卡 IP (立即生效)
         * $ ifconfig eth0 192.168.1.1 netmask 255.255.255.0
 
+    * 設定網卡為混亂模式
+        * $ ifconfig eth0 promisc
+            * 用 ifconfig eth0 確認
+
 * route:  路由相關
     * -n: 以數字表示 IP，不做 DNS 反查
     * -ee: 詳細顯示
@@ -94,6 +98,7 @@ down ip -6 route del ::/0 via xxxx:xxxx::yyyy dev eth0
             * $ ip link set eth0 up/down
         * 啟動/關閉網卡的混亂模式
             * $ ip link set eth0 promisc on/off
+                * 用 ifconfig INTERFACE 來檢查網卡是否在混亂模式
         * 設定網卡 MTU
             * $ ip link set eth0 mtu 1400
         * 改變網路卡名稱(要先關閉界面)
