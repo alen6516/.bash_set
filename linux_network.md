@@ -110,6 +110,11 @@ down ip -6 route del ::/0 via xxxx:xxxx::yyyy dev eth0
             * $ ip address add 192.168.1.1/24 broadcast 192.168.1.255 dev eth0 label eth0:HP
         * 刪除網卡(?)
             * $ ip address del 192.168.1.1/24 dev eth0
+    * ARP entry
+        * 顯示 arp entry
+            * $ ip nei
+        * 新增 arp entry
+            * $ ip nei add 192.168.1.1 lladdr aa:aa:aa:aa:aa:aa
     * IPv4 位址
         * 顯示網卡 IPv4 訊息
             * $ ip addr

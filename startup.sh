@@ -103,7 +103,7 @@ build_link() {
 install_pkg() {
 
     JOB="apt update"
-    sudo apt update
+    true || sudo apt update
     _result 
 
     JOB="apt install vim tmux curl git openssh-server w3m bc manpages-zh"
