@@ -160,13 +160,13 @@ call plug#begin('~/.vim/plugged')
     " config {
     " }
    
-    Plug 'gcmt/wildfire.vim'
+    "Plug 'gcmt/wildfire.vim'
     " config {
 		" This selects the next closest text object.
-		map <ENTER> <Plug>(wildfire-fuel)
+		"map <ENTER> <Plug>(wildfire-fuel)
 
 		" This selects the previous closest text object.
-		vmap <BS> <Plug>(wildfire-water)
+		"vmap <BS> <Plug>(wildfire-water)
     " }
     
    
@@ -193,7 +193,7 @@ call plug#begin('~/.vim/plugged')
         let g:tagbar_left = 0 
         
         " set window size
-        let g:tagbar_width = 20
+        let g:tagbar_width = 40
 
         " auto focus to the windows
         let g:tagbar_autofocus = 1
