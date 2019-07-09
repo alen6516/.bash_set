@@ -8,7 +8,8 @@ ctrl + e        | 移動游標到行尾
 ctrl + w        | 刪除一個word
 ctrl + y        | paste the words deleted by ctrl + u/k/w
 ctrl + p        | 顯示上一個指令
-ctrl + r        | 在歷史裡搜尋指令
+ctrl + n        | 顯示下一個指令
+ctrl + r        | 在歷史裡搜尋指令(一邊打一邊繼續按 ctrl + r)
 alt + .         | 上個命令後面的參數
 ctrl + c        | 中斷執行
 ctrl + d        | 中斷輸入

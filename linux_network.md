@@ -68,6 +68,10 @@ down ip -6 route del ::/0 via xxxx:xxxx::yyyy dev eth0
     * 設定網卡 IP (立即生效)
         * $ ifconfig eth0 192.168.1.1 netmask 255.255.255.0
 
+    * 設定網卡為混亂模式
+        * $ ifconfig eth0 promisc
+            * 用 ifconfig eth0 確認
+
 * route:  路由相關
     * -n: 以數字表示 IP，不做 DNS 反查
     * -ee: 詳細顯示
@@ -94,6 +98,7 @@ down ip -6 route del ::/0 via xxxx:xxxx::yyyy dev eth0
             * $ ip link set eth0 up/down
         * 啟動/關閉網卡的混亂模式
             * $ ip link set eth0 promisc on/off
+                * 用 ifconfig INTERFACE 來檢查網卡是否在混亂模式
         * 設定網卡 MTU
             * $ ip link set eth0 mtu 1400
         * 改變網路卡名稱(要先關閉界面)
@@ -105,6 +110,11 @@ down ip -6 route del ::/0 via xxxx:xxxx::yyyy dev eth0
             * $ ip address add 192.168.1.1/24 broadcast 192.168.1.255 dev eth0 label eth0:HP
         * 刪除網卡(?)
             * $ ip address del 192.168.1.1/24 dev eth0
+    * ARP entry
+        * 顯示 arp entry
+            * $ ip nei
+        * 新增 arp entry
+            * $ ip nei add 192.168.1.1 lladdr aa:aa:aa:aa:aa:aa
     * IPv4 位址
         * 顯示網卡 IPv4 訊息
             * $ ip addr
@@ -122,6 +132,7 @@ down ip -6 route del ::/0 via xxxx:xxxx::yyyy dev eth0
             * $ ip route del default
         * 設定路由
             * $ ip route add 192.168.1.0/24 via 192.168.2.1 dev eth0
+                * 192.168.2.1 就是 next hop, 這個 IP address 必須位於 routing table 裡 eth0 直接相接的網段
         * 刪除路由
             * $ ip route del 192.168.1.0/24 dev eth0
     * IPv6 

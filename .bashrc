@@ -113,7 +113,10 @@ if ! shopt -oq posix; then
   fi
 fi
 
+# allow tmux to use 256 color
 export TERM="xterm-256color"
+
+
 export HISTTIMEFORMAT='%F %T '
 
 
@@ -129,4 +132,4 @@ export LESS_TERMCAP_us=$'\E[04;38;5;146m' # begin underline
 
 
 # fix <backspace> become ^D in xTerm
-stty erase \^H
+#stty erase \^H
