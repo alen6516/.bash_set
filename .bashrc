@@ -113,7 +113,10 @@ if ! shopt -oq posix; then
   fi
 fi
 
+# allow tmux to use 256 color
 export TERM="xterm-256color"
+
+
 export HISTTIMEFORMAT='%F %T '
 
 
