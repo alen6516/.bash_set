@@ -117,6 +117,7 @@ function FileSize()
     endif
 endfunction
 "#### end the style of status line ####
+
 "#### end of color ####
 "######################
 
