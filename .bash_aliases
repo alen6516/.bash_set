@@ -73,12 +73,18 @@ function rfc() {
         ["udp"]="768"           \
         ["tcp"]="793"           \
     )
-
     URL='https://tools.ietf.org/html/'
-    [ -z $1 ] && (echo "please give a rfc number as \$1"; exit)
-    #ping -c1 -w 3 8.8.8.8 > /dev/null || (echo "Internet is not accessable"; return)
+    
+    if [ -z $1 ]; then
+        echo "please give a protocol or rfc number as \$1"
+        return 1
+    fi
+
     res=`curl -s -o /dev/null/ $URL -w %{http_code}`
-    [ 200 -ne $res ] && (echo "https://tools.ietf.otf/html/ is not accessable"; return)
+    if [ 200 -ne $res ]; then
+        echo "https://tools.ietf.otf/html/ is not accessable"
+        return 2
+    fi
 
     _match=0
     for key in "${!RFC[@]}"
@@ -88,40 +94,11 @@ function rfc() {
         fi
     done
 
-    echo "match is $_match"
-
     if [ "$_match" == 1 ]; then
         w3m ${URL}rfc${RFC[$1]} | less
     else
         w3m ${URL}rfc${1} | less
     fi
-        
-
-    #case ${1} in
-    #    $RFC[arp])
-    #        w3m ${URL}rfc826 | less
-    #        ;;
-
-    #    ${RFC[ipv4]})
-    #        w3m ${URL}rfc791 | less
-    #        ;;
-
-    #    ${RFC[icmp]})
-    #        w3m ${URL}rfc792 | less
-    #        ;;
-
-    #    ${RFC[udp]})
-    #        w3m ${URL}rfc768 | less
-    #        ;;
-
-    #    ${RFC[tcp]})
-    #        w3m ${URL}rfc793 | less
-    #        ;;
-
-    #    *)
-    #        w3m ${URL}rfc${1} | less
-    #        ;;
-    #esac
 }
 
 
