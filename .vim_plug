@@ -121,6 +121,13 @@ call plug#begin('~/.vim/plugged')
     Plug 'Valloric/YouCompleteMe'
     " config {
         let g:ycm_global_ycm_extra_conf = '~/.vim/plugged/YouCompleteMe/.ycm_extra_conf.py'
+
+        " allow ycm to autocomplete html/css by combining with built-in Omnicomplete html/css autocompletion
+        let g:ycm_semantic_triggers = {
+            \   'scss,sass,css': [ 're!^\s{4}', 're!:\s+' ],
+            \   'html': ['<', '"', '</', ' '],
+            \ }
+
     " }
     
  
