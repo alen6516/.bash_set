@@ -45,7 +45,7 @@ trash_can="/tmp/recycle_bin"
 function rm()
 {
     [ -d $trash_can ] || mkdir $trash_can
-    mv $@ $trash_can
+    command mv $@ $trash_can
     echo "moving $@ to $trash_can"
 }
 
@@ -101,6 +101,50 @@ function rfc() {
     fi
 }
 
+function cp() {
+
+    while [[ $1 == -* ]]
+    do
+        shift
+        if [ ! -f $1 ] || [ ! -d $1 ] || [ -z $1 ] || [ -z $2 ] || [ -n $3 ]; then
+            command cp $@
+        fi
+    done
+
+    if [ -f $2 ]; then
+        read -p "file $2 already exist, overwrite it? [yN] " ans
+        if [ -n $ans ] && ([[ $ans == "Y" ]] || [[ $ans == "y" ]]); then
+            echo "file copied"
+            command cp $1 $2
+        else
+            echo "nothing done"
+        fi
+    elif [ -d $2 ]; then
+        echo "copy $1 into directory $2"
+        command cp $1 $2
+    else
+        echo "file copied"
+        command cp $1 $2
+    fi
+}
+
+function mv() {
+    if [ -f $2 ]; then
+        read -p "file $2 already exist, overwrite it? [yN] " ans
+        if [ -n $ans ] && ([[ $ans == "Y" ]] || [[ $ans == "y" ]]); then
+            echo "file copied"
+            command cp $1 $2
+        else
+            echo "nothing done"
+        fi
+    elif [ -d $2 ]; then
+        echo "copy $1 into directory $2"
+        command cp $1 $2
+    else
+        echo "file copied"
+        command cp $1 $2
+    fi
+}
 
 alias port='sudo netstat -antlp'
 alias py='python'

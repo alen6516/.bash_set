@@ -352,6 +352,7 @@ vim -r 檔名 | 有 .swp 時緊急恢復
 vim -x 檔名 | 加密檔案，以後要開檔時會要求輸入密碼
 ctrl + a    | 遞增游標所在數字
 ctrl + x    | 遞減游標所在數字
+:set ff=dos | change ff to dos system (no change in appearance), Unix's ff is /r, dos is /r/n
 
 # Note
 - ctags
