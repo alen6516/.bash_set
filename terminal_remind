@@ -14,6 +14,8 @@ alt + .         | 上個命令後面的參數
 ctrl + c        | 中斷執行
 ctrl + d        | 中斷輸入
 ctrl + z        | 暫停執行
+ctrl + s        | freeze
+<ctrl + q> *2   | unfreeze (ctrl-q has been the leader key of tmux, tmux allow pressing ctrl-q twice to send this signal to terminal)
 !!              | 執行上一個指令
 !-N             | 執行上 N 個指令
 !N              | 執行 history 裡編號 N 的指令
