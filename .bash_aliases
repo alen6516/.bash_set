@@ -51,7 +51,20 @@ function rm()
 
 function rrm()
 {
-    /bin/rm -I $@    
+    command rm -I $@    
+}
+
+function cd()
+{
+    if [[ $# -eq 1 ]] && [[ -f $1 ]]; then
+        command cd $@
+        read -t 5 -p "Do you want to open it by vim? [yN] " ans
+        if [[ $ans == 'y' ]] || [[ $ans == 'Y' ]]; then
+            vim $@
+        fi
+    else
+        command cd $@
+    fi
 }
 
 function man2()
@@ -101,48 +114,19 @@ function rfc() {
     fi
 }
 
-function cp() {
-
-    while [[ $1 == -* ]]
-    do
-        shift
-        if [ ! -f $1 ] || [ ! -d $1 ] || [ -z $1 ] || [ -z $2 ] || [ -n $3 ]; then
-            command cp $@
-        fi
-    done
-
-    if [ -f $2 ]; then
-        read -p "file $2 already exist, overwrite it? [yN] " ans
-        if [ -n $ans ] && ([[ $ans == "Y" ]] || [[ $ans == "y" ]]); then
-            echo "file copied"
-            command cp $1 $2
-        else
-            echo "nothing done"
-        fi
-    elif [ -d $2 ]; then
-        echo "copy $1 into directory $2"
-        command cp $1 $2
+function doc() {
+    if [[ $@ -eq 0 ]]; then
+        cd ~/doc
     else
-        echo "file copied"
-        command cp $1 $2
+        :
     fi
 }
 
-function mv() {
-    if [ -f $2 ]; then
-        read -p "file $2 already exist, overwrite it? [yN] " ans
-        if [ -n $ans ] && ([[ $ans == "Y" ]] || [[ $ans == "y" ]]); then
-            echo "file copied"
-            command cp $1 $2
-        else
-            echo "nothing done"
-        fi
-    elif [ -d $2 ]; then
-        echo "copy $1 into directory $2"
-        command cp $1 $2
+function _bash() {
+    if [[ $@ -eq 0 ]]; then
+        cd ~/.bash_set
     else
-        echo "file copied"
-        command cp $1 $2
+        :
     fi
 }
 
@@ -159,3 +143,6 @@ alias mem_load='ps -aux|awk '\''BEGIN{ sum=0} {sum=sum+$4} END{print sum}'\'''
 alias manc='man -M /usr/share/man/zh_TW'
 alias ..='cd ..'
 alias info='info --vi-keys'
+
+alias cp='cp -i'
+alias mv='mv -i'

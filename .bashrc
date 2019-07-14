@@ -117,6 +117,7 @@ fi
 export TERM="xterm-256color"
 
 
+# add timestamp for history
 export HISTTIMEFORMAT='%F %T '
 
 
