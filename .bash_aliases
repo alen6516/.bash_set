@@ -15,6 +15,7 @@ function psg()
         ps -aux | grep $1
     fi
 }
+
 function ipinfo()
 {
     if [ $# = 1 ]; then
