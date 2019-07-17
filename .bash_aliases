@@ -70,12 +70,46 @@ function cd()
 
 function man2()
 {
-    URL="https://wangchujiang.com/linux-command/"
+    local URL="https://wangchujiang.com/linux-command/"
     [ -z $1 ] && (echo "please give a command as \$1"; exit)
     #ping -c1 -w 3 8.8.8.8 > /dev/null || (echo "Internet is not accessable"; return)
     res=`curl -s -o /dev/null/ $URL -w %{http_code}`
     [ 200 -ne $res ] && (echo "https://wangchujiang.com/linux-command is not accessable"; return)
     w3m ${URL}c/${1} | less
+}
+
+function shortcut() {
+    local URL='https://shortcutworld.com/'
+
+    declare -A SHORTCUT=(       \
+        ["bash"]="Bash/linux/Bash_Shortcuts"
+    
+    )
+
+    if [ -z $1 ]; then 
+        echo "please give a parameter or option"
+        return 1
+    fi
+
+    res=`curl -s -o /dev/null/ $URL -w %{http_code}`
+    if [ 200 -ne $res ]; then
+        echo "$URL is not accessable"
+        return 2
+    fi
+
+    _match=0
+    for key in "${!SHORTCUT[@]}"
+    do
+        if [ "$1" == "$key" ]; then
+            _match=1
+        fi
+    done
+
+    if [ "$_match" == 1 ]; then
+        w3m ${URL}${SHORTCUT[$1]} | less
+    else
+        echo "Uknown shortcut, try again"
+    fi
 }
 
 function rfc() {
@@ -87,7 +121,7 @@ function rfc() {
         ["udp"]="768"           \
         ["tcp"]="793"           \
     )
-    URL='https://tools.ietf.org/html/'
+    local URL='https://tools.ietf.org/html/'
     
     if [ -z $1 ]; then
         echo "please give a protocol or rfc number as \$1"
@@ -96,7 +130,7 @@ function rfc() {
 
     res=`curl -s -o /dev/null/ $URL -w %{http_code}`
     if [ 200 -ne $res ]; then
-        echo "https://tools.ietf.otf/html/ is not accessable"
+        echo "$URL is not accessable"
         return 2
     fi
 
