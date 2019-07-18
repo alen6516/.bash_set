@@ -8,6 +8,12 @@ call plug#begin('~/.vim/plugged')
 
 " general plug
 " {
+    "Plug 'bagrat/vim-buffet'
+    " config {
+    
+    " }
+
+
     Plug 'scrooloose/nerdtree'
     " config {
         " open nerdtree automatically when vim starts up

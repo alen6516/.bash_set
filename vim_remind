@@ -135,6 +135,10 @@ dG          | 刪除至檔尾
 dgg         | 刪除至檔首
 D           | 刪除至行尾(含游標所在字元)
 d0          | 刪除至行首(不含游標所在字元)
+ctrl + h    | backspace
+ctrl + w    | delete word in insert mode
+c           | delete selected words and enter insert mode
+cc          | delete whole line and enter insert mode
 
 # replace (取代)
 short cut   | function
