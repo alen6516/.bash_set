@@ -175,6 +175,7 @@ alias ptt='ssh bbsu@ptt.cc'
 alias cpu_load='ps -aux|awk '\''BEGIN{ sum=0} {sum=sum+$3} END{print sum}'\'''
 alias mem_load='ps -aux|awk '\''BEGIN{ sum=0} {sum=sum+$4} END{print sum}'\'''
 
+alias man='man -M /usr/share/man'
 alias manc='man -M /usr/share/man/zh_TW'
 alias ..='cd ..'
 alias info='info --vi-keys'
