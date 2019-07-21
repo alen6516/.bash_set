@@ -181,3 +181,5 @@ alias info='info --vi-keys'
 
 alias cp='cp -i'
 alias mv='mv -i'
+
+alias bpf='w3m http://biot.com/capstats/bpf.html | less'
