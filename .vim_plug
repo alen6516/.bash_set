@@ -28,10 +28,10 @@ call plug#begin('~/.vim/plugged')
         autocmd VimEnter * if argc() == 1 && isdirectory(argv()[0]) && !exists("s:std_in") | exe 'NERDTree' argv()[0] | wincmd p | ene | endif
         
         " toggle (default jump to the nerdtree window)
-        "map E :NERDTreeToggle<CR>
+        "map <leader>e :NERDTreeToggle<CR>
         
         " toggle (jump back to the file window)
-        map E :NERDTreeToggle<CR>:wincmd p<CR>
+        map <leader>e :NERDTreeToggle<CR>:wincmd p<CR>
      
         " close vim if the only window left open is a NERDTree
         autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
@@ -160,7 +160,7 @@ call plug#begin('~/.vim/plugged')
     Plug 'mbbill/undotree'
     " config {
         " toggle
-        nnoremap U :UndotreeToggle<cr>
+        nnoremap <leader>u :UndotreeToggle<cr>
 
         " set window size
         let g:undotree_SplitWidth = 30
@@ -189,7 +189,7 @@ call plug#begin('~/.vim/plugged')
         let g:indentLine_char = '¦'
 
         " toggle
-        nnoremap I :IndentLinesToggle<cr>
+        nnoremap <leader>i :IndentLinesToggle<cr>
     " }
 
 " }
@@ -200,7 +200,7 @@ call plug#begin('~/.vim/plugged')
     " depending on ctags ( $ apt install ctags )    
     " config {
         " toggle
-        nmap T :TagbarToggle<cr>
+        nmap <leader>t :TagbarToggle<cr>
         
         " set window on left side
         let g:tagbar_left = 0 
@@ -240,7 +240,7 @@ call plug#begin('~/.vim/plugged')
     Plug 'wesleyche/SrcExpl'
     " config {
     	" // The switch of the Source Explorer 
-     	nmap S :SrcExplToggle<CR> 
+     	nmap <leader>s :SrcExplToggle<CR> 
     
         " // Set the height of Source Explorer window 
         let g:SrcExpl_winHeight = 8 
@@ -314,7 +314,7 @@ call plug#begin('~/.vim/plugged')
         let g:syntastic_quiet_messages={'level':'warningis'}
 	
 	    " toggle
-        nmap R :call SyntasticToggle()<CR>
+        nmap <leader>r :call SyntasticToggle()<CR>
         let g:syntastic_is_open = 0
         function! SyntasticToggle()
            if g:syntastic_is_open == 1
@@ -339,7 +339,7 @@ call plug#begin('~/.vim/plugged')
     Plug 'scrooloose/nerdcommenter'
     " config {
     	" default leader key
-        let mapleader='\'
+        "let mapleader='\'
 
     	" Add spaces after comment delimiters by default
 		let g:NERDSpaceDelims = 0
