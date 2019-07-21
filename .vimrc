@@ -25,10 +25,10 @@ hi LineNr cterm=NONE ctermfg=DarkGrey ctermbg=NONE
 hi CursorLineNR term=bold cterm=bold ctermfg=yellow
 
 "#### set shortcut #######
-nmap <C-l> :set nonumber!<CR>:set foldcolumn=0<CR>
+nmap <leader>l :set nonumber!<CR>:set foldcolumn=0<CR>
 nmap <C-d> 10j
 nmap <C-u> 10k
-nmap <C-h> :noh<CR>
+nmap <leader>h :noh<CR>
 "nmap <C-S-g> gg=G
 
 " quick quit
@@ -48,14 +48,14 @@ nmap qqq :q<cr>
 "###########################################
 " enable copy between different vim instance
 
-map <C-y> <Nop>
-map <C-y> :w! /tmp/vitmp<CR>
+"map <C-y> <Nop>
+map <leader>y :w! /tmp/vitmp<CR>
 
-map <C-p> <Nop>
-map <C-p> :r! cat /tmp/vitmp<CR>
+"map <C-p> <Nop>
+map <leader>p :r! cat /tmp/vitmp<CR>
 
-vmap <C-y> :w! /tmp/vitmp<CR>
-nmap <C-p> :r! cat /tmp/vitmp<CR>
+vmap <leader>y :w! /tmp/vitmp<CR>
+nmap <leader>p :r! cat /tmp/vitmp<CR>
 "###########################################
 
 "###########################################
