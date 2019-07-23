@@ -78,13 +78,37 @@ function man2()
     w3m ${URL}c/${1} | less
 }
 
+
+
+function _completion() {
+
+    local COM=""
+
+    case $1 in
+        "rfc")
+            COM=${!RFC[*]}
+            ;;
+        "shortcut")
+            COM=${!SHORTCUT[*]}
+            ;;
+        
+    esac
+
+    if [ "${#COMP_WORDS[@]}" != "2" ]; then
+        return
+    fi
+
+    COMPREPLY=($(compgen -W "$COM" "${COMP_WORDS[1]}"))
+}
+
+
+declare -A SHORTCUT=(       \
+    ["bash"]="Bash/linux/Bash_Shortcuts"
+
+)
 function shortcut() {
     local URL='https://shortcutworld.com/'
 
-    declare -A SHORTCUT=(       \
-        ["bash"]="Bash/linux/Bash_Shortcuts"
-    
-    )
 
     if [ -z $1 ]; then 
         echo "please give a parameter or option"
@@ -111,16 +135,21 @@ function shortcut() {
         echo "Uknown shortcut, try again"
     fi
 }
+complete -F _completion shortcut
+
+
+
+declare -A RFC=(            \
+    ["arp"]="826"           \
+    ["ipv4"]="791"          \
+    ["ipv6"]="2460"         \
+    ["icmp"]="792"          \
+    ["udp"]="768"           \
+    ["tcp"]="793"           \
+)
 
 function rfc() {
-    declare -A RFC=(            \
-        ["arp"]="826"           \
-        ["ipv4"]="791"          \
-        ["ipv6"]="2460"         \
-        ["icmp"]="792"          \
-        ["udp"]="768"           \
-        ["tcp"]="793"           \
-    )
+
     local URL='https://tools.ietf.org/html/'
     
     if [ -z $1 ]; then
@@ -148,6 +177,9 @@ function rfc() {
         w3m ${URL}rfc${1} | less
     fi
 }
+complete -F _completion rfc
+
+
 
 function doc() {
     if [[ $@ -eq 0 ]]; then
@@ -156,6 +188,9 @@ function doc() {
         :
     fi
 }
+
+
+
 
 alias port='sudo netstat -antlp'
 alias py='python'
