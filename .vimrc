@@ -35,15 +35,19 @@ nmap <leader>h :noh<CR>
 nmap qqq :q<cr>
 
 " window switching
-"nmap w<Right> <C-w><Right>
-"nmap w<Left>  <C-w><Left>
-"nmap w<Up>    <C-w><Up>
-"nmap w<Down>  <C-w><Down>
-"nmap ww       <C-w>w
+"nmap <leader>w<Right> <C-w><Right>
+"nmap <leader>w<Left>  <C-w><Left>
+"nmap <leader>w<Up>    <C-w><Up>
+"nmap <leader>w<Down>  <C-w><Down>
+"nmap <leader>ww       <C-w>w
 
-" tab switching
-"nmap t<Right> gt
-"nmap t<Left> gT
+" tab #######
+nmap te :tabe
+nmap tc :tabc
+nmap tn :tabn
+nmap tp :tabp
+nmap t<Right> gt
+nmap t<Left> gT
 
 "###########################################
 " enable copy between different vim instance

@@ -357,6 +357,7 @@ vim -x 檔名 | 加密檔案，以後要開檔時會要求輸入密碼
 ctrl + a    | 遞增游標所在數字
 ctrl + x    | 遞減游標所在數字
 :set ff=dos | change ff to dos system (no change in appearance), Unix's ff is /r, dos is /r/n
+<Ctrl-w> z  | close preview window (YCM hint will show in preview window)
 
 # Note
 - ctags
