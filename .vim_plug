@@ -199,6 +199,9 @@ call plug#begin('~/.vim/plugged')
     Plug 'majutsushi/tagbar'
     " depending on ctags ( $ apt install ctags )    
     " config {
+        " set tags
+        set tags=tags
+
         " toggle
         nmap <leader>t :TagbarToggle<cr>
         

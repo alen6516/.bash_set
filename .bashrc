@@ -114,7 +114,7 @@ if ! shopt -oq posix; then
 fi
 
 # allow tmux to use 256 color
-export TERM="xterm-256color"
+#export TERM="xterm-256color"
 
 
 # add timestamp for history
@@ -131,6 +131,4 @@ export LESS_TERMCAP_so=$'\E[38;5;246m'    # begin standout-mode - info box
 export LESS_TERMCAP_ue=$'\E[0m'           # end underline
 export LESS_TERMCAP_us=$'\E[04;38;5;146m' # begin underline
 
-
-# fix <backspace> become ^D in xTerm
-#stty erase \^H
+export EDITOR=vim

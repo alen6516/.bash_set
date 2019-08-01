@@ -1,4 +1,5 @@
 source ~/.vim_plug
+source ~/.vimrc_cscope
 
 set bg=dark
 set nu
