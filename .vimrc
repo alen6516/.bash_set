@@ -1,5 +1,10 @@
-source ~/.vim_plug
-source ~/.vimrc_cscope
+if [ -f ~/.vim_plug ]; then
+    source ~/.vim_plug
+fi
+
+if [ -f ~/.vimrc_cscope ]; then
+    source ~/.vimrc_cscope
+fi
 
 set bg=dark
 set nu
