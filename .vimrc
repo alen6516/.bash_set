@@ -181,3 +181,21 @@ autocmd filetype php setlocal nocursorline          " by filetype detected by vi
 autocmd BufRead,BufNewFile *.php set nocursorline   " by extension filename
 
 "autocmd filetype c nmap C O/***/<ESC>
+
+
+"let &titlestring = hostname() . "[vim(" . expand("%:t") . ")]"
+"if &term == "screen" || &term == "xterm"
+"	let &titleold="bash"
+"	let &titlestring="vim " . expand("%:t")
+"  	set t_ts=k
+"  	set t_fs=k
+"  	set title
+"endif
+
+if &term == "screen" || &term == "xterm"
+    let &titleold="bash"
+    let &titlestring="vim " . expand("%:t")
+    set t_ts=k
+	set t_fs=\
+	set title
+endif
