@@ -1,11 +1,4 @@
-if filereadable("~/.vim_plug")
-    source ~/.vim_plug
-endif
-
-if filereadable("~/.vim_cscope")
-    source ~/.vim_cscope
-endif
-
+source ~/.vim_plug
 
 set bg=dark
 set nu
@@ -135,8 +128,8 @@ endfunction
 
 "###########################
 "#### custom file title ####
-"autocmd BufNewFile *.py,*.sh exec ":call SetTitle_1()"
-"autocmd BufNewFile *.c,*.cpp exec ":call SetTitle_2()"
+autocmd BufNewFile *.py,*.sh exec ":call SetTitle_1()"
+autocmd BufNewFile *.c,*.cpp exec ":call SetTitle_2()"
 func SetTitle_1()
     if &filetype == 'sh' 
         call setline(1, "\#!/bin/bash")

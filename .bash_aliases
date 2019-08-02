@@ -79,7 +79,7 @@ function man2()
 }
 
 
-
+# inner funtion for auto completion
 function _completion() {
 
     local COM=""
@@ -147,7 +147,6 @@ declare -A RFC=(            \
     ["udp"]="768"           \
     ["tcp"]="793"           \
 )
-
 function rfc() {
 
     local URL='https://tools.ietf.org/html/'
@@ -182,11 +181,43 @@ complete -F _completion rfc
 
 
 function doc() {
-    if [[ $@ -eq 0 ]]; then
-        cd ~/doc
-    else
-        :
-    fi
+    local HELP="usage: doc API|CMD"
+
+    #if [[ ! $@ -eq 1 ]]; then
+    #    echo -e $HELP
+    #    return 1
+    #fi
+
+    local file_cmd=""
+    for item in $(ls ~/doc/cmd/)
+    do
+        item=${item%.*}
+        file_cmd=$file_cmd" $item"
+    done
+
+    local file_api
+    for item in $(ls ~/doc/api/)
+    do
+        item=${item%.*}
+        file_api=$file_api" $item"
+    done
+
+    local file_prot
+    for item in $(ls ~/doc/prot/)
+    do
+        item=${item%.*}
+        file_prot=$file_prot" $item"
+    done
+
+    local file="$file_api $file_cmd $file_prot"
+    #echo $file
+
+    #if [[ $file =~ $1 ]]; then
+    #    echo hit
+    #fi
+    
+    
+
 }
 
 

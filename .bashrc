@@ -114,7 +114,7 @@ if ! shopt -oq posix; then
 fi
 
 # allow tmux to use 256 color
-#export TERM="xterm-256color"
+export TERM="xterm-256color"
 
 
 # add timestamp for history
