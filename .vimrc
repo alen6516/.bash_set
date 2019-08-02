@@ -1,10 +1,11 @@
-if [ -f ~/.vim_plug ]; then
+if filereadable("~/.vim_plug")
     source ~/.vim_plug
-fi
+endif
 
-if [ -f ~/.vimrc_cscope ]; then
-    source ~/.vimrc_cscope
-fi
+if filereadable("~/.vim_cscope")
+    source ~/.vim_cscope
+endif
+
 
 set bg=dark
 set nu
@@ -134,8 +135,8 @@ endfunction
 
 "###########################
 "#### custom file title ####
-autocmd BufNewFile *.py,*.sh exec ":call SetTitle_1()"
-autocmd BufNewFile *.c,*.cpp exec ":call SetTitle_2()"
+"autocmd BufNewFile *.py,*.sh exec ":call SetTitle_1()"
+"autocmd BufNewFile *.c,*.cpp exec ":call SetTitle_2()"
 func SetTitle_1()
     if &filetype == 'sh' 
         call setline(1, "\#!/bin/bash")
@@ -188,15 +189,7 @@ autocmd BufRead,BufNewFile *.php set nocursorline   " by extension filename
 "autocmd filetype c nmap C O/***/<ESC>
 
 
-"let &titlestring = hostname() . "[vim(" . expand("%:t") . ")]"
-"if &term == "screen" || &term == "xterm"
-"	let &titleold="bash"
-"	let &titlestring="vim " . expand("%:t")
-"  	set t_ts=k
-"  	set t_fs=k
-"  	set title
-"endif
-
+" auto change tab's name when using tmux/screen
 if &term == "screen" || &term == "xterm"
     let &titleold="bash"
     let &titlestring="vim " . expand("%:t")
