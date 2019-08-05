@@ -179,7 +179,10 @@ autocmd filetype cpp nnoremap <F9> :w <bar> exec '!clear;echo -n "==============
 autocmd filetype php setlocal nocursorline          " by filetype detected by vim
 autocmd BufRead,BufNewFile *.php set nocursorline   " by extension filename
 
-"autocmd filetype c nmap C O/***/<ESC>
+
+" highlight when a line is overlegth
+highlight OverLength ctermbg=red ctermfg=white guibg=#592929
+match OverLength /\%80v.\+/
 
 
 " auto change tab's name when using tmux/screen

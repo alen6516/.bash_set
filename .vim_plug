@@ -134,6 +134,12 @@ call plug#begin('~/.vim/plugged')
          "   \   'html': ['<', '"', '</', ' '],
          "   \ }
 
+         " disable preview window
+         :set completeopt-=preview
+
+         " auto close preview window after leaving insert mode
+         "let g:ycm_autoclose_preview_window_after_insertion = 1
+
     " }
     
  

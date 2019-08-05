@@ -9,6 +9,7 @@ declare -A FILE=(                        \
     [".bashrc"]=".bashrc"                \
     [".bash_aliases"]=".bash_aliases"    \
     [".tmux.conf"]=".tmux.conf"          \
+    [".ctags"]=".ctags"                  \
 )
 
 CURR_PATH=`pwd`
