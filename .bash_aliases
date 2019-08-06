@@ -180,37 +180,53 @@ complete -F _completion rfc
 
 
 
+declare -A DOC=(            \
+    ["cmd"]=".cmd"           \
+    ["api"]=".c"          \
+    ["prot"]=".md"         \
+)
 function doc() {
     local HELP="usage: doc API|CMD"
 
-    #if [[ ! $@ -eq 1 ]]; then
-    #    echo -e $HELP
-    #    return 1
-    #fi
+    if [[ ! $# -eq 1 ]]; then
+        echo -e $HELP
+        return 1
+    fi
 
-    local file_cmd=""
-    for item in $(ls ~/doc/cmd/)
-    do
-        item=${item%.*}
-        file_cmd=$file_cmd" $item"
-    done
+    if [[ $(ls ~/doc/cmd) =~ $1 ]]; then
+        #echo "hit in cmd"
+        cat ~/doc/cmd/$1.cmd | less
+    elif [[ $(ls ~/doc/api) =~ $1 ]]; then
+        #echo "hit in api"
+        cat ~/doc/cmd/$1.c | less
+    elif [[ $(ls ~/doc/prot) =~ $1 ]]; then
+        #echo "hit in prot"
+        cat ~/doc/cmd/$1.md | less
+    fi
 
-    local file_api
-    for item in $(ls ~/doc/api/)
-    do
-        item=${item%.*}
-        file_api=$file_api" $item"
-    done
+    #local file_cmd=""
+    #for item in $(ls ~/doc/cmd/)
+    #do
+    #    item=${item%.*}
+    #    file_cmd=$file_cmd" $item"
+    #done
 
-    local file_prot
-    for item in $(ls ~/doc/prot/)
-    do
-        item=${item%.*}
-        file_prot=$file_prot" $item"
-    done
+    #local file_api
+    #for item in $(ls ~/doc/api/)
+    #do
+    #    item=${item%.*}
+    #    file_api=$file_api" $item"
+    #done
 
-    local file="$file_api $file_cmd $file_prot"
-    #echo $file
+    #local file_prot
+    #for item in $(ls ~/doc/prot/)
+    #do
+    #    item=${item%.*}
+    #    file_prot=$file_prot" $item"
+    #done
+
+    #local file="$file_api $file_cmd $file_prot"
+    ##echo $file
 
     #if [[ $file =~ $1 ]]; then
     #    echo hit
