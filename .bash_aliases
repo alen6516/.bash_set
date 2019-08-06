@@ -180,6 +180,11 @@ complete -F _completion rfc
 
 
 
+declare -A RFC=(            \
+    ["api"]=".c"           \
+    ["cmd"]=".cmd"          \
+    ["prot"]=".md"         \
+)
 function doc() {
     local HELP="usage: doc API|CMD"
 
@@ -188,6 +193,11 @@ function doc() {
     #    return 1
     #fi
 
+    if [[ $# -eq 0 ]]; then
+        cd ~/doc
+        return 0
+    fi
+
     local file_cmd=""
     for item in $(ls ~/doc/cmd/)
     do
@@ -195,14 +205,14 @@ function doc() {
         file_cmd=$file_cmd" $item"
     done
 
-    local file_api
+    local file_api=""
     for item in $(ls ~/doc/api/)
     do
         item=${item%.*}
         file_api=$file_api" $item"
     done
 
-    local file_prot
+    local file_prot=""
     for item in $(ls ~/doc/prot/)
     do
         item=${item%.*}
@@ -215,6 +225,7 @@ function doc() {
     #if [[ $file =~ $1 ]]; then
     #    echo hit
     #fi
+
     
     
 
