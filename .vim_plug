@@ -57,7 +57,17 @@ call plug#begin('~/.vim/plugged')
 
     Plug 'itchyny/lightline.vim'
     " config {
-        let g:lightline = {'colorscheme': 'jellybeans'}
+		let g:lightline = {
+      		\ 'colorscheme': 'jellybeans',
+      		\ 'active': {
+      		\   'right': [ [ 'lineinfo' ],
+      		\              [ 'percent' ],
+      		\              [ 'fileformat', 'fileencoding', 'filetype', 'charvaluehex' ] ]
+      		\ },
+      		\ 'component': {
+      		\   'charvaluehex': '0x%B'
+      		\ },
+      		\ }
     " }
 
 
@@ -133,6 +143,12 @@ call plug#begin('~/.vim/plugged')
         "    \   'scss,sass,css': [ 're!^\s{4}', 're!:\s+' ],
          "   \   'html': ['<', '"', '</', ' '],
          "   \ }
+
+         " disable preview window
+         :set completeopt-=preview
+
+         " auto close preview window after leaving insert mode
+         "let g:ycm_autoclose_preview_window_after_insertion = 1
 
     " }
     

@@ -72,6 +72,10 @@ noremap gP P
 "###########################################
 
 
+"######################################
+" highlight cursor word but don't jump
+nnoremap # #``
+"######################################
 
 "#####################
 "# indent & unindent #
@@ -83,7 +87,9 @@ imap <s-tab> <Esc>V<i
 
 "###############
 "#### color ####
-set t_Co=256
+if !has('gui_running')
+	set t_Co=256
+endif
 "colorscheme torte # set color style (select from /usr/share/vim/vimNN/colors/ , vimNN is the version number of your vim)
 
 
@@ -128,9 +134,10 @@ endfunction
 
 "###########################
 "#### custom file title ####
-autocmd BufNewFile *.py,*.sh exec ":call SetTitle_1()"
-autocmd BufNewFile *.c,*.cpp exec ":call SetTitle_2()"
-func SetTitle_1()
+"autocmd BufNewFile *.py exec ":call SetTitle_py()"
+"autocmd BufNewFile *.sh exec ":call SetTitle_bash()"
+"autocmd BufNewFile *.c,*.cpp exec ":call SetTitle_c()"
+func SetTitle_bash()
     if &filetype == 'sh' 
         call setline(1, "\#!/bin/bash")
         call append(line("."), "\#####") 
@@ -138,8 +145,11 @@ func SetTitle_1()
         call append(line(".")+2, "\# Author: alen6516") 
         call append(line(".")+3, "\# Created Time: ".strftime("%Y-%m-%d")) 
         call append(line(".")+4, "\#####") 
-        call append(line(".")+5, "") 
-    else
+        call append(line(".")+5, "")
+	endif
+endfunc
+func SetTitle_py()
+	if &filetype == 'py' 
         call setline(1,"\#!/usr/bin/python") 
         call append(line("."), "\# -*- coding: utf-8 -*-") 
         call append(line(".")+1, "\#####") 
@@ -150,7 +160,7 @@ func SetTitle_1()
         call append(line(".")+6, "")
     endif
 endfunc 
-func SetTitle_2()
+func SetTitle_c()
     call setline(1,"/***") 
     call append(line("."), " File Name: ".expand("%")) 
     call append(line(".")+1, " Author: alen6516") 
@@ -179,7 +189,10 @@ autocmd filetype cpp nnoremap <F9> :w <bar> exec '!clear;echo -n "==============
 autocmd filetype php setlocal nocursorline          " by filetype detected by vim
 autocmd BufRead,BufNewFile *.php set nocursorline   " by extension filename
 
-"autocmd filetype c nmap C O/***/<ESC>
+
+" highlight when a line is overlegth
+highlight OverLength ctermbg=red ctermfg=white guibg=#592929
+match OverLength /\%80v.\+/
 
 
 " auto change tab's name when using tmux/screen
@@ -190,3 +203,12 @@ if &term == "screen" || &term == "xterm"
 	set t_fs=\
 	set title
 endif
+
+
+" show current function name un C program
+fun! ShowFuncName()
+  echohl ModeMsg
+  echo getline(search("^[^ \t#/]\\{2}.*[^:]\s*$", 'bWn'))
+  echohl None
+endfun
+map <leader>f :call ShowFuncName() <CR>
