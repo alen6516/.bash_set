@@ -91,12 +91,11 @@ function _completion() {
         "shortcut")
             COM=${!SHORTCUT[*]}
             ;;
-        
     esac
 
-    if [ "${#COMP_WORDS[@]}" != "2" ]; then
-        return
-    fi
+    #if [ "${#COMP_WORDS[@]}" != "2" ]; then
+    #    return
+    #fi
 
     COMPREPLY=($(compgen -W "$COM" "${COMP_WORDS[1]}"))
 }
@@ -220,6 +219,7 @@ function doc() {
     done
 
 }
+complete -F _completion doc
 
 
 

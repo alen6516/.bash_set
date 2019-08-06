@@ -74,7 +74,7 @@ noremap gP P
 
 "######################################
 " highlight cursor word but don't jump
-nnoremap # #``
+nnoremap <silent> # :let @/='\<<C-R>=expand("<cword>")<CR>\>'<CR>:set hls<CR>
 "######################################
 
 "#####################
@@ -212,3 +212,5 @@ fun! ShowFuncName()
   echohl None
 endfun
 map <leader>f :call ShowFuncName() <CR>
+
+
