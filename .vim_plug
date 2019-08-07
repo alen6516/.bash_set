@@ -201,12 +201,12 @@ call plug#begin('~/.vim/plugged')
    
     Plug 'Yggdroot/indentLine' 
     " config {
-        " change indent char
-        let g:indentLine_char = '¦'
+          " change indent char
+          let g:indentLine_char = '¦'
 
-        " toggle
-        nnoremap <leader>i :IndentLinesToggle<cr>
-    " }
+          " toggle
+          nnoremap <leader>i :IndentLinesToggle<cr>
+     " }
 
 " }
 
@@ -215,23 +215,21 @@ call plug#begin('~/.vim/plugged')
     Plug 'majutsushi/tagbar'
     " depending on ctags ( $ apt install ctags )    
     " config {
-        " set tags
-        set tags=tags
 
-        " toggle
-        nmap <leader>t :TagbarToggle<cr>
+          " toggle
+          nmap <leader>t :TagbarToggle<cr>
         
-        " set window on left side
-        let g:tagbar_left = 0 
+          " set window on left side
+          let g:tagbar_left = 0 
         
-        " set window size
-        let g:tagbar_width = 40
+          " set window size
+          let g:tagbar_width = 40
 
-        " auto focus to the windows
-        let g:tagbar_autofocus = 1
+          " auto focus to the windows
+          let g:tagbar_autofocus = 1
     
-        " do not sort tags
-        let g:tagbar_sort = 0
+          " do not sort tags
+          let g:tagbar_sort = 0
     " }
     
     "Plug 'chazy/cscope_maps'

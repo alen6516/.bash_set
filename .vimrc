@@ -205,7 +205,7 @@ if &term == "screen" || &term == "xterm"
 endif
 
 
-" show current function name un C program
+" show current function name in C program
 fun! ShowFuncName()
   echohl ModeMsg
   echo getline(search("^[^ \t#/]\\{2}.*[^:]\s*$", 'bWn'))
@@ -214,3 +214,19 @@ endfun
 map <leader>f :call ShowFuncName() <CR>
 
 
+"#########################################
+" config for ctags
+" ########################################
+
+" change vim's work dir to the dir of the file, note some plugin may break
+set autochdir
+
+" set tags, the final ';' is important, it allows ctag to recursively search parent dir from current work dir
+" ./tags means search from vim's current working dir
+" note if not set autochdir, vim's working dir is user's current path
+set tags=./tags;
+
+" still try to move tags to .git
+"let tags_path=findfile(".git/tags", ";")
+"let &tags=tags_path
+" ########################################
