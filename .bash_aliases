@@ -185,16 +185,15 @@ declare -A DOC=(          \
     ["prot"]=".md"        \
 )
 function doc() {
-    local HELP="usage: doc API|CMD"
-
-    #if [[ ! $@ -eq 1 ]]; then
-    #    echo -e $HELP
-    #    return 1
-    #fi
+    local HELP="usage: doc API|CMD|PROT"
 
     if [[ $# -eq 0 ]]; then
         cd ~/doc
         return 0
+    fi
+
+    if [[ ! $# -eq 1 ]]; then
+        echo $HELP
     fi
 
     local file_cmd=""
@@ -203,6 +202,12 @@ function doc() {
         item=${item%.*}
         file_cmd=$file_cmd" $item"
     done
+    if [[ $file_cmd =~ $1 ]]; then
+        #echo "${1}.cmd"
+        cat ~/doc/cmd/${1}.cmd | less
+        return 0
+    fi
+
 
     local file_api=""
     for item in $(ls ~/doc/api/)
@@ -210,6 +215,12 @@ function doc() {
         item=${item%.*}
         file_api=$file_api" $item"
     done
+    if [[ $file_api =~ $1 ]]; then
+        #echo "${1}.c"
+        cat ~/doc/api/${1}.c | less
+        return 0
+    fi
+
 
     local file_prot=""
     for item in $(ls ~/doc/prot/)
@@ -217,9 +228,15 @@ function doc() {
         item=${item%.*}
         file_prot=$file_prot" $item"
     done
+    if [[ $file_prot =~ $1 ]]; then
+        #echo "${1}.md"
+        cat ~/doc/prot/${1}.md | less
+        return 0
+    fi
 
+    echo "can not find $1"
 }
-complete -F _completion doc
+#complete -F _completion doc
 
 
 
