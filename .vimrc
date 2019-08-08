@@ -230,3 +230,15 @@ set tags=./tags;
 "let tags_path=findfile(".git/tags", ";")
 "let &tags=tags_path
 " ########################################
+
+let g:flag_open_pane = 0
+fun! TogglePane()
+	if g:flag_open_pane
+		echo "close pane"
+		let g:flag_open_pane = 0
+	else
+		echo "open pane"
+		let g:flag_open_pane = 1
+	endif
+endfun
+map <leader>q :call TogglePane() <CR>
