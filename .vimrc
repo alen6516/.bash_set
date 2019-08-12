@@ -216,7 +216,7 @@ map <leader>f :call ShowFuncName() <CR>
 
 "#########################################
 " config for ctags
-" ########################################
+"#########################################
 
 " change vim's work dir to the dir of the file, note some plugin may break
 set autochdir
@@ -224,12 +224,12 @@ set autochdir
 " set tags, the final ';' is important, it allows ctag to recursively search parent dir from current work dir
 " ./tags means search from vim's current working dir
 " note if not set autochdir, vim's working dir is user's current path
-set tags=./tags;
+set tags=./.tags;
 
 " still try to move tags to .git
 "let tags_path=findfile(".git/tags", ";")
 "let &tags=tags_path
-" ########################################
+"#########################################
 
 let g:flag_open_pane = 0
 fun! TogglePane()
