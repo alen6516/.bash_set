@@ -12,6 +12,7 @@ set shiftwidth=4    " the width of auto indent
 set expandtab       " expand a tab as several spaces
 "set mouse=a        " allow using mouse to move the cursor
 set encoding=utf-8
+set splitright		" set split window to right-hand side
 
 set foldenable      " enable fold mode
 set foldmethod=manual   " zz to create; zo to open; zc to close
@@ -25,7 +26,7 @@ hi LineNr cterm=NONE ctermfg=DarkGrey ctermbg=NONE
 hi CursorLineNR term=bold cterm=bold ctermfg=yellow
 
 "#### set shortcut #######
-nmap <leader>l :set nonumber!<CR>:set foldcolumn=0<CR>
+"nmap <leader>l :set nonumber!<CR>:set foldcolumn=0<CR>
 nmap <C-d> 10j
 nmap <C-u> 10k
 nmap <leader>h :noh<CR>
@@ -218,13 +219,15 @@ map <leader>f :call ShowFuncName() <CR>
 " config for ctags
 "#########################################
 
+" Must change input method to English then can jump
+
 " change vim's work dir to the dir of the file, note some plugin may break
 set autochdir
 
 " set tags, the final ';' is important, it allows ctag to recursively search parent dir from current work dir
 " ./tags means search from vim's current working dir
 " note if not set autochdir, vim's working dir is user's current path
-set tags=./.tags;
+set tags=./.tags,./tags;
 
 " still try to move tags to .git
 "let tags_path=findfile(".git/tags", ";")
@@ -234,11 +237,29 @@ set tags=./.tags;
 let g:flag_open_pane = 0
 fun! TogglePane()
 	if g:flag_open_pane
-		echo "close pane"
+		"echo "close pane"
+		:wincmd q
 		let g:flag_open_pane = 0
 	else
-		echo "open pane"
+		"echo "open pane"
 		let g:flag_open_pane = 1
+		:vs ~/doc/cmd/vim.cmd
 	endif
 endfun
-map <leader>q :call TogglePane() <CR>
+map <leader>v :call TogglePane() <CR>
+
+
+let g:flag_nu = 1
+fun! ToggleNu()
+	if g:flag_nu
+		:set nonumber!
+		:set foldcolumn=0
+		let g:flag_nu = 0
+	else
+		:set number
+		let g:flag_nu = 1
+	endif
+endfun
+map <leader>n :call ToggleNu() <CR>
+	
+	
