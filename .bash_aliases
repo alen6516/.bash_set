@@ -91,12 +91,27 @@ function _completion() {
         "shortcut")
             COM=${!SHORTCUT[*]}
             ;;
+        "doc")
+            COM=""
+            for _dir in ${!DOC[@]}
+            do
+                for _file in $(ls ~/doc/$_dir)
+                do
+                    if [[ $_dir == "cmd" ]]; then
+                        COM="$COM ${_file%.cmd}"
+                    elif [[ $_dir == "api" ]]; then
+                        COM="$COM ${_file%.c}"
+                    elif [[ $_dir == "prot" ]]; then
+                        COM="$COM ${_file%.md}"
+                    fi
+                done
+            done
+            ;;
     esac
 
     #if [ "${#COMP_WORDS[@]}" != "2" ]; then
     #    return
     #fi
-
     COMPREPLY=($(compgen -W "$COM" "${COMP_WORDS[1]}"))
 }
 
@@ -236,7 +251,7 @@ function doc() {
 
     echo "can not find $1"
 }
-#complete -F _completion doc
+complete -F _completion doc
 
 
 
