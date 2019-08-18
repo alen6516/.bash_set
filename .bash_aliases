@@ -91,6 +91,9 @@ function _completion() {
         "shortcut")
             COM=${!SHORTCUT[*]}
             ;;
+        "doc")
+            echo "$0" "$1" "$2"
+            ;;
     esac
 
     #if [ "${#COMP_WORDS[@]}" != "2" ]; then
@@ -187,6 +190,10 @@ declare -A DOC=(          \
 function doc() {
     local HELP="usage: doc API|CMD"
 
+    if [[ $1=="--help" ]]; then
+        echo "-a 123"
+    fi
+
     #if [[ ! $@ -eq 1 ]]; then
     #    echo -e $HELP
     #    return 1
@@ -219,7 +226,7 @@ function doc() {
     done
 
 }
-complete -F _completion doc
+complete -F try doc
 
 
 
