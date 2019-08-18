@@ -193,7 +193,7 @@ autocmd BufRead,BufNewFile *.php set nocursorline   " by extension filename
 
 " highlight when a line is overlegth
 highlight OverLength ctermbg=red ctermfg=white guibg=#592929
-match OverLength /\%80v.\+/
+match OverLength /\%130v.\+/
 
 
 " auto change tab's name when using tmux/screen
