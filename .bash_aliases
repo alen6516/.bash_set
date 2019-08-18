@@ -92,14 +92,26 @@ function _completion() {
             COM=${!SHORTCUT[*]}
             ;;
         "doc")
-            echo "$0" "$1" "$2"
+            COM=""
+            for _dir in ${!DOC[@]}
+            do
+                for _file in $(ls ~/doc/$_dir)
+                do
+                    if [[ $_dir == "cmd" ]]; then
+                        COM="$COM ${_file%.cmd}"
+                    elif [[ $_dir == "api" ]]; then
+                        COM="$COM ${_file%.c}"
+                    elif [[ $_dir == "prot" ]]; then
+                        COM="$COM ${_file%.md}"
+                    fi
+                done
+            done
             ;;
     esac
 
     #if [ "${#COMP_WORDS[@]}" != "2" ]; then
     #    return
     #fi
-
     COMPREPLY=($(compgen -W "$COM" "${COMP_WORDS[1]}"))
 }
 
@@ -188,20 +200,15 @@ declare -A DOC=(          \
     ["prot"]=".md"        \
 )
 function doc() {
-    local HELP="usage: doc API|CMD"
-
-    if [[ $1=="--help" ]]; then
-        echo "-a 123"
-    fi
-
-    #if [[ ! $@ -eq 1 ]]; then
-    #    echo -e $HELP
-    #    return 1
-    #fi
+    local HELP="usage: doc API|CMD|PROT"
 
     if [[ $# -eq 0 ]]; then
         cd ~/doc
         return 0
+    fi
+
+    if [[ ! $# -eq 1 ]]; then
+        echo $HELP
     fi
 
     local file_cmd=""
@@ -210,6 +217,12 @@ function doc() {
         item=${item%.*}
         file_cmd=$file_cmd" $item"
     done
+    if [[ $file_cmd =~ $1 ]]; then
+        #echo "${1}.cmd"
+        cat ~/doc/cmd/${1}.cmd | less
+        return 0
+    fi
+
 
     local file_api=""
     for item in $(ls ~/doc/api/)
@@ -217,6 +230,12 @@ function doc() {
         item=${item%.*}
         file_api=$file_api" $item"
     done
+    if [[ $file_api =~ $1 ]]; then
+        #echo "${1}.c"
+        cat ~/doc/api/${1}.c | less
+        return 0
+    fi
+
 
     local file_prot=""
     for item in $(ls ~/doc/prot/)
@@ -224,7 +243,13 @@ function doc() {
         item=${item%.*}
         file_prot=$file_prot" $item"
     done
+    if [[ $file_prot =~ $1 ]]; then
+        #echo "${1}.md"
+        cat ~/doc/prot/${1}.md | less
+        return 0
+    fi
 
+    echo "can not find $1"
 }
 complete -F try doc
 
