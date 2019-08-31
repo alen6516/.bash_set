@@ -255,25 +255,30 @@ complete -F try doc
 
 
 
-
-alias port='sudo netstat -antlp'
-alias py='python'
-alias py3='python3'
-alias ptt='ssh bbsu@ptt.cc'
+## for handy
 alias tmp='cd ~/vm_share/tmp'
 alias _ba='cd ~/.bash_set'
+alias ..='cd ..'
+alias py='python'
+alias py3='python3'
 
 
-# 引號裡要打引號前要先用\跳脫，但是也不能直接打\，否則會被awk解析，要打'\'
+## tool
+alias port='sudo netstat -antlp'
+alias ptt='ssh bbsu@ptt.cc'
+
+#引號裡要打引號前要先用\跳脫，但是也不能直接打 \，否則會被 awk 解析，要打 '\'
 alias cpu_load='ps -aux|awk '\''BEGIN{ sum=0} {sum=sum+$3} END{print sum}'\'''
 alias mem_load='ps -aux|awk '\''BEGIN{ sum=0} {sum=sum+$4} END{print sum}'\'''
 
+alias info='info --vi-keys'
 alias man='man -M /usr/share/man'
 alias manc='man -M /usr/share/man/zh_TW'
-alias ..='cd ..'
-alias info='info --vi-keys'
+alias bpf='w3m http://biot.com/capstats/bpf.html | less'
 
+
+## add a little to original cmd
 alias cp='cp -i'
 alias mv='mv -i'
+alias tmux='history -w && tmux'     # write cmd history to .bash_history before using tmux
 
-alias bpf='w3m http://biot.com/capstats/bpf.html | less'
