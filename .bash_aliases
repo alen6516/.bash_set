@@ -251,7 +251,7 @@ function doc() {
 
     echo "can not find $1"
 }
-complete -F try doc
+complete -F _completion doc
 
 
 
