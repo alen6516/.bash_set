@@ -216,8 +216,9 @@ function doc() {
     do
         item=${item%.*}
         file_cmd=$file_cmd" $item"
+        echo $item
     done
-    if [[ $file_cmd =~ $1 ]]; then
+    if [[ $file_cmd =~ " $1 " ]]; then
         #echo "${1}.cmd"
         cat ~/doc/cmd/${1}.cmd | less
         return 0
@@ -230,7 +231,7 @@ function doc() {
         item=${item%.*}
         file_api=$file_api" $item"
     done
-    if [[ $file_api =~ $1 ]]; then
+    if [[ $file_api =~ " $1 " ]]; then
         #echo "${1}.c"
         cat ~/doc/api/${1}.c | less
         return 0
@@ -243,7 +244,7 @@ function doc() {
         item=${item%.*}
         file_prot=$file_prot" $item"
     done
-    if [[ $file_prot =~ $1 ]]; then
+    if [[ $file_prot =~ " $1 " ]]; then
         #echo "${1}.md"
         cat ~/doc/prot/${1}.md | less
         return 0
