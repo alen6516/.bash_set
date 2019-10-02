@@ -25,7 +25,13 @@ function ipinfo()
     fi
 }
 
-function mem()
+function ppid() 
+{
+    var=1234
+    ps -o ppid= -p $var
+}
+
+function mem()       # show mem usage
 {
     ps aux | head -n1
     ps aux | grep $1 | grep -v grep | grep $1
@@ -267,6 +273,7 @@ alias py3='python3'
 ## tool
 alias port='sudo netstat -antlp'
 alias ptt='ssh bbsu@ptt.cc'
+
 
 #引號裡要打引號前要先用\跳脫，但是也不能直接打 \，否則會被 awk 解析，要打 '\'
 alias cpu_load='ps -aux|awk '\''BEGIN{ sum=0} {sum=sum+$3} END{print sum}'\'''
