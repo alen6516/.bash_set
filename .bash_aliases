@@ -222,7 +222,7 @@ function doc() {
     do
         item=${item%.*}
         file_cmd=$file_cmd" $item"
-        echo $item
+        #echo $item
     done
     if [[ $file_cmd =~ " $1 " ]]; then
         #echo "${1}.cmd"
