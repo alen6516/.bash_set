@@ -261,5 +261,19 @@ fun! ToggleNu()
 	endif
 endfun
 map <leader>n :call ToggleNu() <CR>
-	
-	
+
+
+let g:flag_open_def = 0
+fun! ToggleDef()
+	if g:flag_open_def
+		"echo "close def"
+		:wincmd q
+		let g:flag_open_def = 0
+	else
+		"echo "open def"
+		let g:flag_open_def = 1
+		:vsp 
+		:exec('tag '.expand('<cword>'))
+	endif
+endfun
+map <leader>g :call ToggleDef() <CR>
