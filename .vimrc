@@ -1,4 +1,5 @@
 source ~/.vim_plug
+source ~/.cscope_maps.vim
 
 set bg=dark
 set nu
@@ -9,7 +10,7 @@ set ai              " auto indent
 set scrolloff=3     " preserve several lines when scrolling
 set tabstop=4       " the definition for a tab of vim
 set shiftwidth=4    " the width of auto indent
-set expandtab       " expand a tab as several spaces
+set expandtab       " expand a tab as several spaces, for original tab, use :retab
 "set mouse=a        " allow using mouse to move the cursor
 set encoding=utf-8
 set splitright		" set split window to right-hand side

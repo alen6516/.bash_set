@@ -2,14 +2,15 @@
 
 ######################### set up variables
 
-declare -A FILE=(                        \
-    [".vim"]=".vim"                      \
-    [".vimrc"]=".vimrc"                  \
-    [".vim_plug"]=".vim_plug"            \
-    [".bashrc"]=".bashrc"                \
-    [".bash_aliases"]=".bash_aliases"    \
-    [".tmux.conf"]=".tmux.conf"          \
-    [".ctags"]=".ctags"                  \
+declare -A FILE=(                           \
+    [".vim"]=".vim"                         \
+    [".vimrc"]=".vimrc"                     \
+    [".vim_plug"]=".vim_plug"               \
+    [".bashrc"]=".bashrc"                   \
+    [".bash_aliases"]=".bash_aliases"       \
+    [".tmux.conf"]=".tmux.conf"             \
+    [".ctags"]=".ctags"                     \
+    [".cscope_maps.vim"]=".cscope_maps.vim"  \
 )
 
 CURR_PATH=`pwd`
