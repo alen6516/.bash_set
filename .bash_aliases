@@ -161,6 +161,7 @@ complete -F _completion shortcut
 
 declare -A RFC=(            \
     ["arp"]="826"           \
+    ["ip"]="791"            \
     ["ipv4"]="791"          \
     ["ipv6"]="2460"         \
     ["icmp"]="792"          \
