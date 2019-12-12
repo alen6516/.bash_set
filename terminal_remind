@@ -26,3 +26,5 @@ ctrl + s        | freeze
 !:N             | 上一個指令的第 N 個參數
 !ls:2           | 上一個以 ls 開頭的指令的第 2 個參數
 sudo !!         | 用 sudo 來執行上個指令
+shift + PgUp    | scroll up in bash
+shift + PgDown  | scroll down in bash
