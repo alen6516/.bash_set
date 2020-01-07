@@ -33,6 +33,10 @@ function ppid()
 
 function mem()       # show mem usage
 {
+    if [ $# != 1 ]; then
+        echo "Please give process or pid as \$1"
+        return 1
+    fi
     ps aux | head -n1
     ps aux | grep $1 | grep -v grep | grep $1
     echo -n "$1 totally use memory "
