@@ -23,7 +23,7 @@ cnoremap w!! execute 'silent! write !sudo tee % >/dev/null' <bar> edit!
 
 " #### line number color #### 
 set cursorline
-hi LineNr cterm=NONE ctermfg=DarkGrey ctermbg=NONE
+"hi LineNr cterm=NONE ctermfg=DarkGrey ctermbg=NONE
 hi CursorLineNR term=bold cterm=bold ctermfg=yellow
 
 "#### set shortcut #######
