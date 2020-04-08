@@ -273,12 +273,12 @@ alias _ba='cd ~/.bash_set'
 alias ..='cd ..'
 alias py='python'
 alias py3='python3'
-
+alias rlf='readlink -f'
+alias tcpread='tcpdump -r'
 
 ## tool
 alias port='sudo netstat -antlp'
 alias ptt='ssh bbsu@ptt.cc'
-
 
 #引號裡要打引號前要先用\跳脫，但是也不能直接打 \，否則會被 awk 解析，要打 '\'
 alias cpu_load='ps -aux|awk '\''BEGIN{ sum=0} {sum=sum+$3} END{print sum}'\'''
@@ -290,8 +290,7 @@ alias manc='man -M /usr/share/man/zh_TW'
 alias bpf='w3m http://biot.com/capstats/bpf.html | less'
 
 
-## add a little to original cmd
+## wrap command
 alias cp='cp -i'
 alias mv='mv -i'
 alias tmux='history -w && tmux'     # write cmd history to .bash_history before using tmux
-
