@@ -235,20 +235,36 @@ set tags=./.tags,./tags;
 "let &tags=tags_path
 "#########################################
 
-let g:flag_open_pane = 0
-fun! TogglePane()
-	if g:flag_open_pane
-		"echo "close pane"
+let g:flag_open_vim_doc = 0
+fun! ToggleVimDoc()
+	if g:flag_open_vim_doc
+		"echo "close vim doc"
 		:wincmd q
-		let g:flag_open_pane = 0
+		let g:flag_open_vim_doc = 0
 	else
-		"echo "open pane"
-		let g:flag_open_pane = 1
+		"echo "open vim doc"
+		let g:flag_open_vim_doc = 1
 		:vs ~/doc/cmd/vim.cmd
 	endif
 endfun
-map <leader>v :call TogglePane() <CR>
+map <leader>v :call ToggleVimDoc() <CR>
 
+
+let g:flag_open_cword = 0
+fun! ToggleCWord()
+    if g:flag_open_cword
+        echo "close cword"
+        :wincmd q
+        let g:flag_open_cword = 0
+    else
+        let g:flag_open_cword = 1
+        echo "open cword"
+        :vs<CR> :exec("tag ".expand("<cword>"))<CR>
+    endif
+endfun
+map <leader>w :call ToggleCWord() <CR>
+
+"map <leader>w :vsp <CR>:exec("tag ".expand("<cword>"))<CR>
 
 let g:flag_nu = 1
 fun! ToggleNu()
