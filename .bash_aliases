@@ -294,3 +294,4 @@ alias bpf='w3m http://biot.com/capstats/bpf.html | less'
 alias cp='cp -i'
 alias mv='mv -i'
 alias tmux='history -w && tmux'     # write cmd history to .bash_history before using tmux
+alias gdb='gdb -q'

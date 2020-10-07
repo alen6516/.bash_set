@@ -10,6 +10,7 @@ declare -A FILE=(                           \
     [".bash_aliases"]=".bash_aliases"       \
     [".tmux.conf"]=".tmux.conf"             \
     [".ctags"]=".ctags"                     \
+    [".gdbinit"]=".gdbinit"                 \
     [".cscope_maps.vim"]=".cscope_maps.vim"  \
 )
 
@@ -22,7 +23,7 @@ RET=0
 JOB=""
 
 DIR_NAME=".bash_set"
-LOG_PATH="/tmp/bash_set.log"
+LOG_PATH="${SCRIPT_PATH}/bash_set.log"
 DEBUG_MODE=1
 
 ######################### tools
