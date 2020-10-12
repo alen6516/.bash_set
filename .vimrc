@@ -1,8 +1,6 @@
-runtime macros/matchit.vim			" enable vim customized pair pattern jump
-let b:match_words='\<foo\>:\<bar\>'	" let vim match 'begin' and 'end' by % (but don't know why it doesn't in .vimrc, need to type it manually in vim)
-let b:match_ignorecase = 1 				" ignore the case of the pattern
 
 set nocompatible
+filetype plugin on
 source ~/.vim_plug
 source ~/.cscope_maps.vim
 
@@ -19,6 +17,12 @@ set expandtab       " expand a tab as several spaces, for original tab, use :ret
 "set mouse=a        " allow using mouse to move the cursor
 set encoding=utf-8
 set splitright		" set split window to right-hand side
+
+packadd! matchit
+runtime macros/matchit.vim			" enable vim customized pair pattern jump
+let b:match_words='\<foo\>:\<bar\>'	" let vim match 'begin' and 'end' by % (but don't know why it doesn't work in .vimrc, need to type it manually in vim)
+let b:match_ignorecase = 1 				" ignore the case of the pattern
+
 
 set foldenable     		" enable fold mode
 set foldmethod=manual 	" zz to create; zo to open; zc to close
