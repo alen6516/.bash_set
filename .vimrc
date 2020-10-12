@@ -1,3 +1,8 @@
+runtime macros/matchit.vim			" enable vim customized pair pattern jump
+let b:match_words='\<foo\>:\<bar\>'	" let vim match 'begin' and 'end' by % (but don't know why it doesn't in .vimrc, need to type it manually in vim)
+let b:match_ignorecase = 1 				" ignore the case of the pattern
+
+set nocompatible
 source ~/.vim_plug
 source ~/.cscope_maps.vim
 
@@ -10,13 +15,30 @@ set ai              " auto indent
 set scrolloff=3     " preserve several lines when scrolling
 set tabstop=4       " the definition for a tab of vim
 set shiftwidth=4    " the width of auto indent
-set expandtab       " expand a tab as several spaces, for original tab, use :retab
+set expandtab       " expand a tab as several spaces, for original tab, use :retab or :%s/^I/    /gc
 "set mouse=a        " allow using mouse to move the cursor
 set encoding=utf-8
 set splitright		" set split window to right-hand side
 
-set foldenable      " enable fold mode
-set foldmethod=manual   " zz to create; zo to open; zc to close
+set foldenable     		" enable fold mode
+set foldmethod=manual 	" zz to create; zo to open; zc to close
+" fold command under visual mode:
+" 	zf 	 - create
+" 	za   - toggle fold
+" 	zo   - open fold
+" 	zc   - close fold
+" 	zM   - close all fold
+" 	zR   - open all fold
+" 	zd   - delete fold
+" 	zE   - delete all fold
+" 	zj   - move to previous fold
+" 	zk   - move to next fold
+" 	zn   - disable fold
+" 	zN   - enable fold
+" 	zfa( - fold () area
+" 	:mkview - save current fold
+" 	:loadview - load fold when open this file
+
 
 " allow using :w!! to write a edited read-only file (press quickly)
 cnoremap w!! execute 'silent! write !sudo tee % >/dev/null' <bar> edit!
@@ -235,6 +257,8 @@ set tags=./.tags,./tags;
 "let &tags=tags_path
 "#########################################
 
+
+" Just a example
 let g:flag_open_pane = 0
 fun! TogglePane()
 	if g:flag_open_pane
@@ -249,7 +273,39 @@ fun! TogglePane()
 endfun
 map <leader>v :call TogglePane() <CR>
 
+" open my vim help doc in a vim pane
+let g:flag_open_vim_doc = 0
+fun! ToggleVimDoc()
+	if g:flag_open_vim_doc
+		"echo "close vim doc"
+		:wincmd q
+		let g:flag_open_vim_doc = 0
+	else
+		"echo "open vim doc"
+		let g:flag_open_vim_doc = 1
+		:vs ~/doc/cmd/vim.cmd
+	endif
+endfun
+map <leader>v :call ToggleVimDoc() <CR>
 
+
+" Just a example
+let g:flag_open_cword = 0
+fun! ToggleCWord()
+    if g:flag_open_cword
+        echo "close cword"
+        :wincmd q
+        let g:flag_open_cword = 0
+    else
+        let g:flag_open_cword = 1
+        echo "open cword"
+        :vs<CR> :exec("tag ".expand("<cword>"))<CR>
+    endif
+endfun
+map <leader>w :call ToggleCWord() <CR>
+
+
+" Toggle line number
 let g:flag_nu = 1
 fun! ToggleNu()
 	if g:flag_nu
@@ -264,6 +320,7 @@ endfun
 map <leader>n :call ToggleNu() <CR>
 
 
+" use ctag tag file to open function defination in pane
 let g:flag_open_def = 0
 fun! ToggleDef()
 	if g:flag_open_def
@@ -278,3 +335,20 @@ fun! ToggleDef()
 	endif
 endfun
 map <leader>g :call ToggleDef() <CR>
+
+
+" jump to history record place
+function! GotoJump()
+  jumps
+  let j = input("Please select your jump: ")
+  if j != ''
+    let pattern = '\v\c^\+'
+    if j =~ pattern
+      let j = substitute(j, pattern, '', 'g')
+      execute "normal " . j . "\<c-i>"
+    else
+      execute "normal " . j . "\<c-o>"
+    endif
+  endif
+endfunction
+map <leader>j :call GotoJump() <CR>
