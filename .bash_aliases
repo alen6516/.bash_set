@@ -273,6 +273,7 @@ alias _ba='cd ~/.bash_set'
 alias ..='cd ..'
 alias py='python'
 alias py3='python3'
+alias od='objdump'
 
 
 ## tool
