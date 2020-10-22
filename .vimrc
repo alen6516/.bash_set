@@ -69,6 +69,9 @@ nmap qqq :q<cr>
 "nmap <leader>w<Down>  <C-w><Down>
 "nmap <leader>ww       <C-w>w
 
+" YouCompleteMe FixIt
+nmap <leader>x :YcmCompleter FixIt<CR>
+
 " tab #######
 nmap te :tabe
 nmap tc :tabc
