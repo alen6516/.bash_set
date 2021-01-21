@@ -56,7 +56,14 @@ hi CursorLineNR term=bold cterm=bold ctermfg=yellow
 "nmap <leader>l :set nonumber!<CR>:set foldcolumn=0<CR>
 nmap <C-d> 10j
 nmap <C-u> 10k
+
+nmap <C-j> 10j
+nmap <C-k> 10k
+nmap <C-l> 15l
+nmap <BS> 15h
+" bind <BS> is tricky, because in tmux, <C-h> sends ^? to the terminal, which is <BS>
 nmap <leader>h :noh<CR>
+nmap <leader>m :marks<CR>
 "nmap <C-S-g> gg=G
 
 " quick quit
