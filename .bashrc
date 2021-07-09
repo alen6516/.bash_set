@@ -120,6 +120,8 @@ export TERM="xterm-256color"
 # add timestamp for history
 export HISTTIMEFORMAT='%F %T '
 
+# diable terminal freeze
+stty -ixon
 
 # Less Colors for Man Pages
 export PAGER="less"
