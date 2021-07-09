@@ -1,7 +1,7 @@
 
 set nocompatible
 filetype plugin on
-source ~/.vim_plug
+"source ~/.vim_plug
 source ~/.cscope_maps.vim
 
 set bg=dark
@@ -59,9 +59,15 @@ nmap <C-u> 10k
 
 nmap <C-j> 10j
 nmap <C-k> 10k
-nmap <C-l> 15l
+nmap <C-l> 20l
+nmap <C-h> 20h
 nmap <BS> 15h
 " bind <BS> is tricky, because in tmux, <C-h> sends ^? to the terminal, which is <BS>
+
+"shift + arrow key is annoying
+nmap <S-Down> <Nop>
+nmap <S-Up> <Nop>
+
 nmap <leader>h :noh<CR>
 nmap <leader>m :marks<CR>
 "nmap <C-S-g> gg=G
@@ -135,7 +141,7 @@ set hlsearch        " highlight the searching result
 hi Search guibg=Yellow guifg=Black ctermbg=Yellow ctermfg=Black
 
 "##### set the style of status line ####
-set laststatus=2    " turn on the status line of vim, set 1 to turn 0ff
+"set laststatus=2    " turn on the status line of vim, set 1 to turn 0ff
 "set statusline=%#filepath#[%{expand('%:p')}]%#filetype#[%{strlen(&fenc)?&fenc:&enc},\ %{&ff},\ %{strlen(&filetype)?&filetype:'plain'}]%#filesize#%{FileSize()}%{IsBinary()}%=%#position#%c,%l/%L\ [%3p%%]
 
 hi filepath cterm=none ctermbg=238 ctermfg=40
