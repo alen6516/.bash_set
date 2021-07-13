@@ -1,19 +1,31 @@
 function lsg()
 {
-    if [ $# = 1 ]; then
-        ls -a | grep $1
-    elif [ $# = 2 ]; then
-        ls -a $1 | grep $2
+    local cmd="ls -a"
+    if [ $# -gt 0 ]; then
+        for var in $@
+        do
+            cmd=$cmd" | grep $var"
+        done
     fi
+
+    echo "$cmd"
+    echo "---------------"
+    eval $cmd
 }
 
 function psg()
 {
-    if [ $# = 0 ]; then
-        ps -aux
-    elif [ $# = 1 ]; then
-        ps -aux | grep $1
+    local cmd="ps -aux"
+    if [ $# -gt 0 ]; then
+        for var in $@
+        do
+            cmd=$cmd" | grep $var"
+        done
     fi
+
+    echo "$cmd"
+    echo "---------------"
+    eval $cmd
 }
 
 function ipinfo()
