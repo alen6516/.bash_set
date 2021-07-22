@@ -239,6 +239,13 @@ autocmd BufRead,BufNewFile *.php set nocursorline   " by extension filename
 "match OverLength /\%130v.\+/
 
 
+" Let vim open at last position
+if has("autocmd")
+  au BufReadPost * if line("'\"") > 0 && line("'\"") <= line("$")
+    \| exe "normal! g'\"" | endif
+endif
+
+
 " auto change tab's name when using tmux/screen
 if &term == "screen" || &term == "xterm"
     let &titleold="bash"
@@ -326,18 +333,19 @@ map <leader>w :call ToggleCWord() <CR>
 
 
 " Toggle line number
-let g:flag_nu = 1
-fun! ToggleNu()
-	if g:flag_nu
-		:set nonumber!
-		:set foldcolumn=0
-		let g:flag_nu = 0
-	else
-		:set number
-		let g:flag_nu = 1
-	endif
-endfun
-map <leader>n :call ToggleNu() <CR>
+"let g:flag_nu = 1
+"fun! ToggleNu()
+"	if g:flag_nu
+"		:set nonumber!
+"		:set foldcolumn=0
+"		let g:flag_nu = 0
+"	else
+"		:set number
+"		let g:flag_nu = 1
+"	endif
+"endfun
+"map <leader>n :call ToggleNu() <CR>
+map <leader>n :set nu! <CR>
 
 
 " use ctag tag file to open function defination in pane
