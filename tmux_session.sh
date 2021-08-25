@@ -14,9 +14,8 @@
 #tmux attach -t $SESSIONNAME
 
 
-date=`date +%m%d`
-#time=`date +%H:%M:%S`
-time=`date +%S`
+date=`date +%m%d-%H:%M:%S`
+wdw="tmp"
 
 file_name="$HOME/.tmux_session_$date"
 touch $file_name
@@ -26,9 +25,9 @@ for session in `tmux ls | cut -d ":" -f 1`
 do
     #tmux send-keys -t ${session} Escape
     #tmux send-keys -t ${session} C-z 
-    tmux new-window -t ${session} -c '#{pane_current_path}' -n ${time}
-    tmux send-keys -t ${session}:${time} "echo -n ${session}: >> ${file_name} && pwd >> ${file_name}" Enter
-    tmux kill-window -t ${session}:${time}
+    tmux new-window -t ${session} -c '#{pane_current_path}' -n ${wdw}
+    tmux send-keys -t ${session}:${wdw} "echo -n ${session}: >> ${file_name} && pwd >> ${file_name} && logout" Enter
+    #tmux kill-window -t ${session}:${wdw}
 
 	#echo $session >> $file_name
 	#tmux attach-session -t $session
