@@ -140,6 +140,9 @@ endif
 set hlsearch        " highlight the searching result
 hi Search guibg=Yellow guifg=Black ctermbg=Yellow ctermfg=Black
 
+" remove _ from the markdown pattern
+syn match markdownError "\w\@<=\w\@="
+
 "##### set the style of status line ####
 "set laststatus=2    " turn on the status line of vim, set 1 to turn 0ff
 "set statusline=%#filepath#[%{expand('%:p')}]%#filetype#[%{strlen(&fenc)?&fenc:&enc},\ %{&ff},\ %{strlen(&filetype)?&filetype:'plain'}]%#filesize#%{FileSize()}%{IsBinary()}%=%#position#%c,%l/%L\ [%3p%%]
