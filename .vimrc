@@ -72,6 +72,11 @@ nmap <leader>h :noh<CR>
 nmap <leader>m :marks<CR>
 "nmap <C-S-g> gg=G
 
+" show full path of current file
+map <leader>F :echo expand('%:p') <CR>
+" :f only show file name, and 1-Ctrl-g I need to tap enter again, not
+" convenient
+
 " quick quit
 nmap qqq :q<cr>
 
