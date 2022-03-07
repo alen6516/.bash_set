@@ -78,7 +78,7 @@ map <leader>F :echo expand('%:p') <CR>
 " convenient
 
 " quick quit
-nmap qqq :q<cr>
+nmap qqqqq :q!<cr>
 
 " window switching
 "nmap <leader>w<Right> <C-w><Right>
