@@ -1,3 +1,4 @@
+# ls | grep
 function lsg()
 {
     local cmd="ls -a"
@@ -13,6 +14,8 @@ function lsg()
     eval $cmd
 }
 
+
+# ps aux | grep
 function psg()
 {
     local cmd="ps -aux"
@@ -28,6 +31,8 @@ function psg()
     eval $cmd
 }
 
+
+# check my ip info
 function ipinfo()
 {
     if [ $# = 1 ]; then
@@ -43,7 +48,9 @@ function ppid()
     ps -o ppid= -p $var
 }
 
-function mem()       # show mem usage
+
+# show mem usage
+function mem()
 {
     if [ $# != 1 ]; then
         echo "Please give process or pid as \$1"
@@ -55,6 +62,7 @@ function mem()       # show mem usage
     ps aux | grep $1 | grep -v grep | awk '{ total += $6; } END { print total/1024"MB" }'
 }
 
+
 function open()
 {
     if [ $# != 2 ]; then
@@ -64,6 +72,7 @@ function open()
     fi
 }
 
+
 trash_can="/tmp/recycle_bin"
 function rm()
 {
@@ -72,10 +81,12 @@ function rm()
     echo "moving $@ to $trash_can"
 }
 
+
 function rrm()
 {
     command rm -I $@    
 }
+
 
 function cd()
 {
@@ -89,6 +100,7 @@ function cd()
         command cd $@
     fi
 }
+
 
 function man2()
 {
@@ -288,6 +300,24 @@ alias py3='python3'
 alias od='objdump'
 alias rlf='readlink -f'
 alias tcpread='tcpdump -r'
+alias v-="vim -"
+function vv()   # `vv | git show HEAD` => `git show HEAD | vim -`
+{
+    # not test yet
+
+    if [[ -n $1 ]]; then
+        if [[ -n ${BASH_ALIASES[$1]} ]]; then
+            # if command is an alias, extract the true command
+            local cmd=${BASH_ALIASES[$1]}
+            shift
+            $cmd $@ | vim -
+
+        else
+            # if the command is command or function
+            $* | vim -
+        fi
+    fi
+}
 
 ## tool
 alias port='sudo netstat -antlp'
@@ -308,3 +338,33 @@ alias cp='cp -i'
 alias mv='mv -i'
 alias tmux='history -w && tmux'     # write cmd history to .bash_history before using tmux
 alias gdb='gdb -q'
+
+## git
+alias gs="git show"
+alias gd="git diff"
+alias gln="git log -3"
+alias glln="git log -3 --oneline"
+function gl()
+{
+    if [[ $1 = "" ]]; then
+        git log HEAD
+    elif [[ $1 =~ -[0-9]+$ ]]; then
+        git log $1
+    elif [[ $1 =~ ^[0-9]+$ ]]; then
+        git log -$1
+    else
+        command_not_found_handle ${FUNCNAME[0]} $1
+    fi
+}
+function gll()
+{
+    if [[ $1 = "" ]]; then
+        git log --oneline HEAD
+    elif [[ $1 =~ -[0-9]+$ ]]; then
+        git log --oneline $1
+    elif [[ $1 =~ ^[0-9]+$ ]]; then
+        git log --oneline -$1
+    else
+        command_not_found_handle ${FUNCNAME[0]} $1
+    fi
+}
