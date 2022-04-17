@@ -68,6 +68,9 @@ nmap <BS> 15h
 nmap <S-Down> <Nop>
 nmap <S-Up> <Nop>
 
+" ctrl-q for visual-block is annoying
+nmap <C-q> <Nop>
+
 nmap <leader>h :noh<CR>
 nmap <leader>m :marks<CR>
 "nmap <C-S-g> gg=G
@@ -247,7 +250,11 @@ autocmd BufRead,BufNewFile *.php set nocursorline   " by extension filename
 "match OverLength /\%130v.\+/
 
 
-" Let vim open at last position
+" Forcing vimdiff to wrap lines
+au VimEnter * if &diff | execute 'windo set wrap' | endif
+
+
+" Let vim open at previously leaving position
 if has("autocmd")
   au BufReadPost * if line("'\"") > 0 && line("'\"") <= line("$")
     \| exe "normal! g'\"" | endif

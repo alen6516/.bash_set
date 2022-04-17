@@ -42,6 +42,12 @@ function ipinfo()
     fi
 }
 
+# check it input ip is a remote ip to me
+is_remote_ip()
+{
+   ip route get $1 | grep -q "via $(ip route | awk '/default/ {print $3}') " && echo yes || echo no
+}
+
 function ppid() 
 {
     var=1234
@@ -84,7 +90,7 @@ function rm()
 
 function rrm()
 {
-    command rm -I $@    
+    sudo rm -I $@    
 }
 
 
@@ -318,6 +324,7 @@ function vv()   # `vv | git show HEAD` => `git show HEAD | vim -`
         fi
     fi
 }
+alias csd="gtags-cscope -dp6"
 
 ## tool
 alias port='sudo netstat -antlp'
@@ -340,10 +347,16 @@ alias tmux='history -w && tmux'     # write cmd history to .bash_history before 
 alias gdb='gdb -q'
 
 ## git
+alias g="git"
 alias gs="git show"
 alias gd="git diff"
+alias gsh="git show"
+alias gco="git checkout"
+alias gsw="git switch"
 alias gln="git log -3"
 alias glln="git log -3 --oneline"
+alias gbr="git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/\1/'"
+
 function gl()
 {
     if [[ $1 = "" ]]; then
@@ -368,3 +381,5 @@ function gll()
         command_not_found_handle ${FUNCNAME[0]} $1
     fi
 }
+
+source ~/.bash_company.sh
