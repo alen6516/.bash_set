@@ -1,0 +1,14 @@
+[user]
+	email = alen6516@gmail.com
+	name = alen6516
+[alias]
+    co = checkout
+    sw = switch
+    sh = show
+    br = branch
+    bm = blame
+    ci = commit
+    st = status
+    unstage = reset HEAD --
+    last = log -1 HEAD
+    hs = log --pretty='%C(yellow)%h %C(cyan)%cd %Cblue%aN%C(auto)%d %Creset%s' --date=short
