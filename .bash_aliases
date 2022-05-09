@@ -90,7 +90,7 @@ function rm()
 
 function rrm()
 {
-    sudo rm -I $@    
+    sudo rm -Ir $@    
 }
 
 
@@ -116,6 +116,15 @@ function man2()
     res=`curl -s -o /dev/null/ $URL -w %{http_code}`
     [ 200 -ne $res ] && (echo "https://wangchujiang.com/linux-command is not accessable"; return)
     w3m ${URL}c/${1} | less
+}
+
+function man3()
+{
+    local URL="http://manpages.ubuntu.com/manpages/bionic/zh_TW/man1/"
+    [ -z $1 ] && (echo "please give a command as \$1"; exit)
+    res=`curl -s -o /dev/null/ $URL -w %{http_code}`
+    [ 200 -ne $res ] && (echo "$URL is not accessable"; return)
+    w3m ${URL}${1}.1.html | less
 }
 
 
@@ -348,7 +357,6 @@ alias gdb='gdb -q'
 
 ## git
 alias g="git"
-alias gs="git show"
 alias gd="git diff"
 alias gsh="git show"
 alias gco="git checkout"
@@ -381,5 +389,20 @@ function gll()
         command_not_found_handle ${FUNCNAME[0]} $1
     fi
 }
+function glp()
+{
+    if [[ $1 = "" ]]; then
+        git log --pretty=format:"%h%x09%an%x09%ad%x09%s" HEAD
+    elif [[ $1 =~ -[0-9]+$ ]]; then
+        git log --pretty=format:"%h%x09%an%x09%ad%x09%s" $1
+    elif [[ $1 =~ ^[0-9]+$ ]]; then
+        git log --pretty=format:"%h%x09%an%x09%ad%x09%s" -$1
+    else
+        command_not_found_handle ${FUNCNAME[0]} $1
+    fi
+}
 
-source ~/.bash_company.sh
+
+if [ -f ~/.bash_company ]; then
+    . ~/.bash_company
+fi

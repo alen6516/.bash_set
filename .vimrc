@@ -65,8 +65,8 @@ nmap <BS> 15h
 " bind <BS> is tricky, because in tmux, <C-h> sends ^? to the terminal, which is <BS>
 
 "shift + arrow key is annoying
-nmap <S-Down> <Nop>
-nmap <S-Up> <Nop>
+map <S-Down> <Nop>
+map <S-Up> <Nop>
 
 " ctrl-q for visual-block is annoying
 nmap <C-q> <Nop>
