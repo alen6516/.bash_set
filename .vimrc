@@ -57,6 +57,9 @@ hi CursorLineNR term=bold cterm=bold ctermfg=yellow
 nmap <C-d> 10j
 nmap <C-u> 10k
 
+nmap <M-n> 10j
+nmap <M-u> 10k
+
 nmap <C-j> 10j
 nmap <C-k> 10k
 nmap <C-l> 20l
@@ -131,11 +134,11 @@ nnoremap <silent> # :let @/='\<<C-R>=expand("<cword>")<CR>\>'<CR>:set hls<CR>
 
 "#####################
 "# indent & unindent #
-nmap <tab> V>
-nmap <s-tab> V<
-vmap <tab> >gv
-vmap <s-tab> <gv
-imap <s-tab> <Esc>V<i
+"nmap <tab> V>
+"nmap <s-tab> V<
+"vmap <tab> >gv
+"vmap <s-tab> <gv
+"imap <s-tab> <Esc>V<i
 
 "###############
 "#### color ####
