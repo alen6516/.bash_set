@@ -398,3 +398,16 @@ function! GotoJump()
   endif
 endfunction
 map <leader>j :call GotoJump() <CR>
+
+
+" -- git command on current file
+fun! GitCommand(command)
+  silent! !clear
+  exec "!git " . a:command . " %"
+endfun
+" -- git diff for current file
+"map <leader>d :call GitCommand("diff") <CR>
+" -- git log for current file
+"map <leader>l :call GitCommand("log -p") <CR>
+" -- git blame for current file
+map <leader>b :call GitCommand("blame") <CR>

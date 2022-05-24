@@ -368,7 +368,7 @@ alias gbr="git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/\1/'"
 function gl()
 {
     if [[ $1 = "" ]]; then
-        git log HEAD
+        git log
     elif [[ $1 =~ -[0-9]+$ ]]; then
         git log $1
     elif [[ $1 =~ ^[0-9]+$ ]]; then
@@ -380,7 +380,7 @@ function gl()
 function gll()
 {
     if [[ $1 = "" ]]; then
-        git log --oneline HEAD
+        git log --oneline
     elif [[ $1 =~ -[0-9]+$ ]]; then
         git log --oneline $1
     elif [[ $1 =~ ^[0-9]+$ ]]; then
@@ -392,7 +392,7 @@ function gll()
 function glp()
 {
     if [[ $1 = "" ]]; then
-        git log --pretty=format:"%h%x09%an%x09%ad%x09%s" HEAD
+        git log --pretty=format:"%h%x09%an%x09%ad%x09%s"
     elif [[ $1 =~ -[0-9]+$ ]]; then
         git log --pretty=format:"%h%x09%an%x09%ad%x09%s" $1
     elif [[ $1 =~ ^[0-9]+$ ]]; then
