@@ -333,7 +333,8 @@ function vv()   # `vv | git show HEAD` => `git show HEAD | vim -`
         fi
     fi
 }
-alias csd="gtags-cscope -dp6"
+alias csd="cscope -dp6"
+alias csr="cscope -R -q -k"
 
 ## tool
 alias port='sudo netstat -antlp'
@@ -359,6 +360,7 @@ alias gdb='gdb -q'
 alias g="git"
 alias gd="git diff"
 alias gsh="git show"
+alias gst="git status"
 alias gco="git checkout"
 alias gsw="git switch"
 alias gln="git log -3"

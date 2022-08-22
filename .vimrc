@@ -1,8 +1,17 @@
-
 set nocompatible
 filetype plugin on
 "source ~/.vim_plug
-source ~/.cscope_maps.vim
+
+set cscopetag               "enable commands(:tags, ctrl-]) in cscope database
+					        "no need, already in the plugin gtags-cscope.vim
+
+"set cscopeprg=gtags-cscope 	"tell vim use gtags-cscope as cscope
+
+"cs add GTAGS                "let cs command can read GTAGS file, don't
+
+cs add cscope.out
+"source ~/.cscope_maps.vim   "map cs command to short-cut
+
 
 set bg=dark
 set nu
@@ -265,13 +274,14 @@ endif
 
 
 " auto change tab's name when using tmux/screen
-if &term == "screen" || &term == "xterm"
-    let &titleold="bash"
-    let &titlestring="vim " . expand("%:t")
-    set t_ts=k
-	set t_fs=\
-	set title
-endif
+" !! this block may cause line to overlap !! disable for now
+"if &term == "screen" || &term == "xterm"
+"    let &titleold="bash"
+"    let &titlestring="vim " . expand("%:t")
+"    set t_ts=k
+"    set t_fs=\
+"    set title
+"endif
 
 
 " show current function name in C program
@@ -290,7 +300,7 @@ map <leader>f :call ShowFuncName() <CR>
 " Must change input method to English then can jump
 
 " change vim's work dir to the dir of the file, note some plugin may break
-set autochdir
+"set autochdir
 
 " set tags, the final ';' is important, it allows ctag to recursively search parent dir from current work dir
 " ./tags means search from vim's current working dir
@@ -399,11 +409,10 @@ function! GotoJump()
 endfunction
 map <leader>j :call GotoJump() <CR>
 
-
 " -- git command on current file
 fun! GitCommand(command)
   silent! !clear
-  exec "!git " . a:command . " %"
+  exec "!git " . a:command . " % | vim +" . line(".") . " -"
 endfun
 " -- git diff for current file
 "map <leader>d :call GitCommand("diff") <CR>
