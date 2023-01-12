@@ -1,3 +1,29 @@
+# allow tmux to use 256 color
+export TERM="xterm-256color"
+
+# add timestamp for history
+export HISTTIMEFORMAT='%F %T '
+
+# diable terminal freeze
+stty -ixon
+
+# Less Colors for Man Pages
+export PAGER="less"
+export LESS_TERMCAP_mb=$'\E[01;31m'       # begin blinking
+export LESS_TERMCAP_md=$'\E[01;38;5;74m'  # begin bold
+export LESS_TERMCAP_me=$'\E[0m'           # end mode
+export LESS_TERMCAP_se=$'\E[0m'           # end standout-mode
+export LESS_TERMCAP_so=$'\E[38;5;246m'    # begin standout-mode - info box
+export LESS_TERMCAP_ue=$'\E[0m'           # end underline
+export LESS_TERMCAP_us=$'\E[04;38;5;146m' # begin underline
+
+export EDITOR=vim
+
+parse_git_branch() {
+    git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/ (\1)/'
+}
+export PS1="\[\e]0;\u@\h: \w\a\]${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[33m\]\$(parse_git_branch)\[\033[00m\]\$ "
+
 # ls | grep
 function lsg()
 {
@@ -5,7 +31,7 @@ function lsg()
     if [ $# -gt 0 ]; then
         for var in $@
         do
-            cmd=$cmd" | grep $var"
+            cmd=$cmd" | grep -i $var"
         done
     fi
 
@@ -91,6 +117,17 @@ function rm()
 function rrm()
 {
     sudo rm -Ir $@    
+}
+
+function swap()
+{
+    if [[ $# != 2 ]]; then
+        echo "please give \$1 and \$2"
+        return
+    fi
+    mv $1 /tmp/__swap
+    mv $2 $1
+    mv /tmp/__swap $2
 }
 
 
@@ -334,11 +371,15 @@ function vv()   # `vv | git show HEAD` => `git show HEAD | vim -`
     fi
 }
 alias csd="cscope -dp6"
-alias csr="cscope -R -q -k"
+alias csr="cscope -R -q -k -p6"
 
 ## tool
 alias port='sudo netstat -antlp'
 alias ptt='ssh bbsu@ptt.cc'
+
+#cat /proc/sys/kernel/sysrq, and if it is 1 or bit 0x80 is on,
+#we can forcely reboot OS if at least 1 cpu is not hanging
+alias _reboot="$ echo b | sudo tee /proc/sysrq-trigger"
 
 #引號裡要打引號前要先用\跳脫，但是也不能直接打 \，否則會被 awk 解析，要打 '\'
 alias cpu_load='ps -aux|awk '\''BEGIN{ sum=0} {sum=sum+$3} END{print sum}'\'''
@@ -370,7 +411,7 @@ alias gbr="git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/\1/'"
 function gl()
 {
     if [[ $1 = "" ]]; then
-        git log
+        git log HEAD
     elif [[ $1 =~ -[0-9]+$ ]]; then
         git log $1
     elif [[ $1 =~ ^[0-9]+$ ]]; then
@@ -382,7 +423,7 @@ function gl()
 function gll()
 {
     if [[ $1 = "" ]]; then
-        git log --oneline
+        git log --oneline HEAD
     elif [[ $1 =~ -[0-9]+$ ]]; then
         git log --oneline $1
     elif [[ $1 =~ ^[0-9]+$ ]]; then
@@ -394,7 +435,7 @@ function gll()
 function glp()
 {
     if [[ $1 = "" ]]; then
-        git log --pretty=format:"%h%x09%an%x09%ad%x09%s"
+        git log --pretty=format:"%h%x09%an%x09%ad%x09%s" HEAD
     elif [[ $1 =~ -[0-9]+$ ]]; then
         git log --pretty=format:"%h%x09%an%x09%ad%x09%s" $1
     elif [[ $1 =~ ^[0-9]+$ ]]; then

@@ -4,13 +4,10 @@ filetype plugin on
 
 set cscopetag               "enable commands(:tags, ctrl-]) in cscope database
 					        "no need, already in the plugin gtags-cscope.vim
-
 "set cscopeprg=gtags-cscope 	"tell vim use gtags-cscope as cscope
-
 "cs add GTAGS                "let cs command can read GTAGS file, don't
-
 cs add cscope.out
-"source ~/.cscope_maps.vim   "map cs command to short-cut
+source ~/.cscope_maps.vim   "map cs command to short-cut
 
 
 set bg=dark
@@ -66,9 +63,6 @@ hi CursorLineNR term=bold cterm=bold ctermfg=yellow
 nmap <C-d> 10j
 nmap <C-u> 10k
 
-nmap <M-n> 10j
-nmap <M-u> 10k
-
 nmap <C-j> 10j
 nmap <C-k> 10k
 nmap <C-l> 20l
@@ -93,7 +87,8 @@ map <leader>F :echo expand('%:p') <CR>
 " convenient
 
 " quick quit
-nmap qqqqq :q!<cr>
+nmap qqq :q!<cr>
+nmap <leader>qq :q!<cr>
 
 " window switching
 "nmap <leader>w<Right> <C-w><Right>
@@ -164,8 +159,8 @@ hi Search guibg=Yellow guifg=Black ctermbg=Yellow ctermfg=Black
 syn match markdownError "\w\@<=\w\@="
 
 "##### set the style of status line ####
-"set laststatus=2    " turn on the status line of vim, set 1 to turn 0ff
-"set statusline=%#filepath#[%{expand('%:p')}]%#filetype#[%{strlen(&fenc)?&fenc:&enc},\ %{&ff},\ %{strlen(&filetype)?&filetype:'plain'}]%#filesize#%{FileSize()}%{IsBinary()}%=%#position#%c,%l/%L\ [%3p%%]
+set laststatus=2    " turn on the status line of vim, set 1 to turn 0ff
+set statusline=%#filepath#[%{expand('%:p')}]%#filetype#[%{strlen(&fenc)?&fenc:&enc},\ %{&ff},\ %{strlen(&filetype)?&filetype:'plain'}]%#filesize#%{FileSize()}%{IsBinary()}%=%#position#%c,%l/%L\ [%3p%%]
 
 hi filepath cterm=none ctermbg=238 ctermfg=40
 hi filetype cterm=none ctermbg=238 ctermfg=45
@@ -416,7 +411,12 @@ fun! GitCommand(command)
 endfun
 " -- git diff for current file
 "map <leader>d :call GitCommand("diff") <CR>
+
 " -- git log for current file
 "map <leader>l :call GitCommand("log -p") <CR>
+
 " -- git blame for current file
 map <leader>b :call GitCommand("blame") <CR>
+
+" -- git show the word under cursor as the commit id
+map <leader>s :!git show <cWORD> \| vim - <CR>
