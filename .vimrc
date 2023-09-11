@@ -17,8 +17,10 @@ set incsearch       " jump to the searching pattern while still typing
 set ic              " ignore the case of searching pattern
 set ai              " auto indent
 set scrolloff=3     " preserve several lines when scrolling
+set cindent         " cindent can identify C and Java and do intent
 set tabstop=4       " the definition for a tab of vim
 set shiftwidth=4    " the width of auto indent
+"set softtabstop=8  " the width of indent should appear; tabstop is the width
 set expandtab       " expand a tab as several spaces, for original tab, use :retab or :%s/^I/    /gc
 "set mouse=a        " allow using mouse to move the cursor
 set encoding=utf-8
@@ -33,7 +35,7 @@ let b:match_ignorecase = 1 				" ignore the case of the pattern
 set foldenable     		" enable fold mode
 set foldmethod=manual 	" zz to create; zo to open; zc to close
 " fold command under visual mode:
-" 	zf 	 - create
+" 	zf   - create
 " 	za   - toggle fold
 " 	zo   - open fold
 " 	zc   - close fold
@@ -76,6 +78,9 @@ map <S-Up> <Nop>
 
 " ctrl-q for visual-block is annoying
 nmap <C-q> <Nop>
+
+" shift-tab maps to 4 spaces in insert mode
+inoremap <S-Tab> <Space><Space><Space><Space>
 
 nmap <leader>h :noh<CR>
 nmap <leader>m :marks<CR>
@@ -257,6 +262,16 @@ autocmd BufRead,BufNewFile *.php set nocursorline   " by extension filename
 "match OverLength /\%130v.\+/
 
 
+" highlight trailing whitespace
+highlight ExtraWhitespace ctermbg=red guibg=red
+autocmd ColorScheme * highlight ExtraWhitespace ctermbg=red guibg=red
+"match ExtraWhitespace /\S\zs\s\+$/
+autocmd BufWinEnter * match ExtraWhitespace /\S\zs\s\+$/
+autocmd InsertEnter * match ExtraWhitespace /\s\+\%#\@<!$/
+autocmd InsertLeave * match ExtraWhitespace /\S\zs\s\+$/
+autocmd BufWinLeave * call clearmatches()
+
+
 " Forcing vimdiff to wrap lines
 au VimEnter * if &diff | execute 'windo set wrap' | endif
 
@@ -403,6 +418,21 @@ function! GotoJump()
   endif
 endfunction
 map <leader>j :call GotoJump() <CR>
+
+
+" Toggle set an 80 column border for good coding style
+let g:flag_cc = 0
+fun! ToggleCC()
+        if g:flag_cc
+                :set cc=0
+                let g:flag_cc = 0
+        else
+                let g:flag_cc = 1
+                :set cc=80
+        endif
+endfun
+map <leader>c :call ToggleCC() <CR>
+
 
 " -- git command on current file
 fun! GitCommand(command)

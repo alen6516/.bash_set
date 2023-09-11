@@ -17,13 +17,13 @@ declare -A FILE=(                           \
 CURR_PATH=`pwd`
 SCRIPT=`realpath $0`
 SCRIPT_PATH=`dirname $SCRIPT`
+DIR_NAME=".bash_set"
 DATE=`date +"%Y%m%d"`
 
 RET=0
 JOB=""
 
-DIR_NAME=".bash_set"
-LOG_PATH="${SCRIPT_PATH}/bash_set.log"
+LOG_PATH="${SCRIPT_PATH}/_backup/bash_set.log"
 DEBUG_MODE=1
 
 ######################### tools
@@ -85,8 +85,8 @@ backup() {
     for file in ${FILE[@]}
     do
         if [ -e $HOME/$file ]; then
-            JOB="backup $HOME/$file to $HOME/${file}_$DATE"
-            mv -i $HOME/$file $HOME/${file}_$DATE
+            JOB="backup $HOME/$file to $SCRIPT_PATH/_backup/${file}_$DATE"
+            mv --backup $HOME/$file $SCRIPT_PATH/_backup/${file}_$DATE
             _result 
         fi
     done

@@ -1,6 +1,8 @@
 [user]
-	email = alen6516@gmail.com
-	name = alen6516
+	#email = alen6516@gmail.com
+	#name = alen6516
+    email = HaoPing.Liu@amd.com
+    name = Alan Liu
 [alias]
     co = checkout
     sw = switch
@@ -14,3 +16,7 @@
     hs = log --pretty='%C(yellow)%h %C(cyan)%cd %Cblue%aN%C(auto)%d %Creset%s' --date=short
 [pull]
 	rebase = true
+[commit]
+	verbose = true
+[url "ssh://gerritgitmaster/"]
+	pushInsteadOf = ssh://gerritgit/

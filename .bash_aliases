@@ -19,6 +19,10 @@ export LESS_TERMCAP_us=$'\E[04;38;5;146m' # begin underline
 
 export EDITOR=vim
 
+#bind 'set show-all-if-ambiguous on'
+#bind 'TAB:menu-complete'
+
+
 parse_git_branch() {
     git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/ (\1)/'
 }
@@ -68,13 +72,13 @@ function ipinfo()
     fi
 }
 
-# check it input ip is a remote ip to me
+# check if input ip is a remote ip to me
 is_remote_ip()
 {
    ip route get $1 | grep -q "via $(ip route | awk '/default/ {print $3}') " && echo yes || echo no
 }
 
-function ppid() 
+function ppid()
 {
     var=1234
     ps -o ppid= -p $var
@@ -109,25 +113,31 @@ trash_can="/tmp/recycle_bin"
 function rm()
 {
     [ -d $trash_can ] || mkdir $trash_can
-    command mv $@ $trash_can
+    command mv --backup $@ $trash_can &&
     echo "moving $@ to $trash_can"
 }
 
 
 function rrm()
 {
-    sudo rm -Ir $@    
+    sudo rm -Ir $@
 }
 
 function swap()
 {
-    if [[ $# != 2 ]]; then
-        echo "please give \$1 and \$2"
-        return
+    if [[ $1 = "" || ! -e $1 ]]; then
+        echo "Please give valid \$1"
+        return 1
     fi
-    mv $1 /tmp/__swap
-    mv $2 $1
-    mv /tmp/__swap $2
+    if [[ $2 = "" || ! -e $2 ]]; then
+        echo "Please give valid \$2"
+        return 1
+    fi
+
+    echo "swap file name of $1 and $2"
+    command mv $1 /tmp/$1_swap
+    command mv $2 $1
+    command mv /tmp/$1_swap $2
 }
 
 
@@ -144,6 +154,26 @@ function cd()
     fi
 }
 
+# cd to specific dirctory in current path
+function cdc()
+{
+    if [[ -z $1 ]]; then
+        echo "Please give \$1"
+        return -1
+    fi
+
+    if [[ "$PWD" != *"$1"* ]]; then
+        echo "Current path doesn't contain $1"
+        return -1
+    fi
+
+    head=${PWD%$1*}
+    tail=${PWD##*$1}
+    tail=${tail%%/*}
+    #echo ${head}${1}${tail}
+
+    cd ${head}${1}${tail}
+}
 
 function man2()
 {
@@ -347,12 +377,14 @@ complete -F _completion doc
 alias tmp='cd ~/vm_share/tmp'
 alias _ba='cd ~/.bash_set'
 alias ..='cd ..'
-alias py='python'
-alias py3='python3'
+#alias py='python'
+#alias py3='python3'
 alias od='objdump'
 alias rlf='readlink -f'
 alias tcpread='tcpdump -r'
 alias v-="vim -"
+alias cmd="command"
+alias lsr="ls -r"
 function vv()   # `vv | git show HEAD` => `git show HEAD | vim -`
 {
     # not test yet
@@ -370,6 +402,8 @@ function vv()   # `vv | git show HEAD` => `git show HEAD | vim -`
         fi
     fi
 }
+
+## cscope
 alias csd="cscope -dp6"
 alias csr="cscope -R -q -k -p6"
 
@@ -379,7 +413,8 @@ alias ptt='ssh bbsu@ptt.cc'
 
 #cat /proc/sys/kernel/sysrq, and if it is 1 or bit 0x80 is on,
 #we can forcely reboot OS if at least 1 cpu is not hanging
-alias _reboot="$ echo b | sudo tee /proc/sysrq-trigger"
+alias _reboot="echo b | sudo tee /proc/sysrq-trigger"
+wdmesg() { echo "alan: $*" | sudo tee /dev/kmsg; }
 
 #引號裡要打引號前要先用\跳脫，但是也不能直接打 \，否則會被 awk 解析，要打 '\'
 alias cpu_load='ps -aux|awk '\''BEGIN{ sum=0} {sum=sum+$3} END{print sum}'\'''
@@ -408,6 +443,7 @@ alias gln="git log -3"
 alias glln="git log -3 --oneline"
 alias gbr="git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/\1/'"
 
+# git log
 function gl()
 {
     if [[ $1 = "" ]]; then
@@ -420,6 +456,8 @@ function gl()
         command_not_found_handle ${FUNCNAME[0]} $1
     fi
 }
+
+# git log oneline
 function gll()
 {
     if [[ $1 = "" ]]; then
@@ -429,9 +467,12 @@ function gll()
     elif [[ $1 =~ ^[0-9]+$ ]]; then
         git log --oneline -$1
     else
-        command_not_found_handle ${FUNCNAME[0]} $1
+        #command_not_found_handle ${FUNCNAME[0]} $1
+        git log --oneline $*
     fi
 }
+
+# git log pretty
 function glp()
 {
     if [[ $1 = "" ]]; then
@@ -444,7 +485,6 @@ function glp()
         command_not_found_handle ${FUNCNAME[0]} $1
     fi
 }
-
 
 if [ -f ~/.bash_company ]; then
     . ~/.bash_company
