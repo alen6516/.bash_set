@@ -17,13 +17,14 @@ declare -A FILE=(                           \
 CURR_PATH=`pwd`
 SCRIPT=`realpath $0`
 SCRIPT_PATH=`dirname $SCRIPT`
+BACKUP_PATH="${SCRIPT_PATH}/_backup"
 DIR_NAME=".bash_set"
 DATE=`date +"%Y%m%d"`
 
 RET=0
 JOB=""
 
-LOG_PATH="${SCRIPT_PATH}/_backup/bash_set.log"
+LOG="${BACKUP_PATH}/bash_set.log"
 DEBUG_MODE=1
 
 ######################### tools
@@ -45,10 +46,10 @@ _error() {
 _result() {
     if [ $? -eq 0 ]; then
         #_msg "\33[32m[✔]\33[0m $JOB"
-        echo "\\\33[32m[✔]\\\33[0m $JOB" >> $LOG_PATH
+        echo "\\\33[32m[✔]\\\33[0m $JOB" >> $LOG
     else
         #_msg "\33[31m[✘]\33[0m $JOB"
-        echo "\\\33[31m[✘]\\\33[0m $JOB" >> $LOG_PATH
+        echo "\\\33[31m[✘]\\\33[0m $JOB" >> $LOG
         show_log
         echo "installation fail due to an error..."
         exit 1
@@ -65,7 +66,8 @@ _debug() {
 
 init() {
 
-    echo "" > $LOG_PATH
+    mkdir -p $BACKUP_PATH
+    echo "" > $LOG
 }
 
 check_env() {
@@ -174,8 +176,8 @@ setup_vim_plug() {
 }
 
 show_log() {
-    _msg "log is save in $LOG_PATH and show below"
-    exec < $LOG_PATH
+    _msg "log is save in $LOG and show below"
+    exec < $LOG
     while read line
     do
         _msg $line
@@ -197,9 +199,9 @@ backup
 
 build_link
 
-install_pkg
+#install_pkg
 
-setup_vim_plug
+#setup_vim_plug
 
 show_log
 
