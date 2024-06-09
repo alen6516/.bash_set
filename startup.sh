@@ -11,6 +11,7 @@ declare -A FILE=(                           \
     [".tmux.conf"]=".tmux.conf"             \
     [".ctags"]=".ctags"                     \
     [".gdbinit"]=".gdbinit"                 \
+    [".gitconfig"]=".gitconfig"             \
     [".cscope_maps.vim"]=".cscope_maps.vim"  \
 )
 

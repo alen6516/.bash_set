@@ -337,7 +337,7 @@ function doc() {
     done
     if [[ $file_cmd =~ " $1 " ]]; then
         #echo "${1}.cmd"
-        cat ~/doc/cmd/${1}.cmd | less
+        vi ~/doc/cmd/${1}.cmd
         return 0
     fi
 
@@ -403,13 +403,28 @@ function vv()   # `vv | git show HEAD` => `git show HEAD | vim -`
     fi
 }
 
-## cscope
-alias csd="cscope -dp6"
+function lsha1()
+{
+    for i in `ls`;
+    do
+        sha1sum $i
+        if [[ -n $1 ]]; then
+            sha1sum $1/$i
+        fi
+    done
+}
+
+# cscope
+alias csd="[ -f cscope.out ] && cscope -dp6 || gtags-cscope -dp6"
 alias csr="cscope -R -q -k -p6"
+alias gsd="[ -f GTAGS ] && gtags-cscope -dp6"
+alias gsr="[ -f GTAGS ] && global -u || gtags"
+alias gsrr="rm GTAGS GPATH GRTAGS"
 
 ## tool
 alias port='sudo netstat -antlp'
 alias ptt='ssh bbsu@ptt.cc'
+alias NIC='lshw -class network -short | grep network | tail -1 | cut -d " " -f 7'
 
 #cat /proc/sys/kernel/sysrq, and if it is 1 or bit 0x80 is on,
 #we can forcely reboot OS if at least 1 cpu is not hanging

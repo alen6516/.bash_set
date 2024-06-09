@@ -1,8 +1,6 @@
 [user]
-	#email = alen6516@gmail.com
-	#name = alen6516
-    email = HaoPing.Liu@amd.com
-    name = Alan Liu
+	email = alen6516@gmail.com
+	name = alen6516
 [alias]
     co = checkout
     sw = switch
@@ -18,5 +16,3 @@
 	rebase = true
 [commit]
 	verbose = true
-[url "ssh://gerritgitmaster/"]
-	pushInsteadOf = ssh://gerritgit/

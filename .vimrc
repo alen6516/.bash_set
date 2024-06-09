@@ -17,7 +17,7 @@ set incsearch       " jump to the searching pattern while still typing
 set ic              " ignore the case of searching pattern
 set ai              " auto indent
 set scrolloff=3     " preserve several lines when scrolling
-set cindent         " cindent can identify C and Java and do intent
+"set cindent         " cindent can identify C and Java and do intent
 set tabstop=4       " the definition for a tab of vim
 set shiftwidth=4    " the width of auto indent
 "set softtabstop=8  " the width of indent should appear; tabstop is the width
@@ -25,11 +25,20 @@ set expandtab       " expand a tab as several spaces, for original tab, use :ret
 "set mouse=a        " allow using mouse to move the cursor
 set encoding=utf-8
 set splitright		" set split window to right-hand side
+"set shortmess+=A   " don't show swap file exist warning
 
 packadd! matchit
 runtime macros/matchit.vim			" enable vim customized pair pattern jump
 let b:match_words='\<foo\>:\<bar\>'	" let vim match 'begin' and 'end' by % (but don't know why it doesn't work in .vimrc, need to type it manually in vim)
 let b:match_ignorecase = 1 				" ignore the case of the pattern
+
+
+" Tmux auto rename window name {
+"autocmd BufEnter * call system("tmux rename-window " . expand("%:t"))
+"autocmd VimLeave * call system("tmux rename-window bash")
+"autocmd BufEnter * let &titlestring = ' ' . expand("%:t")
+"set title
+" }
 
 
 set foldenable     		" enable fold mode
