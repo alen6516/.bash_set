@@ -7,7 +7,7 @@ set cscopetag               "enable commands(:tags, ctrl-]) in cscope database
 "set cscopeprg=gtags-cscope 	"tell vim use gtags-cscope as cscope
 "cs add GTAGS                "let cs command can read GTAGS file, don't
 cs add cscope.out
-source ~/.cscope_maps.vim   "map cs command to short-cut
+"source ~/.cscope_maps.vim   "map cs command to short-cut
 
 
 set bg=dark
@@ -17,11 +17,13 @@ set incsearch       " jump to the searching pattern while still typing
 set ic              " ignore the case of searching pattern
 set ai              " auto indent
 set scrolloff=3     " preserve several lines when scrolling
-"set cindent         " cindent can identify C and Java and do intent
-set tabstop=4       " the definition for a tab of vim
+"set cindent         " cindent can identify C and Java and do intent (but not useful)
+set tabstop=4       " means the width of a tab appears to be
 set shiftwidth=4    " the width of auto indent
-"set softtabstop=8  " the width of indent should appear; tabstop is the width
-set expandtab       " expand a tab as several spaces, for original tab, use :retab or :%s/^I/    /gc
+set expandtab       " expand a new tab as several spaces, to transfer old tab, use :retab or :%s/^I/    /gc
+"set softtabstop=4  " not sure, don't use
+" set noexpandtab   " don't expand tab to spaces
+" %retab!           " recover spaces to tab, ! means to process all tabs in a line
 "set mouse=a        " allow using mouse to move the cursor
 set encoding=utf-8
 set splitright		" set split window to right-hand side
