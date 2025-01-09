@@ -2,12 +2,36 @@ set nocompatible
 filetype plugin on
 "source ~/.vim_plug
 
-set cscopetag               "enable commands(:tags, ctrl-]) in cscope database
-					        "no need, already in the plugin gtags-cscope.vim
-"set cscopeprg=gtags-cscope 	"tell vim use gtags-cscope as cscope
-"cs add GTAGS                "let cs command can read GTAGS file, don't
-cs add cscope.out
-"source ~/.cscope_maps.vim   "map cs command to short-cut
+" Enable commands(:tags, ctrl-]) in cscope database; needed even with plugin gtags-cscope.vim
+set cscopetag
+
+" Tell vim to use gtags-cscope as cscope
+set cscopeprg='gtags-cscope'
+
+" For using ^] ^t in gtags-cscope (need to install ctags?)
+if findfile("GTAGS", ".;")
+    cs add GTAGS
+
+" For using ^] ^t in cscope
+elseif findfile("cscope.out", ".;")
+    cs add cscope.out
+
+    " Map cs command to ctrl-\ short-cut; no need if using gtags-cscope
+    source ~/.cscope_maps.vim
+endif
+
+" Let cs command can read GTAGS file, don't use `cs add cscope.out
+"cs add GTAGS
+
+"set tags=./tags,./TAGS,tags;~,TAGS;~
+
+
+" variables use by gtags.vim plugin
+let GtagsCscope_Auto_Load = 1   " needed if want to use <C-]>
+let CtagsCscope_Auto_Map = 1
+let GtagsCscope_Auto_Map = 1    " To use the default key/mouse mapping
+let GtagsCscope_Quiet = 1
+"let GtagsCscope_Ignore_Case = 1        " To ignore letter case when searching
 
 
 set bg=dark

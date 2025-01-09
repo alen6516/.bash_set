@@ -194,6 +194,10 @@ function man3()
     w3m ${URL}${1}.1.html | less
 }
 
+function rcsv()
+{
+    column -s, -t < $1 | vi -c "set nowrap" -
+}
 
 # inner funtion for auto completion
 function _completion() {
