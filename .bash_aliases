@@ -378,6 +378,7 @@ complete -F _completion doc
 
 
 ## for handy
+alias vi="vim"
 alias tmp='cd ~/vm_share/tmp'
 alias _ba='cd ~/.bash_set'
 alias ..='cd ..'
@@ -389,6 +390,10 @@ alias tcpread='tcpdump -r'
 alias v-="vim -"
 alias cmd="command"
 alias lsr="ls -r"
+alias lst="ls -lt"
+alias lss="ls -lS"
+alias up_initramfs="sudo update-initramfs -u -k all"
+alias untar="tar xvf"
 function vv()   # `vv | git show HEAD` => `git show HEAD | vim -`
 {
     # not test yet
