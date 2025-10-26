@@ -1,3 +1,4 @@
+syntax on
 set nocompatible
 filetype plugin on
 "source ~/.vim_plug
@@ -7,23 +8,49 @@ set cscopetag
 
 " Tell vim to use gtags-cscope as cscope
 set cscopeprg='gtags-cscope'
+" For using ^] ^t in gtags-cscope (no need to install ctags), no need if source .cscope_maps.vim
+cs add GTAGS
+" Map cs command to ctrl-\ short-cut
+source ~/.cscope_maps.vim
 
-" For using ^] ^t in gtags-cscope (need to install ctags?)
-if findfile("GTAGS", ".;")
-    cs add GTAGS
+"" For using ^] ^t in cscope
+"cs add cscope.out
 
-" For using ^] ^t in cscope
-elseif findfile("cscope.out", ".;")
-    cs add cscope.out
+"## following logic should work, but not {
+"" For using ^] ^t in gtags-cscope (no need to install ctags)
+"if findfile("GTAGS", ".;")
+"    cs add GTAGS
+"
+"" For using ^] ^t in cscope
+"elseif findfile("cscope.out", ".;")
+"    cs add cscope.out
+"
+"endif
+"## }
 
-    " Map cs command to ctrl-\ short-cut; no need if using gtags-cscope
-    source ~/.cscope_maps.vim
-endif
 
-" Let cs command can read GTAGS file, don't use `cs add cscope.out
-"cs add GTAGS
-
+"## no need {
 "set tags=./tags,./TAGS,tags;~,TAGS;~
+
+"#########################################
+" config for ctags
+"#########################################
+
+" Must change input method to English then can jump
+
+" change vim's work dir to the dir of the file, note some plugin may break
+"set autochdir
+
+" set tags, the final ';' is important, it allows ctag to recursively search parent dir from current work dir
+" ./tags means search from vim's current working dir
+" note if not set autochdir, vim's working dir is user's current path
+"set tags=./.tags,./tags;
+
+" still try to move tags to .git
+"let tags_path=findfile(".git/tags", ";")
+"let &tags=tags_path
+"#########################################
+"## }
 
 
 " variables use by gtags.vim plugin
@@ -60,10 +87,10 @@ let b:match_ignorecase = 1 				" ignore the case of the pattern
 
 
 " Tmux auto rename window name {
-"autocmd BufEnter * call system("tmux rename-window " . expand("%:t"))
-"autocmd VimLeave * call system("tmux rename-window bash")
-"autocmd BufEnter * let &titlestring = ' ' . expand("%:t")
-"set title
+autocmd BufEnter * call system("tmux rename-window " . expand("%:t"))
+autocmd VimLeave * call system("tmux rename-window bash")
+autocmd BufEnter * let &titlestring = ' ' . expand("%:t")
+set title
 " }
 
 
@@ -338,26 +365,6 @@ endfun
 map <leader>f :call ShowFuncName() <CR>
 
 
-"#########################################
-" config for ctags
-"#########################################
-
-" Must change input method to English then can jump
-
-" change vim's work dir to the dir of the file, note some plugin may break
-"set autochdir
-
-" set tags, the final ';' is important, it allows ctag to recursively search parent dir from current work dir
-" ./tags means search from vim's current working dir
-" note if not set autochdir, vim's working dir is user's current path
-set tags=./.tags,./tags;
-
-" still try to move tags to .git
-"let tags_path=findfile(".git/tags", ";")
-"let &tags=tags_path
-"#########################################
-
-
 " Just a example
 let g:flag_open_pane = 0
 fun! TogglePane()
@@ -483,5 +490,5 @@ endfun
 " -- git blame for current file
 map <leader>b :call GitCommand("blame") <CR>
 
-" -- git show the word under cursor as the commit id
+" git show the word under cursor as the commit id
 map <leader>s :!git show <cWORD> \| vim - <CR>

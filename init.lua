@@ -20,7 +20,7 @@
     --opt.smartindent = true          -- autoindent new lines
 
     -- Wrapping & scrolling
-    opt.wrap = false                -- disable line wrap
+    opt.wrap = true                 -- allow line wrap
     opt.scrolloff = 8               -- keep cursor 8 lines from screen edge
 
     -- Search

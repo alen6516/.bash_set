@@ -18,6 +18,7 @@ export LESS_TERMCAP_ue=$'\E[0m'           # end underline
 export LESS_TERMCAP_us=$'\E[04;38;5;146m' # begin underline
 
 export EDITOR=vim
+export CSCOPE_EDITOR=vim
 
 #bind 'set show-all-if-ambiguous on'
 #bind 'TAB:menu-complete'
@@ -31,17 +32,20 @@ export PS1="\[\e]0;\u@\h: \w\a\]${debian_chroot:+($debian_chroot)}\[\033[01;32m\
 # ls | grep
 function lsg()
 {
-    local cmd="ls -a"
-    if [ $# -gt 0 ]; then
+    if [ $# -eq 1 ]; then
+        ls -ad *$1* 2>/dev/null     # ls -a *123*321*
+    elif [ $# -gt 1 ]; then         # ls -a | grep -i '123\|321'
+        local cmd="ls -a | grep -i '$1"
+        shift
         for var in $@
         do
-            cmd=$cmd" | grep -i $var"
+            cmd="$cmd\\|$var"
         done
+        cmd="$cmd'"
+        echo "$cmd"
+        echo "---------------"
+        eval $cmd
     fi
-
-    echo "$cmd"
-    echo "---------------"
-    eval $cmd
 }
 
 
@@ -341,7 +345,7 @@ function doc() {
     done
     if [[ $file_cmd =~ " $1 " ]]; then
         #echo "${1}.cmd"
-        vi ~/doc/cmd/${1}.cmd
+        $EDITOR ~/doc/cmd/${1}.cmd
         return 0
     fi
 
@@ -390,8 +394,8 @@ alias tcpread='tcpdump -r'
 alias v-="vim -"
 alias cmd="command"
 alias lsr="ls -r"
-alias lst="ls -lt"
-alias lss="ls -lS"
+alias lst="ls -ltr"
+alias lss="ls -lSrh"
 alias up_initramfs="sudo update-initramfs -u -k all"
 alias untar="tar xvf"
 function vv()   # `vv | git show HEAD` => `git show HEAD | vim -`
@@ -423,9 +427,16 @@ function lsha1()
     done
 }
 
+function findi()
+{
+    find ./ -iname "*$1*"
+}
+
+
 # cscope
 alias csd="[ -f cscope.out ] && cscope -dp6 || gtags-cscope -dp6"
 alias csr="cscope -R -q -k -p6"
+alias csrr="rm cscope.in.out cscope.out cscope.po.out"
 alias gsd="[ -f GTAGS ] && gtags-cscope -dp6"
 alias gsr="[ -f GTAGS ] && global -u || gtags"
 alias gsrr="rm GTAGS GPATH GRTAGS"
@@ -438,7 +449,7 @@ alias NIC='lshw -class network -short | grep network | tail -1 | cut -d " " -f 7
 #cat /proc/sys/kernel/sysrq, and if it is 1 or bit 0x80 is on,
 #we can forcely reboot OS if at least 1 cpu is not hanging
 alias _reboot="echo b | sudo tee /proc/sysrq-trigger"
-wdmesg() { echo "alan: $*" | sudo tee /dev/kmsg; }
+wdmesg() { echo alan: $1 | sudo tee /dev/kmsg; }
 
 #引號裡要打引號前要先用\跳脫，但是也不能直接打 \，否則會被 awk 解析，要打 '\'
 alias cpu_load='ps -aux|awk '\''BEGIN{ sum=0} {sum=sum+$3} END{print sum}'\'''
@@ -459,9 +470,9 @@ alias gdb='gdb -q'
 ## git
 alias g="git"
 alias gd="git diff"
-alias gsh="git show"
 alias gst="git status"
-alias gco="git checkout"
+alias gsh="git show"
+#alias gco="git checkout"
 alias gsw="git switch"
 alias gln="git log -3"
 alias glln="git log -3 --oneline"
@@ -508,6 +519,20 @@ function glp()
     else
         command_not_found_handle ${FUNCNAME[0]} $1
     fi
+}
+
+function gco()
+{
+    if [[ -n $1 ]]; then
+        git checkout $1
+	return
+    fi
+
+    git branch | awk '{ printf NR ": %s\n",$0}'
+    read -p "select the number to set: " op
+    branch=`git br | awk "NR==${op}{ print; }" | cut -c 3-`
+    echo "git checkout $branch"
+    git co $branch
 }
 
 if [ -f ~/.bash_company ]; then

@@ -3,16 +3,16 @@
 ######################### set up variables
 
 declare -A FILE=(                           \
-    [".vim"]=".vim"                         \
     [".vimrc"]=".vimrc"                     \
-    [".vim_plug"]=".vim_plug"               \
     [".bashrc"]=".bashrc"                   \
     [".bash_aliases"]=".bash_aliases"       \
     [".tmux.conf"]=".tmux.conf"             \
-    [".ctags"]=".ctags"                     \
-    [".gdbinit"]=".gdbinit"                 \
     [".gitconfig"]=".gitconfig"             \
     [".cscope_maps.vim"]=".cscope_maps.vim"  \
+    #[".vim"]=".vim"                         \
+    #[".vim_plug"]=".vim_plug"               \
+    #[".ctags"]=".ctags"                     \
+    #[".gdbinit"]=".gdbinit"                 \
 )
 
 CURR_PATH=`pwd`
@@ -74,28 +74,50 @@ init() {
 check_env() {
 
     JOB="check if \$HOME is set"
-    [ -n $HOME ] 
-    _result 
+    [ -n $HOME ]
+    _result
+
+    JOB="check distro"
+    local os_release=$(cat /etc/os-release)
+    case "$os_release" in
+    *ubuntu*)
+        PKG_TOOL="apt"
+        ;;
+    *debian*)
+        PKG_TOOL="apt"
+        ;;
+    *manjaro*)
+        PKG_TOOL="pacman"
+        ;;
+    *arch*)
+        PKG_TOOL="pacman"
+        ;;
+    *)
+        ;;
+    esac
+    echo "Distro is $DISTRO"
 
     JOB="check if internet is accessable"
     #ping -w 1 -q -c 1 `ip r | grep "default" | head -1 |cut -d ' ' -f 3` > /dev/null
     ping -w 1 -c1 8.8.8.8 > /dev/null
-    _result 
+    _result
 
 }
 
-backup() {
+backup()
+{
     for file in ${FILE[@]}
     do
         if [ -e $HOME/$file ]; then
             JOB="backup $HOME/$file to $SCRIPT_PATH/_backup/${file}_$DATE"
             mv --backup $HOME/$file $SCRIPT_PATH/_backup/${file}_$DATE
-            _result 
+            _result
         fi
     done
 }
 
-build_link() {
+build_link()
+{
     for file in ${FILE[@]}
     do
 	    if [ -f $SCRIPT_PATH/$file ]; then
@@ -106,57 +128,68 @@ build_link() {
     done
 }
 
-install_pkg() {
-
-    JOB="apt update"
-    true || sudo apt update
-    _result 
-
-    JOB="apt install vim tmux curl git openssh-server w3m bc manpages-zh"
+install_pkg()
+{
+    PKG="vim tmux curl git w3m bc global sshfs"
     # w3m: command line based web browser, for my man2 command
     # bc: command line calculater tool, for bash to calculate float val
     # manpages-zh: manpages in zh_TW, for my manc
-    sudo apt install -y vim tmux curl git openssh-server w3m bc manpages-zh
-    _result 
+    case "$PKG_TOOL" in
+    apt)
+        sudo apt update -y
+	PKG=$PKG" ssh manpages-zh"
+	sudo apt install -y $PKG
+        ;;
+    pacman)
+        sudo pacman -Sy --noconfirm
+	PKG=$PKG" openssh"
+	sudo pacman -S --noconfirm $PKG
+        ;;
+    *)
+        ;;
+    esac
+    JOB="Install $PKG"
+    _result
     
-    JOB="install vim-plug"
-    curl -fLo $HOME/.vim/autoload/plug.vim --create-dirs \
-        https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim 
-    _result 
+    #JOB="install vim-plug"
+    #curl -fLo $HOME/.vim/autoload/plug.vim --create-dirs \
+    #    https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+    #_result
 
-    JOB="install ctags"
-    sudo apt install -y exuberant-ctags 
-    _result 
+    #JOB="install ctags"
+    #sudo apt install -y exuberant-ctags
+    #_result
 
-    JOB="install cscope"
-    #sudo apt install -y cscope
-    #_result 
+    #JOB="install cscope"
+    ##sudo apt install -y cscope
+    ##_result
 
-    JOB="install YCM dependencies"
-    (( $(echo `lsb_release -rs` ">= 16.04" | bc -l) )) && (sudo apt install -y build-essential cmake python3-dev) || (sudo apt install -y build-essential cmake3 python3-dev)
-    _result
+    #JOB="install YCM dependencies"
+    #(( $(echo `lsb_release -rs` ">= 16.04" | bc -l) )) && (sudo apt install -y build-essential cmake python3-dev) || (sudo apt install -y build-essential cmake3 python3-dev)
+    #_result
 
-    # let systastic to suppport python
-    JOB="install pylint"
-    sudo apt install -y pylint 
-    _result 
+    ## let systastic to suppport python
+    #JOB="install pylint"
+    #sudo apt install -y pylint
+    #_result
 
-    #install vim-autopep8"
-    JOB="install python3-pip"
-    sudo apt install -y python3-pip
-    _result 
+    ##install vim-autopep8"
+    #JOB="install python3-pip"
+    #sudo apt install -y python3-pip
+    #_result
 
-    JOB="upgrade pip"
-    sudo pip3 install --upgrade pip
-    _result
+    #JOB="upgrade pip"
+    #sudo pip3 install --upgrade pip
+    #_result
 
-    JOB="install autopep8"
-    sudo pip3 install --upgrade autopep8
-    _result 
+    #JOB="install autopep8"
+    #sudo pip3 install --upgrade autopep8
+    #_result
 
 }
 
-setup_vim_plug() {
+setup_vim_plug()
+{
 
     JOB="set up vim plug"
     vim \
@@ -166,7 +199,7 @@ setup_vim_plug() {
         "+PlugClean"                \
         "+qall"
 
-    _result 
+    _result
 
     JOB="install YCM"
     python3 ~/.vim/plugged/YouCompleteMe/install.py --clang-completer && \
@@ -176,7 +209,8 @@ setup_vim_plug() {
     _result
 }
 
-show_log() {
+show_log()
+{
     _msg "log is save in $LOG and show below"
     exec < $LOG
     while read line
@@ -185,9 +219,14 @@ show_log() {
     done
 }
 
-source_config() {
-    source $HOME/.bashrc
-    source $HOME/.bash_aliases
+source_config()
+{
+    if [[ "$SHELL" != "/bin/bash" ]]; then
+        sudo chsh $USER -s /bin/bash
+    else
+        source $HOME/.bashrc
+        source $HOME/.bash_aliases
+    fi
 }
 
 ######################### start
@@ -200,7 +239,7 @@ backup
 
 build_link
 
-#install_pkg
+install_pkg
 
 #setup_vim_plug
 
