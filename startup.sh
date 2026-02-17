@@ -3,12 +3,13 @@
 ######################### set up variables
 
 declare -A FILE=(                           \
-    [".vimrc"]=".vimrc"                     \
-    [".bashrc"]=".bashrc"                   \
-    [".bash_aliases"]=".bash_aliases"       \
-    [".tmux.conf"]=".tmux.conf"             \
-    [".gitconfig"]=".gitconfig"             \
-    [".cscope_maps.vim"]=".cscope_maps.vim"  \
+    [".vimrc"]="${HOME}/.vimrc"                     \
+    [".bashrc"]="${HOME}/.bashrc"                   \
+    [".bash_aliases"]="${HOME}/.bash_aliases"       \
+    [".tmux.conf"]="${HOME}/.tmux.conf"             \
+    [".gitconfig"]="${HOME}/.gitconfig"             \
+    [".cscope_maps.vim"]="${HOME}/.cscope_maps.vim"  \
+    ["init.lua"]="${HOME}/.config/nvim/init.lua"    \
     #[".vim"]=".vim"                         \
     #[".vim_plug"]=".vim_plug"               \
     #[".ctags"]=".ctags"                     \
@@ -106,11 +107,12 @@ check_env() {
 
 backup()
 {
-    for file in ${FILE[@]}
+    for file in ${!FILE[@]}
     do
-        if [ -e $HOME/$file ]; then
-            JOB="backup $HOME/$file to $SCRIPT_PATH/_backup/${file}_$DATE"
-            mv --backup $HOME/$file $SCRIPT_PATH/_backup/${file}_$DATE
+        path=${FILE[$file]}
+        if [ -e $path ]; then
+            JOB="backup $path to $SCRIPT_PATH/_backup/${file}_$DATE"
+            mv --backup $path $SCRIPT_PATH/_backup/${file}_$DATE
             _result
         fi
     done
@@ -118,19 +120,21 @@ backup()
 
 build_link()
 {
-    for file in ${FILE[@]}
+    for file in ${!FILE[@]}
     do
-	    if [ -f $SCRIPT_PATH/$file ]; then
-            JOB="build link for $file"
-            touch $HOME/$file && ln -sf $SCRIPT_PATH/$file $HOME/$file
-            _result
-        fi
+        path=${FILE[$file]}
+        JOB="build link for $file"
+        if [ ! -e ${path%/*} ]; then	# if target directory doesn't exist, create it
+	    mkdir -p ${path%/*}
+	fi
+        touch $path && ln -sf $SCRIPT_PATH/$file $path
+        _result
     done
 }
 
 install_pkg()
 {
-    PKG="vim tmux curl git w3m bc global sshfs"
+    PKG="vim neovim fzf tmux curl git w3m bc global sshfs"
     # w3m: command line based web browser, for my man2 command
     # bc: command line calculater tool, for bash to calculate float val
     # manpages-zh: manpages in zh_TW, for my manc

@@ -178,12 +178,11 @@ nmap t<Left> gT
 "###########################################
 " enable copy between different vim instance
 
-"map <C-y> <Nop>
+" copy the while file if not select
 map <leader>y :w! /tmp/vitmp<CR>
-
-"map <C-p> <Nop>
 map <leader>p :r! cat /tmp/vitmp<CR>
 
+" copy the selected area
 vmap <leader>y :w! /tmp/vitmp<CR>
 nmap <leader>p :r! cat /tmp/vitmp<CR>
 "###########################################
